@@ -1,0 +1,798 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f9ff">
+  <meta name="description" content="CidadãoConecta. Sua cidade, sua voz. Registre problemas urbanos e participe da melhoria da sua comunidade.">
+
+  <title>CidadãoConecta | Sua cidade, sua voz</title>
+
+  <link rel="stylesheet" href="./CSS/style.css">
+  <script src="./JS/main.js" defer></script>
+</head>
+
+<body class="pagina-inicio">
+
+  <a href="#conteudo" class="pular-conteudo">
+    Pular para o conteúdo
+  </a>
+
+  <!-- CABEÇALHO -->
+
+  <header class="cabecalho" id="topo">
+    <div class="container cabecalho-interno">
+
+      <a href="./index.html"
+         class="marca"
+         aria-label="CidadãoConecta, página inicial">
+
+        <span class="marca-simbolo" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 48 48" fill="none">
+            <path d="M8 24L24 10L40 24V39H8V24Z"
+                  stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M18 39V26H30V39"
+                  stroke="currentColor" stroke-width="3"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="36" cy="12" r="5" fill="#A2DDF9"/>
+          </svg>
+        </span>
+
+        <span class="marca-texto">
+          <strong>cidadão<span>conecta.</span></strong>
+          <small>Sua cidade, sua voz</small>
+        </span>
+      </a>
+
+      <nav class="navegacao" aria-label="Menu principal">
+        <a href="./index.html" class="ativo" aria-current="page">
+          Início
+        </a>
+        <a href="./servicos.html">Serviços</a>
+      </nav>
+
+      <a href="./registrar.html"
+         class="botao botao-primario botao-cabecalho">
+        Registrar problema
+        <span aria-hidden="true">↗</span>
+      </a>
+
+      <button class="botao-menu"
+              type="button"
+              id="botaoMenu"
+              aria-label="Abrir menu"
+              aria-controls="menuMobile"
+              aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <nav class="menu-mobile" id="menuMobile"
+         aria-label="Menu para celular" hidden>
+      <a href="./index.html" aria-current="page">Início</a>
+      <a href="./servicos.html">Serviços</a>
+      <a href="./registrar.html" class="menu-mobile-destaque">
+        Registrar problema
+      </a>
+    </nav>
+  </header>
+
+  <main id="conteudo">
+
+    <!-- APRESENTAÇÃO -->
+
+    <section class="hero">
+      <div class="container hero-grid">
+
+        <div class="hero-conteudo">
+          <span class="etiqueta">
+            <span class="etiqueta-ponto"></span>
+            TECNOLOGIA E PARTICIPAÇÃO CIDADÃ
+          </span>
+
+          <h1>
+            A cidade é de todos.
+            <span>A voz também.</span>
+          </h1>
+
+          <p class="hero-descricao">
+            Uma maneira mais simples de dar visibilidade
+            aos problemas da sua cidade. Registre ocorrências,
+            compartilhe informações e acompanhe as necessidades
+            da comunidade em um só lugar.
+          </p>
+
+          <div class="hero-botoes">
+            <a href="./registrar.html"
+               class="botao botao-primario botao-grande">
+              <span class="botao-icone" aria-hidden="true">＋</span>
+              Registrar um problema
+              <span aria-hidden="true">↗</span>
+            </a>
+
+            <a href="./servicos.html"
+               class="botao botao-secundario botao-grande">
+              Explorar serviços
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+
+          <div class="hero-confiança">
+            <span class="icone-confiança" aria-hidden="true">✓</span>
+            <span>
+              Simples para participar.
+              <strong>Transparente para acompanhar.</strong>
+            </span>
+          </div>
+        </div>
+
+        <!-- ILUSTRAÇÃO EXCLUSIVA DA CIDADE -->
+
+        <div class="urban-visual"
+             aria-label="Ilustração de uma cidade conectada">
+
+          <div class="urban-grade" aria-hidden="true"></div>
+          <div class="urban-orbita" aria-hidden="true"></div>
+
+          <div class="urban-painel">
+            <div class="urban-painel-topo">
+              <span><i class="ponto-online"></i> URBAN VIEW</span>
+              <small>VISÃO CONCEITUAL</small>
+            </div>
+
+            <svg class="cidade-ilustracao" width="560" height="390"
+                 viewBox="0 0 560 390" role="img"
+                 aria-label="Prédios, ruas, árvores e marcador de ocorrência"
+                 xmlns="http://www.w3.org/2000/svg">
+
+              <defs>
+                <linearGradient id="baseCidade" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#F0F9FF"/>
+                  <stop offset="100%" stop-color="#BEDCF1"/>
+                </linearGradient>
+
+                <linearGradient id="predioAzul" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#E0F3FF"/>
+                  <stop offset="100%" stop-color="#8AB8DE"/>
+                </linearGradient>
+              </defs>
+
+              <ellipse cx="282" cy="313" rx="210" ry="45"
+                       fill="#9EBEDB" opacity=".18"/>
+
+              <path d="M43 271L279 139L519 271L279 383Z"
+                    fill="url(#baseCidade)"
+                    stroke="#FFFFFF" stroke-width="5"/>
+
+              <path d="M109 233L345 359"
+                    stroke="#FFFFFF" stroke-width="22" opacity=".9"/>
+              <path d="M213 176L454 304"
+                    stroke="#FFFFFF" stroke-width="21" opacity=".9"/>
+              <path d="M163 329L400 204"
+                    stroke="#FFFFFF" stroke-width="20" opacity=".9"/>
+
+              <!-- PRÉDIO ESQUERDO -->
+
+              <g>
+                <path d="M110 113L153 88L199 113L155 139Z"
+                      fill="#EAF6FF"/>
+                <path d="M110 113L155 139V236L110 209Z"
+                      fill="#8EB8DF"/>
+                <path d="M155 139L199 113V209L155 236Z"
+                      fill="url(#predioAzul)"/>
+
+                <g stroke="#EFFAFF" stroke-width="7"
+                   stroke-linecap="round">
+                  <path d="M122 146V161M141 157V172"/>
+                  <path d="M122 183V198M141 194V209"/>
+                  <path d="M171 151V166M188 141V156"/>
+                  <path d="M171 189V204M188 179V194"/>
+                </g>
+              </g>
+
+              <!-- PRÉDIO CENTRAL -->
+
+              <g>
+                <path d="M228 75L274 48L320 75L274 101Z"
+                      fill="#F0F1FF"/>
+                <path d="M228 75L274 101V194L228 168Z"
+                      fill="#A3B9E7"/>
+                <path d="M274 101L320 75V168L274 194Z"
+                      fill="#C2D0F0"/>
+
+                <g stroke="#F8FAFF" stroke-width="7"
+                   stroke-linecap="round">
+                  <path d="M240 108V124M261 120V136"/>
+                  <path d="M240 145V160M261 156V171"/>
+                  <path d="M288 111V127M307 100V116"/>
+                  <path d="M288 149V165M307 138V154"/>
+                </g>
+              </g>
+
+              <!-- PRÉDIO DIREITO -->
+
+              <g>
+                <path d="M348 139L390 114L434 139L391 164Z"
+                      fill="#EAF6FF"/>
+                <path d="M348 139L391 164V240L348 215Z"
+                      fill="#80AED5"/>
+                <path d="M391 164L434 139V215L391 240Z"
+                      fill="#C5E0F1"/>
+
+                <g stroke="#F3FCFF" stroke-width="7"
+                   stroke-linecap="round">
+                  <path d="M360 172V188M379 183V199"/>
+                  <path d="M405 175V191M422 165V181"/>
+                </g>
+              </g>
+
+              <!-- CASAS -->
+
+              <g>
+                <path d="M140 267L180 244L221 267L180 291Z"
+                      fill="#EDF0FF"/>
+                <path d="M140 267L180 291V334L140 310Z"
+                      fill="#91B3DF"/>
+                <path d="M180 291L221 267V310L180 334Z"
+                      fill="#C5D5F0"/>
+
+                <path d="M318 272L358 249L399 272L358 296Z"
+                      fill="#E5F5FF"/>
+                <path d="M318 272L358 296V333L318 309Z"
+                      fill="#91BCD9"/>
+                <path d="M358 296L399 272V309L358 333Z"
+                      fill="#C5E0F1"/>
+              </g>
+
+              <!-- ÁRVORES -->
+
+              <g stroke="#79A49B" stroke-width="5">
+                <path d="M76 287V315"/>
+                <path d="M468 275V304"/>
+                <path d="M253 317V341"/>
+              </g>
+
+              <circle cx="76" cy="279" r="18" fill="#ACDED3"/>
+              <circle cx="468" cy="267" r="17" fill="#ACDED3"/>
+              <circle cx="253" cy="308" r="15" fill="#BDE8DE"/>
+
+              <!-- MARCADOR -->
+
+              <circle cx="292" cy="282" r="39"
+                      fill="#6CB2EB" opacity=".15"/>
+              <circle cx="292" cy="282" r="26"
+                      fill="#5DA6DF" opacity=".18"/>
+
+              <path d="M292 256C280 256 271 265 271 277
+                       C271 293 292 312 292 312
+                       C292 312 313 293 313 277
+                       C313 265 304 256 292 256Z"
+                    fill="#418DCA" stroke="#FFFFFF" stroke-width="4"/>
+
+              <circle cx="292" cy="277" r="7" fill="#FFFFFF"/>
+
+              <path d="M292 256V218H347" stroke="#7EB5E2"
+                    stroke-width="2.5" stroke-dasharray="5 6" fill="none"/>
+              <circle cx="347" cy="218" r="5" fill="#75ACE0"/>
+            </svg>
+
+            <div class="urban-painel-base">
+              <span>CIDADE CONECTADA</span>
+              <span>ILUSTRAÇÃO · 001</span>
+            </div>
+          </div>
+
+          <div class="cartao-flutuante flutuante-superior">
+            <span class="flutuante-icone azul" aria-hidden="true">⌖</span>
+            <span>
+              <small>Exemplo de registro</small>
+              <strong>Problema localizado</strong>
+            </span>
+            <span class="flutuante-check" aria-hidden="true">✓</span>
+          </div>
+
+          <div class="cartao-flutuante flutuante-inferior">
+            <span class="flutuante-icone lilas" aria-hidden="true">≡</span>
+            <span>
+              <small>Acompanhamento</small>
+              <strong>Etapas transparentes</strong>
+            </span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SERVIÇOS -->
+
+    <section class="secao servicos" id="servicos">
+      <div class="container">
+
+        <div class="cabecalho-secao">
+          <div>
+            <span class="sobretitulo">SUA CENTRAL DE PARTICIPAÇÃO</span>
+            <h2>Como podemos ajudar hoje?</h2>
+          </div>
+          <p>
+            Três caminhos simples para você participar
+            das melhorias da sua comunidade.
+          </p>
+        </div>
+
+        <div class="grade-servicos">
+
+          <a href="./registrar.html"
+             class="servico-card servico-destaque">
+            <span class="servico-numero">01 / REGISTRAR</span>
+            <span class="servico-icone" aria-hidden="true">＋</span>
+
+            <h3>Registrar um problema</h3>
+            <p>
+              Encontrou um buraco, vazamento ou outra situação?
+              Conte o que aconteceu e onde fica.
+            </p>
+
+            <span class="servico-rodape">
+              <span>Começar registro</span>
+              <span aria-hidden="true">↗</span>
+            </span>
+          </a>
+
+          <a href="./servicos.html"
+             class="servico-card">
+            <span class="servico-numero">02 / CONSULTAR</span>
+            <span class="servico-icone" aria-hidden="true">⌕</span>
+
+            <h3>Consultar ocorrências</h3>
+            <p>
+              Descubra quais problemas foram registrados
+              e conheça as demandas da região.
+            </p>
+
+            <span class="servico-rodape">
+              <span>Ver serviços</span>
+              <span aria-hidden="true">↗</span>
+            </span>
+          </a>
+
+          <a href="./servicos.html"
+             class="servico-card">
+            <span class="servico-numero">03 / ACOMPANHAR</span>
+            <span class="servico-icone" aria-hidden="true">✓</span>
+
+            <h3>Acompanhar solicitações</h3>
+            <p>
+              Conheça as etapas previstas para o acompanhamento
+              dos registros.
+            </p>
+
+            <span class="servico-rodape">
+              <span>Ver serviços</span>
+              <span aria-hidden="true">↗</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CATEGORIAS -->
+
+    <section class="secao categorias" id="categorias">
+      <div class="container categorias-layout">
+
+        <div class="categorias-apresentacao">
+          <span class="sobretitulo">OLHE PELA SUA CIDADE</span>
+
+          <h2>
+            Cada detalhe importa.
+            <span>Cada voz também.</span>
+          </h2>
+
+          <p>
+            Uma lâmpada apagada, uma calçada danificada
+            ou um vazamento podem afetar a rotina
+            de muitas pessoas. Conheça os tipos
+            de situações que podem ser registradas.
+          </p>
+
+          <a href="./registrar.html" class="link-texto">
+            Registrar uma ocorrência
+            <span aria-hidden="true">→</span>
+          </a>
+
+          <div class="categorias-decoracao" aria-hidden="true">
+            <span></span><span></span><b>CC</b>
+          </div>
+        </div>
+
+        <div class="grade-categorias">
+
+          <article class="categoria-card">
+            <span class="categoria-icone categoria-azul" aria-hidden="true">▤</span>
+            <h3>Ruas e calçadas</h3>
+            <p>Buracos, pavimentação e problemas nas vias.</p>
+          </article>
+
+          <article class="categoria-card">
+            <span class="categoria-icone categoria-lilas" aria-hidden="true">☼</span>
+            <h3>Iluminação pública</h3>
+            <p>Postes e lâmpadas apagadas ou com defeito.</p>
+          </article>
+
+          <article class="categoria-card">
+            <span class="categoria-icone categoria-ciano" aria-hidden="true">◉</span>
+            <h3>Água e saneamento</h3>
+            <p>Vazamentos e problemas relacionados à água.</p>
+          </article>
+
+          <article class="categoria-card">
+            <span class="categoria-icone categoria-verde" aria-hidden="true">♿</span>
+            <h3>Acessibilidade</h3>
+            <p>Obstáculos que dificultam a circulação.</p>
+          </article>
+
+          <article class="categoria-card categoria-larga">
+            <span class="categoria-icone categoria-perola" aria-hidden="true">✳</span>
+            <div>
+              <h3>Limpeza e espaços públicos</h3>
+              <p>Acúmulo de lixo, conservação de praças e outras situações.</p>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- COMO FUNCIONA -->
+
+    <section class="secao funcionamento" id="como-funciona">
+      <div class="container">
+
+        <div class="cabecalho-secao centralizado">
+          <span class="sobretitulo">PARTICIPAÇÃO SEM COMPLICAÇÃO</span>
+          <h2>Simples do começo ao fim.</h2>
+          <p>
+            O objetivo é permitir que qualquer morador
+            consiga registrar uma situação em poucos passos.
+          </p>
+        </div>
+
+        <div class="grade-etapas">
+
+          <article class="etapa-card">
+            <span class="etapa-numero">01</span>
+            <div class="etapa-icone" aria-hidden="true">✎</div>
+            <h3>Conte o problema</h3>
+            <p>
+              Escolha uma categoria e descreva,
+              com suas palavras, o que aconteceu.
+            </p>
+          </article>
+
+          <article class="etapa-card">
+            <span class="etapa-numero">02</span>
+            <div class="etapa-icone" aria-hidden="true">⌖</div>
+            <h3>Informe o local</h3>
+            <p>
+              Digite a rua, o bairro e uma referência
+              que ajude a identificar a situação.
+            </p>
+          </article>
+
+          <article class="etapa-card">
+            <span class="etapa-numero">03</span>
+            <div class="etapa-icone" aria-hidden="true">✓</div>
+            <h3>Revise e conclua</h3>
+            <p>
+              Confira as informações antes de finalizar
+              o registro demonstrativo.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ACOMPANHAMENTO -->
+
+    <section class="secao acompanhamento" id="acompanhamento">
+      <div class="container acompanhamento-layout">
+
+        <div class="acompanhamento-texto">
+          <span class="sobretitulo">TRANSPARÊNCIA EM CADA ETAPA</span>
+
+          <h2>
+            Você registra.
+            <span>E entende o que vem depois.</span>
+          </h2>
+
+          <p>
+            O CidadãoConecta foi pensado para mostrar
+            o andamento de uma ocorrência de maneira clara,
+            sem termos técnicos e sem informações confusas.
+          </p>
+
+          <p>
+            Na versão integrada, cada atualização poderá
+            aparecer em uma linha do tempo.
+          </p>
+
+          <a href="./servicos.html" class="botao botao-secundario">
+            Conhecer os serviços
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+
+        <div class="painel-acompanhamento">
+          <div class="painel-topo">
+            <span>EXEMPLO DE ACOMPANHAMENTO</span>
+            <small>CC-EXEMPLO-001</small>
+          </div>
+
+          <div class="ocorrencia-cabecalho">
+            <span class="ocorrencia-simbolo" aria-hidden="true">▤</span>
+            <div>
+              <strong>Buraco em via pública</strong>
+              <small>Centro · Registro ilustrativo</small>
+            </div>
+
+            <span class="status status-analise">Em análise</span>
+          </div>
+
+          <ol class="linha-tempo">
+
+            <li class="concluida">
+              <span class="marcador" aria-hidden="true">✓</span>
+              <div>
+                <strong>Registrada</strong>
+                <p>As informações foram incluídas no exemplo.</p>
+              </div>
+            </li>
+
+            <li class="atual">
+              <span class="marcador" aria-hidden="true"></span>
+              <div>
+                <strong>Em análise</strong>
+                <p>Etapa de avaliação das informações.</p>
+              </div>
+            </li>
+
+            <li>
+              <span class="marcador" aria-hidden="true"></span>
+              <div>
+                <strong>Em andamento</strong>
+                <p>Etapa prevista para uma atualização futura.</p>
+              </div>
+            </li>
+
+            <li>
+              <span class="marcador" aria-hidden="true"></span>
+              <div>
+                <strong>Resolvida</strong>
+                <p>Situação de uma ocorrência concluída.</p>
+              </div>
+            </li>
+
+          </ol>
+
+          <div class="painel-aviso">
+            ⓘ Demonstração visual. Não representa atendimento oficial.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMUNIDADE -->
+
+    <section class="secao comunidade" id="comunidade">
+      <div class="container">
+
+        <div class="cabecalho-secao">
+          <div>
+            <span class="sobretitulo">A CIDADE EM PERSPECTIVA</span>
+            <h2>O que acontece na comunidade?</h2>
+          </div>
+
+          <p>
+            Conheça como os registros poderão ser organizados
+            para facilitar a consulta dos moradores.
+          </p>
+        </div>
+
+        <div class="comunidade-grade">
+
+          <article class="registro-card">
+            <div class="registro-topo">
+              <span>REGISTRO ILUSTRATIVO · #0001</span>
+              <span class="status status-analise">Em análise</span>
+            </div>
+
+            <div class="registro-icone" aria-hidden="true">▤</div>
+            <h3>Buraco na Rua das Flores</h3>
+
+            <p>
+              Exemplo de ocorrência de pavimentação
+              que pode afetar a circulação de pessoas e veículos.
+            </p>
+
+            <div class="registro-informacoes">
+              <span>⌖ Bairro Centro</span>
+              <span>♡ 1 apoio ilustrativo</span>
+            </div>
+
+            <div class="registro-rodape">
+              <span>Dados demonstrativos</span>
+              <span aria-hidden="true">↗</span>
+            </div>
+          </article>
+
+          <div class="comunidade-destaque">
+            <span class="destaque-etiqueta">
+              CONEXÃO COM A COMUNIDADE
+            </span>
+
+            <h3>
+              Sua participação ajuda a dar
+              visibilidade ao que precisa melhorar.
+            </h3>
+
+            <p>
+              Compartilhar informações de maneira clara
+              é um primeiro passo para organizar
+              as necessidades da comunidade.
+            </p>
+
+            <a href="./registrar.html" class="link-texto">
+              Quero participar
+              <span aria-hidden="true">→</span>
+            </a>
+
+            <div class="destaque-circulo" aria-hidden="true"></div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PERGUNTAS FREQUENTES -->
+
+    <section class="secao perguntas" id="duvidas">
+      <div class="container perguntas-layout">
+
+        <div class="perguntas-intro">
+          <span class="sobretitulo">PRECISA DE AJUDA?</span>
+          <h2>Ficou com alguma dúvida?</h2>
+          <p>
+            Informações simples para ajudar
+            você a entender a plataforma.
+          </p>
+        </div>
+
+        <div class="perguntas-lista">
+
+          <details class="pergunta-item">
+            <summary>
+              O que posso registrar?
+              <span aria-hidden="true">⌄</span>
+            </summary>
+            <p>
+              Problemas como buracos, iluminação pública,
+              vazamentos, acessibilidade e limpeza urbana.
+            </p>
+          </details>
+
+          <details class="pergunta-item">
+            <summary>
+              Posso adicionar fotos?
+              <span aria-hidden="true">⌄</span>
+            </summary>
+            <p>
+              Sim. O formulário aceita até três imagens opcionais.
+              Nesta demonstração, elas não são enviadas ao servidor.
+            </p>
+          </details>
+
+          <details class="pergunta-item">
+            <summary>
+              O CidadãoConecta é um serviço da prefeitura?
+              <span aria-hidden="true">⌄</span>
+            </summary>
+            <p>
+              Não. Este é um projeto acadêmico independente.
+              Registrar uma ocorrência aqui não equivale a
+              solicitar um serviço oficial da prefeitura.
+            </p>
+          </details>
+
+          <details class="pergunta-item">
+            <summary>
+              Posso usar pelo celular?
+              <span aria-hidden="true">⌄</span>
+            </summary>
+            <p>
+              Sim. O site foi planejado para funcionar
+              em computadores, tablets e celulares.
+            </p>
+          </details>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CHAMADA FINAL -->
+
+    <section class="chamada-final">
+      <div class="container">
+        <div class="chamada-painel">
+          <span class="sobretitulo">SUA PARTICIPAÇÃO IMPORTA</span>
+
+          <h2>
+            Uma cidade melhor começa
+            <span>com quem vive nela.</span>
+          </h2>
+
+          <p>
+            O CidadãoConecta nasce para aproximar
+            pessoas, informações e necessidades urbanas.
+          </p>
+
+          <a href="./servicos.html"
+             class="botao botao-primario botao-grande">
+            Conhecer os serviços
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- RODAPÉ -->
+
+  <footer class="rodape">
+    <div class="container">
+
+      <div class="rodape-principal">
+
+        <div class="rodape-marca">
+          <strong>cidadão<span>conecta.</span></strong>
+          <p>
+            Tecnologia e participação para dar visibilidade
+            às necessidades da cidade.
+          </p>
+        </div>
+
+        <div class="rodape-links">
+          <strong>Navegação</strong>
+          <a href="./index.html">Início</a>
+          <a href="./servicos.html">Serviços</a>
+          <a href="./registrar.html">Registrar problema</a>
+          <a href="#categorias">Categorias</a>
+        </div>
+
+        <div class="rodape-links">
+          <strong>Informações</strong>
+          <a href="#como-funciona">Como funciona</a>
+          <a href="#comunidade">Comunidade</a>
+          <a href="#duvidas">Perguntas frequentes</a>
+          <a href="#topo">Voltar ao início</a>
+        </div>
+      </div>
+
+      <div class="rodape-inferior">
+        <span>© 2026 CidadãoConecta · Projeto acadêmico FIAP.</span>
+        <span>
+          Projeto independente, não oficial
+          da administração pública.
+        </span>
+      </div>
+
+    </div>
+  </footer>
+
+</body>
+</html>

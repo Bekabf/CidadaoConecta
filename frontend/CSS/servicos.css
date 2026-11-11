@@ -1,0 +1,261 @@
+
+/* ==========================================
+   CIDADÃOCONECTA — URBAN OS
+   PÁGINA SERVIÇOS
+   ========================================== */
+
+.pagina-servicos {
+  background: #ffffff;
+}
+
+.central-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 90px 0;
+  background:
+    radial-gradient(
+      circle at 85% 25%,
+      rgba(198, 214, 255, .58),
+      transparent 40%
+    ),
+    linear-gradient(120deg, #f7fbff, #edf7ff, #f0efff);
+}
+
+.central-apresentacao {
+  display: grid;
+  grid-template-columns: 1.3fr .7fr;
+  align-items: center;
+  gap: 55px;
+}
+
+.central-apresentacao h1 {
+  max-width: 760px;
+  margin: 0 0 23px;
+  font-size: clamp(40px, 5vw, 67px);
+  line-height: 1.1;
+  letter-spacing: -.07em;
+}
+
+.central-apresentacao h1 span {
+  display: block;
+  color: #5c9bd0;
+}
+
+.central-apresentacao p {
+  max-width: 530px;
+  margin: 0;
+  color: #718ba5;
+  font-size: 15px;
+}
+
+.central-destaque {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 270px;
+}
+
+.central-destaque::before,
+.central-destaque::after {
+  content: "";
+  position: absolute;
+  width: 248px;
+  height: 248px;
+  border: 1px solid rgba(137,185,224,.34);
+  border-radius: 50%;
+}
+
+.central-destaque::after {
+  transform: rotate(48deg) scaleX(.87);
+}
+
+.central-destaque-circulo {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 150px;
+  height: 150px;
+  color: #498fcb;
+  background: rgba(255,255,255,.79);
+  border: 1px solid white;
+  border-radius: 35px;
+  box-shadow: 0 20px 50px rgba(84,136,184,.1);
+  transform: rotate(-11deg);
+}
+
+.central-destaque-circulo span {
+  font-size: 48px;
+  font-weight: 800;
+  transform: rotate(11deg);
+}
+
+.central-destaque-texto {
+  position: absolute;
+  z-index: 2;
+  right: 8px;
+  bottom: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 17px;
+  color: #9aaec1;
+  background: rgba(255,255,255,.95);
+  border-radius: 14px;
+  box-shadow: 0 13px 35px rgba(60,115,170,.1);
+  font-size: 9px;
+  letter-spacing: .11em;
+}
+
+.central-destaque-texto strong {
+  color: #438ac7;
+  font-size: 12px;
+}
+
+.central-acoes {
+  padding: 85px 0 100px;
+}
+
+.central-secao-topo {
+  margin-bottom: 35px;
+}
+
+.central-secao-topo h2 {
+  margin: 0;
+}
+
+.central-lista {
+  display: grid;
+  gap: 16px;
+}
+
+.central-acao {
+  display: grid;
+  grid-template-columns: 66px minmax(0,1fr) auto;
+  align-items: center;
+  gap: 26px;
+  min-height: 142px;
+  padding: 27px 30px;
+  background: #f9fbfe;
+  border: 1px solid #e1ebf4;
+  border-radius: 23px;
+  transition:
+    transform .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
+}
+
+.central-acao:hover {
+  transform: translateY(-3px);
+  border-color: #beddf4;
+  box-shadow: 0 15px 35px rgba(60,115,170,.07);
+}
+
+.central-acao-principal {
+  background: linear-gradient(125deg, #e8f4ff, #f5f8ff);
+  border-color: #c6e2f8;
+}
+
+.central-acao-icone {
+  display: grid;
+  place-items: center;
+  width: 66px;
+  height: 66px;
+  color: #4089c4;
+  background: #e1f0fc;
+  border-radius: 19px;
+  font-size: 31px;
+}
+
+.central-acao-texto {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  gap: 8px;
+}
+
+.central-acao-texto strong {
+  color: #294861;
+  font-size: 19px;
+  letter-spacing: -.04em;
+}
+
+.central-acao-texto > span:last-child {
+  max-width: 650px;
+  color: #7a93aa;
+  font-size: 13px;
+}
+
+.central-acao-final {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  color: #347fba;
+  font-size: 12px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.central-acao-final > span {
+  font-size: 18px;
+}
+
+.central-observacao {
+  margin: 27px 0 0;
+  color: #91a3b4;
+  font-size: 11px;
+}
+
+@media (max-width: 900px) {
+  .central-apresentacao {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .central-destaque {
+    min-height: 220px;
+  }
+
+  .central-hero {
+    padding: 65px 0;
+  }
+}
+
+@media (max-width: 650px) {
+  .central-hero {
+    padding: 55px 0;
+  }
+
+  .central-apresentacao h1 {
+    font-size: clamp(37px, 10vw, 51px);
+  }
+
+  .central-acoes {
+    padding: 60px 0 75px;
+  }
+
+  .central-acao {
+    grid-template-columns: 54px minmax(0,1fr);
+    gap: 15px;
+    min-height: 0;
+    padding: 23px 19px;
+  }
+
+  .central-acao-icone {
+    width: 54px;
+    height: 54px;
+  }
+
+  .central-acao-texto strong {
+    font-size: 17px;
+  }
+
+  .central-acao-final {
+    grid-column: 2;
+    white-space: normal;
+  }
+
+  .central-destaque {
+    display: none;
+  }
+}

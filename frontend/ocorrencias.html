@@ -1,0 +1,1552 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f9ff">
+
+  <meta name="description"
+        content="Explore as necessidades da sua comunidade no Observatório Urbano do CidadãoConecta.">
+
+  <title>Observatório Urbano | CidadãoConecta</title>
+
+  <!-- ESTILOS EXISTENTES -->
+  <link rel="stylesheet" href="./CSS/style.css">
+  <link rel="stylesheet" href="./CSS/ocorrencias.css">
+
+  <!-- SCRIPTS EXISTENTES -->
+  <script src="./JS/main.js" defer></script>
+  <script src="./JS/ocorrencias.js" defer></script>
+
+  <!-- ESTILOS ADICIONAIS DO NOVO OBSERVATÓRIO -->
+  <style>
+    /* ========================================
+       OBSERVATÓRIO URBANO — NOVOS COMPONENTES
+       Os estilos existentes são preservados.
+       ======================================== */
+
+    .pagina-ocorrencias {
+      --obs-azul: #438cc8;
+      --obs-escuro: #29465f;
+      --obs-suave: #eef7ff;
+      --obs-borda: #dcebf7;
+    }
+
+    .observatorio-identidade {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 20px;
+      padding: 9px 14px;
+      color: #427faf;
+      background: rgba(255,255,255,.78);
+      border: 1px solid #dcecf8;
+      border-radius: 100px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .09em;
+    }
+
+    .observatorio-identidade::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      background: #6fb4e5;
+      border-radius: 50%;
+      box-shadow: 0 0 0 4px #e0f2ff;
+    }
+
+    .observatorio-destaques {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 30px;
+    }
+
+    .observatorio-destaques span {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 9px 12px;
+      color: #6587a2;
+      background: rgba(255,255,255,.65);
+      border: 1px solid #deebf6;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .observatorio-destaques span::before {
+      content: "✓";
+      color: #4395c9;
+      font-weight: 900;
+    }
+
+    /* APRESENTAÇÃO DA SEÇÃO DE ANÁLISES */
+
+    .analises-area {
+      padding: 85px 0 95px;
+      background: linear-gradient(
+        180deg,
+        #ffffff 0%,
+        #f6faff 100%
+      );
+    }
+
+    .analises-cabecalho {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 25px;
+      margin-bottom: 30px;
+    }
+
+    .analises-cabecalho h2 {
+      margin: 8px 0 12px;
+      color: #29465f;
+      font-size: clamp(28px, 3vw, 38px);
+      letter-spacing: -.035em;
+    }
+
+    .analises-cabecalho p {
+      max-width: 560px;
+      margin: 0;
+      color: #7892a9;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .analises-selo {
+      flex-shrink: 0;
+      padding: 10px 14px;
+      color: #4486b7;
+      background: #edf7ff;
+      border: 1px solid #d5e9f8;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .analises-grade {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 22px;
+    }
+
+    .analise-cartao {
+      min-width: 0;
+      padding: 30px;
+      background: #fff;
+      border: 1px solid #e0eaf4;
+      border-radius: 24px;
+      box-shadow: 0 15px 40px rgba(58,109,158,.045);
+    }
+
+    .analise-cartao-topo {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 15px;
+      margin-bottom: 27px;
+    }
+
+    .analise-cartao-topo h3 {
+      margin: 0 0 8px;
+      color: #304f68;
+      font-size: 19px;
+    }
+
+    .analise-cartao-topo p {
+      margin: 0;
+      color: #8ba0b2;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .analise-cartao-icone {
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      width: 43px;
+      height: 43px;
+      color: #418dc4;
+      background: #e9f5ff;
+      border-radius: 13px;
+      font-size: 22px;
+    }
+
+    /* GRÁFICO DE CATEGORIAS */
+
+    .categorias-grafico {
+      display: grid;
+      gap: 23px;
+    }
+
+    .categoria-linha {
+      display: grid;
+      gap: 9px;
+    }
+
+    .categoria-linha-topo {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      color: #57758f;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .categoria-linha-topo strong {
+      color: #3c80b6;
+      font-size: 12px;
+    }
+
+    .categoria-trilho {
+      height: 10px;
+      overflow: hidden;
+      background: #edf5fb;
+      border-radius: 100px;
+    }
+
+    .categoria-preenchimento {
+      height: 100%;
+      width: 0;
+      background: linear-gradient(
+        90deg,
+        #83c5ec,
+        #438ec7
+      );
+      border-radius: inherit;
+    }
+
+    .analise-sem-dados {
+      padding: 25px;
+      color: #8ca2b4;
+      background: #f7fbff;
+      border: 1px dashed #d8e8f4;
+      border-radius: 14px;
+      font-size: 12px;
+      line-height: 1.7;
+      text-align: center;
+    }
+
+    /* VISÃO POR BAIRRO */
+
+    .bairros-ranking {
+      display: grid;
+      gap: 11px;
+    }
+
+    .bairro-ranking-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px;
+      background: #f7fbff;
+      border: 1px solid #e7f0f8;
+      border-radius: 13px;
+    }
+
+    .bairro-ranking-posicao {
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      width: 34px;
+      height: 34px;
+      color: #438ac1;
+      background: #e6f3fd;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .bairro-ranking-dados {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .bairro-ranking-dados strong {
+      display: block;
+      color: #3d607b;
+      font-size: 12px;
+      overflow-wrap: anywhere;
+    }
+
+    .bairro-ranking-dados small {
+      display: block;
+      margin-top: 4px;
+      color: #91a5b5;
+      font-size: 10px;
+    }
+
+    .bairro-ranking-quantidade {
+      flex-shrink: 0;
+      color: #3d86be;
+      font-size: 18px;
+      font-weight: 800;
+    }
+
+    /* TRÊS PILARES DO PROJETO */
+
+    .impacto-area {
+      padding: 85px 0;
+      background: #fff;
+    }
+
+    .impacto-cabecalho {
+      max-width: 680px;
+      margin: 0 auto 40px;
+      text-align: center;
+    }
+
+    .impacto-cabecalho h2 {
+      margin: 10px 0 14px;
+      color: #29465f;
+      font-size: clamp(29px,3vw,39px);
+      letter-spacing: -.04em;
+    }
+
+    .impacto-cabecalho p {
+      margin: 0;
+      color: #7992a8;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+    .impacto-grade {
+      display: grid;
+      grid-template-columns: repeat(3,minmax(0,1fr));
+      gap: 18px;
+    }
+
+    .impacto-cartao {
+      padding: 28px;
+      background: linear-gradient(
+        145deg,
+        #f8fcff,
+        #eff7ff
+      );
+      border: 1px solid #e1edf7;
+      border-radius: 21px;
+    }
+
+    .impacto-numero {
+      display: inline-block;
+      margin-bottom: 24px;
+      color: #6da9d3;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .1em;
+    }
+
+    .impacto-cartao h3 {
+      margin: 0 0 12px;
+      color: #304f69;
+      font-size: 19px;
+    }
+
+    .impacto-cartao p {
+      margin: 0;
+      color: #7891a7;
+      font-size: 12px;
+      line-height: 1.85;
+    }
+
+    .impacto-rodape {
+      margin-top: 27px;
+      color: #568bb2;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    /* SEÇÃO DE TRANSPARÊNCIA */
+
+    .observatorio-transparencia {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 16px;
+      align-items: start;
+      margin-top: 40px;
+      padding: 25px;
+      background: #eef7ff;
+      border: 1px solid #d7eafa;
+      border-radius: 18px;
+    }
+
+    .observatorio-transparencia-icone {
+      display: grid;
+      place-items: center;
+      width: 40px;
+      height: 40px;
+      color: #3f8bc4;
+      background: #fff;
+      border-radius: 12px;
+      font-size: 22px;
+    }
+
+    .observatorio-transparencia strong {
+      color: #3b6788;
+      font-size: 13px;
+    }
+
+    .observatorio-transparencia p {
+      margin: 7px 0 0;
+      color: #718da5;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    /* AJUSTES MOBILE */
+
+    @media (max-width: 850px) {
+      .analises-grade {
+        grid-template-columns: 1fr;
+      }
+
+      .impacto-grade {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .analises-area,
+      .impacto-area {
+        padding: 65px 0;
+      }
+
+      .analises-cabecalho {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .analise-cartao {
+        padding: 22px;
+      }
+
+      .impacto-cartao {
+        padding: 24px;
+      }
+
+      .observatorio-transparencia {
+        grid-template-columns: 1fr;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body class="pagina-ocorrencias">
+
+  <a href="#conteudo" class="pular-conteudo">
+    Pular para o conteúdo
+  </a>
+
+  <!-- =====================================
+       CABEÇALHO
+       ===================================== -->
+
+  <header class="cabecalho" id="topo">
+    <div class="container cabecalho-interno">
+
+      <a href="./index.html"
+         class="marca"
+         aria-label="CidadãoConecta, página inicial">
+
+        <span class="marca-simbolo" aria-hidden="true">
+          <svg width="28" height="28"
+               viewBox="0 0 48 48"
+               fill="none">
+
+            <path d="M8 24L24 10L40 24V39H8V24Z"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"/>
+
+            <path d="M18 39V26H30V39"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"/>
+
+            <circle cx="36" cy="12" r="5"
+                    fill="#A2DDF9"/>
+          </svg>
+        </span>
+
+        <span class="marca-texto">
+          <strong>cidadão<span>conecta.</span></strong>
+          <small>Sua cidade, sua voz</small>
+        </span>
+
+      </a>
+
+      <nav class="navegacao" aria-label="Menu principal">
+        <a href="./index.html">Início</a>
+        <a href="./servicos.html">Serviços</a>
+        <a href="./consultar.html">Consultar</a>
+        <a href="./ocorrencias.html"
+           class="ativo"
+           aria-current="page">
+          Comunidade
+        </a>
+      </nav>
+
+      <a href="./registrar.html"
+         class="botao botao-primario botao-cabecalho">
+        Registrar problema
+        <span aria-hidden="true">↗</span>
+      </a>
+
+      <button class="botao-menu"
+              id="botaoMenu"
+              type="button"
+              aria-label="Abrir menu"
+              aria-controls="menuMobile"
+              aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+    </div>
+
+    <nav class="menu-mobile"
+         id="menuMobile"
+         aria-label="Menu para celular"
+         hidden>
+
+      <a href="./index.html">Início</a>
+      <a href="./servicos.html">Serviços</a>
+      <a href="./consultar.html">Consultar</a>
+      <a href="./ocorrencias.html"
+         aria-current="page">Comunidade</a>
+      <a href="./registrar.html"
+         class="menu-mobile-destaque">
+        Registrar problema
+      </a>
+    </nav>
+
+  </header>
+
+  <main id="conteudo">
+
+    <!-- =====================================
+         01 — HERO / APRESENTAÇÃO
+         ===================================== -->
+
+    <section class="ocorrencias-hero">
+
+      <div class="container ocorrencias-hero-grid">
+
+        <div class="ocorrencias-intro">
+
+          <span class="observatorio-identidade">
+            INTELIGÊNCIA URBANA E PARTICIPAÇÃO
+          </span>
+
+          <h1>
+            Sua cidade,
+            <span>mais visível.</span>
+          </h1>
+
+          <p>
+            Um espaço para entender as necessidades
+            dos bairros, explorar registros urbanos
+            e dar mais visibilidade aos desafios
+            da comunidade.
+          </p>
+
+          <div class="ocorrencias-hero-acoes">
+
+            <a href="#explorar"
+               class="botao botao-primario">
+              Explorar ocorrências
+              <span aria-hidden="true">↓</span>
+            </a>
+
+            <a href="./registrar.html"
+               class="botao botao-secundario">
+              Registrar problema
+              <span aria-hidden="true">↗</span>
+            </a>
+
+          </div>
+
+          <div class="observatorio-destaques">
+            <span>Visão por bairro</span>
+            <span>Filtros inteligentes</span>
+            <span>Informações organizadas</span>
+          </div>
+
+        </div>
+
+        <!-- VISUAL URBAN OS EXISTENTE -->
+
+        <div class="observatorio-visual" aria-hidden="true">
+
+          <div class="observatorio-orbita"></div>
+
+          <div class="observatorio-painel">
+
+            <div class="observatorio-topo">
+              <span>CC / URBAN VIEW</span>
+              <span>COMUNIDADE</span>
+            </div>
+
+            <div class="observatorio-centro">
+
+              <span class="observatorio-anel anel-um"></span>
+              <span class="observatorio-anel anel-dois"></span>
+              <span class="observatorio-anel anel-tres"></span>
+
+              <span class="observatorio-marcador marcador-um">⌖</span>
+              <span class="observatorio-marcador marcador-dois">⌖</span>
+              <span class="observatorio-marcador marcador-tres">⌖</span>
+
+              <div class="observatorio-simbolo">CC</div>
+
+            </div>
+
+            <div class="observatorio-base">
+              <span>OBSERVE</span>
+              <span>CONECTE</span>
+              <span>PARTICIPE</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =====================================
+         02 — INDICADORES
+         ===================================== -->
+
+    <section class="indicadores-area"
+             aria-label="Indicadores de registros locais">
+
+      <div class="container">
+
+        <div class="indicadores-cabecalho">
+
+          <div>
+            <span class="sobretitulo">VISÃO GERAL</span>
+            <h2>Os números contam uma história.</h2>
+          </div>
+
+          <p>
+            Indicadores calculados com base nos
+            registros demonstrativos deste navegador.
+          </p>
+
+        </div>
+
+        <div class="indicadores-grade">
+
+          <article class="indicador-card">
+            <span class="indicador-icone"
+                  aria-hidden="true">▤</span>
+
+            <span class="indicador-nome">
+              Registros locais
+            </span>
+
+            <strong id="totalOcorrencias">0</strong>
+
+            <small>
+              Ocorrências demonstrativas cadastradas
+            </small>
+          </article>
+
+          <article class="indicador-card">
+            <span class="indicador-icone"
+                  aria-hidden="true">⌖</span>
+
+            <span class="indicador-nome">
+              Bairros identificados
+            </span>
+
+            <strong id="totalBairros">0</strong>
+
+            <small>
+              Localidades presentes nos registros
+            </small>
+          </article>
+
+          <article class="indicador-card">
+            <span class="indicador-icone"
+                  aria-hidden="true">◫</span>
+
+            <span class="indicador-nome">
+              Tipos de problemas
+            </span>
+
+            <strong id="totalCategorias">0</strong>
+
+            <small>
+              Categorias registradas
+            </small>
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =====================================
+         03 — ANÁLISES DO OBSERVATÓRIO
+         NOVA SEÇÃO
+         ===================================== -->
+
+    <section class="analises-area"
+             id="analises"
+             aria-labelledby="tituloAnalises">
+
+      <div class="container">
+
+        <div class="analises-cabecalho">
+
+          <div>
+
+            <span class="sobretitulo">
+              PANORAMA URBANO
+            </span>
+
+            <h2 id="tituloAnalises">
+              Entenda os registros da comunidade.
+            </h2>
+
+            <p>
+              Descubra quais categorias aparecem
+              com maior frequência e como os
+              registros demonstrativos se distribuem
+              entre os bairros.
+            </p>
+
+          </div>
+
+          <span class="analises-selo">
+            DADOS LOCAIS · DEMONSTRAÇÃO
+          </span>
+
+        </div>
+
+        <div class="analises-grade">
+
+          <!-- GRÁFICO DE CATEGORIAS -->
+
+          <article class="analise-cartao">
+
+            <div class="analise-cartao-topo">
+
+              <div>
+                <h3>Problemas por categoria</h3>
+                <p>
+                  Distribuição dos tipos de ocorrência
+                  encontrados nos registros.
+                </p>
+              </div>
+
+              <span class="analise-cartao-icone"
+                    aria-hidden="true">▥</span>
+
+            </div>
+
+            <div class="categorias-grafico"
+                 id="graficoCategorias"
+                 aria-label="Distribuição dos registros por categoria">
+            </div>
+
+          </article>
+
+          <!-- ANÁLISE DE BAIRROS -->
+
+          <article class="analise-cartao">
+
+            <div class="analise-cartao-topo">
+
+              <div>
+                <h3>Bairros em perspectiva</h3>
+                <p>
+                  Localidades com mais registros
+                  nesta demonstração.
+                </p>
+              </div>
+
+              <span class="analise-cartao-icone"
+                    aria-hidden="true">⌖</span>
+
+            </div>
+
+            <div class="bairros-ranking"
+                 id="rankingBairros"
+                 aria-label="Bairros com registros demonstrativos">
+            </div>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =====================================
+         04 — CENTRAL DE OCORRÊNCIAS
+         ===================================== -->
+
+    <section class="explorar-area"
+             id="explorar"
+             aria-labelledby="tituloExplorar">
+
+      <div class="container">
+
+        <div class="explorar-topo">
+
+          <div>
+
+            <span class="sobretitulo">
+              CENTRAL DE OCORRÊNCIAS
+            </span>
+
+            <h2 id="tituloExplorar">
+              Explore o que acontece na sua região.
+            </h2>
+
+            <p>
+              Encontre registros demonstrativos
+              por título, bairro ou categoria.
+            </p>
+
+          </div>
+
+        </div>
+
+        <!-- FILTROS: IDs PRESERVADOS -->
+
+        <form class="filtros-painel"
+              id="formFiltros"
+              role="search">
+
+          <div class="filtro-campo filtro-pesquisa">
+
+            <label for="filtroPesquisa">
+              Buscar ocorrência
+            </label>
+
+            <input type="search"
+                   id="filtroPesquisa"
+                   placeholder="Ex.: buraco, iluminação, bairro...">
+
+          </div>
+
+          <div class="filtro-campo">
+
+            <label for="filtroBairro">
+              Bairro
+            </label>
+
+            <select id="filtroBairro">
+              <option value="">
+                Todos os bairros
+              </option>
+            </select>
+
+          </div>
+
+          <div class="filtro-campo">
+
+            <label for="filtroCategoria">
+              Categoria
+            </label>
+
+            <select id="filtroCategoria">
+
+              <option value="">
+                Todas as categorias
+              </option>
+
+              <option value="pavimentacao">
+                Ruas e calçadas
+              </option>
+
+              <option value="iluminacao">
+                Iluminação pública
+              </option>
+
+              <option value="saneamento">
+                Água e saneamento
+              </option>
+
+              <option value="acessibilidade">
+                Acessibilidade
+              </option>
+
+              <option value="limpeza">
+                Limpeza urbana
+              </option>
+
+              <option value="outro">
+                Outro problema
+              </option>
+
+            </select>
+
+          </div>
+
+          <div class="filtro-campo">
+
+            <label for="filtroSituacao">
+              Situação
+            </label>
+
+            <select id="filtroSituacao">
+              <option value="">
+                Todas as situações
+              </option>
+
+              <option value="local">
+                Registrada localmente
+              </option>
+            </select>
+
+          </div>
+
+          <button type="button"
+                  id="limparFiltros"
+                  class="botao botao-secundario filtro-limpar">
+            Limpar filtros
+          </button>
+
+        </form>
+
+        <!-- TÍTULO DA LISTAGEM -->
+
+        <div class="listagem-topo">
+
+          <div>
+
+            <span class="sobretitulo">
+              REGISTROS ENCONTRADOS
+            </span>
+
+            <h3>
+              Ocorrências registradas
+              <span id="quantidadeResultados">0</span>
+            </h3>
+
+          </div>
+
+          <div class="ordenacao">
+
+            <label for="ordenarOcorrencias">
+              Ordenar por
+            </label>
+
+            <select id="ordenarOcorrencias">
+              <option value="recentes">
+                Mais recentes
+              </option>
+
+              <option value="antigas">
+                Mais antigas
+              </option>
+
+              <option value="bairro">
+                Bairro (A–Z)
+              </option>
+            </select>
+
+          </div>
+
+        </div>
+
+        <!-- AVISO DE ERRO -->
+
+        <div id="mensagemOcorrencias"
+             class="ocorrencias-mensagem"
+             role="status"
+             aria-live="polite"
+             hidden>
+        </div>
+
+        <!-- LISTA: ID PRESERVADO -->
+
+        <div class="ocorrencias-grade"
+             id="listaOcorrencias"
+             aria-live="polite">
+        </div>
+
+        <!-- ESTADO VAZIO: IDs PRESERVADOS -->
+
+        <div id="estadoVazio"
+             class="ocorrencias-vazio"
+             hidden>
+
+          <span class="vazio-icone"
+                aria-hidden="true">⌕</span>
+
+          <h3>
+            Nenhuma ocorrência encontrada
+          </h3>
+
+          <p id="textoEstadoVazio">
+            Ainda não existem registros para mostrar.
+          </p>
+
+          <div class="vazio-acoes">
+
+            <button type="button"
+                    id="botaoLimparVazio"
+                    class="botao botao-secundario">
+              Limpar pesquisa
+            </button>
+
+            <a href="./registrar.html"
+               class="botao botao-primario">
+              Registrar um problema
+              <span aria-hidden="true">↗</span>
+            </a>
+
+          </div>
+
+        </div>
+
+        <!-- TRANSPARÊNCIA -->
+
+        <div class="observatorio-transparencia">
+
+          <span class="observatorio-transparencia-icone"
+                aria-hidden="true">ⓘ</span>
+
+          <div>
+
+            <strong>
+              Transparência sobre esta demonstração
+            </strong>
+
+            <p>
+              Os indicadores e os cartões desta página
+              utilizam registros salvos neste navegador.
+              Eles não representam dados públicos,
+              estatísticas oficiais ou solicitações
+              encaminhadas à prefeitura.
+              A versão integrada utilizará Java,
+              Oracle e regras de privacidade para
+              definir quais ocorrências poderão
+              aparecer publicamente.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =====================================
+         05 — IMPACTO SOCIAL
+         NOVA SEÇÃO
+         ===================================== -->
+
+    <section class="impacto-area"
+             aria-labelledby="tituloImpacto">
+
+      <div class="container">
+
+        <div class="impacto-cabecalho">
+
+          <span class="sobretitulo">
+            MAIS DO QUE UM REGISTRO
+          </span>
+
+          <h2 id="tituloImpacto">
+            Tecnologia para aproximar
+            pessoas e soluções.
+          </h2>
+
+          <p>
+            O CidadãoConecta foi pensado para
+            transformar relatos individuais
+            em informações úteis para a comunidade.
+          </p>
+
+        </div>
+
+        <div class="impacto-grade">
+
+          <article class="impacto-cartao">
+
+            <span class="impacto-numero">01 / VISIBILIDADE</span>
+
+            <h3>
+              Dar voz aos problemas
+            </h3>
+
+            <p>
+              Organizar os relatos dos moradores
+              para tornar as necessidades urbanas
+              mais fáceis de identificar.
+            </p>
+
+            <div class="impacto-rodape">
+              Identificar e registrar ↗
+            </div>
+
+          </article>
+
+          <article class="impacto-cartao">
+
+            <span class="impacto-numero">02 / INFORMAÇÃO</span>
+
+            <h3>
+              Entender a realidade
+            </h3>
+
+            <p>
+              Reunir dados por bairro e categoria
+              para ajudar a compreender quais
+              problemas aparecem com frequência.
+            </p>
+
+            <div class="impacto-rodape">
+              Explorar e compreender ↗
+            </div>
+
+          </article>
+
+          <article class="impacto-cartao">
+
+            <span class="impacto-numero">03 / PARTICIPAÇÃO</span>
+
+            <h3>
+              Acompanhar mudanças
+            </h3>
+
+            <p>
+              Preparar um caminho para que,
+              futuramente, o cidadão acompanhe
+              atualizações e confirme a resolução
+              de problemas registrados.
+            </p>
+
+            <div class="impacto-rodape">
+              Acompanhar e participar ↗
+            </div>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- =====================================
+         06 — CHAMADA FINAL
+         ===================================== -->
+
+    <section class="participacao-final">
+
+      <div class="container">
+
+        <div class="participacao-painel">
+
+          <div>
+
+            <span class="sobretitulo">
+              SUA CIDADE, SUA VOZ
+            </span>
+
+            <h2>
+              Encontrou algo que precisa melhorar?
+            </h2>
+
+            <p>
+              Faça um registro demonstrativo
+              e conheça o funcionamento
+              do CidadãoConecta.
+            </p>
+
+          </div>
+
+          <a href="./registrar.html"
+             class="botao botao-primario">
+            Registrar ocorrência
+            <span aria-hidden="true">↗</span>
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- =====================================
+       RODAPÉ
+       ===================================== -->
+
+  <footer class="rodape">
+
+    <div class="container">
+
+      <div class="rodape-principal">
+
+        <div class="rodape-marca">
+
+          <strong>
+            cidadão<span>conecta.</span>
+          </strong>
+
+          <p>
+            Tecnologia e participação
+            para dar visibilidade às
+            necessidades da cidade.
+          </p>
+
+        </div>
+
+        <div class="rodape-links">
+
+          <strong>Navegação</strong>
+
+          <a href="./index.html">Início</a>
+          <a href="./servicos.html">Serviços</a>
+          <a href="./consultar.html">
+            Consultar protocolo
+          </a>
+          <a href="./ocorrencias.html">Comunidade</a>
+          <a href="./registrar.html">
+            Registrar problema
+          </a>
+
+        </div>
+
+        <div class="rodape-links">
+
+          <strong>Informações</strong>
+
+          <a href="./index.html#como-funciona">
+            Como funciona
+          </a>
+
+          <a href="./index.html#duvidas">
+            Perguntas frequentes
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="rodape-inferior">
+
+        <span>
+          © 2026 CidadãoConecta ·
+          Projeto acadêmico FIAP.
+        </span>
+
+        <span>
+          Projeto independente,
+          não oficial da administração pública.
+        </span>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+  <!-- =====================================
+       07 — ANÁLISES DEMONSTRATIVAS
+
+       Complemento independente para
+       as duas novas áreas do Observatório.
+
+       Não modifica o ocorrencias.js.
+       ===================================== -->
+
+  <script>
+    document.addEventListener(
+      "DOMContentLoaded",
+      () => {
+
+        const grafico = document.getElementById(
+          "graficoCategorias"
+        );
+
+        const ranking = document.getElementById(
+          "rankingBairros"
+        );
+
+        if (!grafico || !ranking) {
+          return;
+        }
+
+        const CHAVE =
+          "cidadaoconecta_registros_demo";
+
+        const nomesCategorias = {
+          pavimentacao: "Ruas e calçadas",
+          iluminacao: "Iluminação pública",
+          saneamento: "Água e saneamento",
+          acessibilidade: "Acessibilidade",
+          limpeza: "Limpeza urbana",
+          outro: "Outro problema"
+        };
+
+        function normalizar(texto) {
+          return String(texto || "")
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .toLowerCase()
+            .trim();
+        }
+
+        function carregarDados() {
+          try {
+            const conteudo =
+              localStorage.getItem(CHAVE);
+
+            const dados = JSON.parse(
+              conteudo || "[]"
+            );
+
+            return Array.isArray(dados)
+              ? dados.filter(
+                  (item) =>
+                    item &&
+                    typeof item === "object" &&
+                    typeof item.idLocal === "string"
+                )
+              : [];
+
+          } catch {
+            return [];
+          }
+        }
+
+        function mostrarMensagem(
+          elemento,
+          mensagem
+        ) {
+          const aviso =
+            document.createElement("div");
+
+          aviso.className = "analise-sem-dados";
+          aviso.textContent = mensagem;
+
+          elemento.replaceChildren(aviso);
+        }
+
+        function renderizarCategorias(registros) {
+          grafico.replaceChildren();
+
+          if (!registros.length) {
+            mostrarMensagem(
+              grafico,
+              "Cadastre uma ocorrência demonstrativa para visualizar os indicadores por categoria."
+            );
+            return;
+          }
+
+          const contagens = new Map();
+
+          registros.forEach((registro) => {
+            const categoria =
+              nomesCategorias[registro.categoria] ||
+              "Outra categoria";
+
+            contagens.set(
+              categoria,
+              (contagens.get(categoria) || 0) + 1
+            );
+          });
+
+          const ordenadas = [
+            ...contagens.entries()
+          ].sort((a, b) => b[1] - a[1]);
+
+          ordenadas.forEach(
+            ([nome, quantidade]) => {
+
+              const porcentagem =
+                (quantidade / registros.length) * 100;
+
+              const linha =
+                document.createElement("div");
+              linha.className = "categoria-linha";
+
+              const topo =
+                document.createElement("div");
+              topo.className =
+                "categoria-linha-topo";
+
+              const titulo =
+                document.createElement("span");
+              titulo.textContent = nome;
+
+              const numero =
+                document.createElement("strong");
+              numero.textContent =
+                `${quantidade} (${Math.round(porcentagem)}%)`;
+
+              topo.append(titulo, numero);
+
+              const trilho =
+                document.createElement("div");
+              trilho.className =
+                "categoria-trilho";
+
+              const preenchimento =
+                document.createElement("div");
+              preenchimento.className =
+                "categoria-preenchimento";
+
+              preenchimento.style.width =
+                `${porcentagem}%`;
+
+              trilho.appendChild(preenchimento);
+
+              linha.append(topo, trilho);
+
+              grafico.appendChild(linha);
+            }
+          );
+        }
+
+        function renderizarBairros(registros) {
+          ranking.replaceChildren();
+
+          const bairros = new Map();
+
+          registros.forEach((registro) => {
+            const nome = String(
+              registro.bairro || ""
+            ).trim();
+
+            const chave = normalizar(nome);
+
+            if (!chave) {
+              return;
+            }
+
+            if (!bairros.has(chave)) {
+              bairros.set(chave, {
+                nome,
+                quantidade: 0
+              });
+            }
+
+            bairros.get(chave).quantidade++;
+          });
+
+          if (!bairros.size) {
+            mostrarMensagem(
+              ranking,
+              "Os bairros aparecerão aqui quando houver registros demonstrativos com localização informada."
+            );
+            return;
+          }
+
+          const ordenados = [
+            ...bairros.values()
+          ]
+            .sort(
+              (a, b) =>
+                b.quantidade - a.quantidade ||
+                a.nome.localeCompare(
+                  b.nome,
+                  "pt-BR"
+                )
+            )
+            .slice(0, 5);
+
+          ordenados.forEach(
+            (bairro, indice) => {
+
+              const item =
+                document.createElement("div");
+              item.className =
+                "bairro-ranking-item";
+
+              const posicao =
+                document.createElement("span");
+              posicao.className =
+                "bairro-ranking-posicao";
+              posicao.textContent =
+                String(indice + 1).padStart(2, "0");
+
+              const dados =
+                document.createElement("div");
+              dados.className =
+                "bairro-ranking-dados";
+
+              const titulo =
+                document.createElement("strong");
+              titulo.textContent = bairro.nome;
+
+              const legenda =
+                document.createElement("small");
+
+              legenda.textContent =
+                bairro.quantidade === 1
+                  ? "1 registro local"
+                  : `${bairro.quantidade} registros locais`;
+
+              dados.append(titulo, legenda);
+
+              const quantidade =
+                document.createElement("span");
+              quantidade.className =
+                "bairro-ranking-quantidade";
+
+              quantidade.textContent =
+                bairro.quantidade;
+
+              item.append(
+                posicao,
+                dados,
+                quantidade
+              );
+
+              ranking.appendChild(item);
+            }
+          );
+        }
+
+        function atualizarAnalises() {
+          const registros = carregarDados();
+
+          renderizarCategorias(registros);
+          renderizarBairros(registros);
+        }
+
+        atualizarAnalises();
+
+        // Sincronização entre abas da mesma origem.
+        window.addEventListener(
+          "storage",
+          (evento) => {
+            if (evento.key === CHAVE) {
+              atualizarAnalises();
+            }
+          }
+        );
+
+      }
+    );
+  </script>
+
+</body>
+</html>

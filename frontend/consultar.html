@@ -1,0 +1,497 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f5f9ff">
+
+  <meta name="description"
+        content="Consulte o andamento demonstrativo de uma ocorrência no CidadãoConecta utilizando seu protocolo.">
+
+  <title>Consultar ocorrência | CidadãoConecta</title>
+
+  <!-- ESTILOS -->
+  <link rel="stylesheet" href="./CSS/style.css">
+  <link rel="stylesheet" href="./CSS/consultar.css">
+
+  <!-- SCRIPTS -->
+  <script src="./JS/main.js" defer></script>
+  <script src="./JS/consultar.js" defer></script>
+</head>
+
+<body class="pagina-consultar">
+
+  <a href="#conteudo" class="pular-conteudo">
+    Pular para o conteúdo
+  </a>
+
+  <!-- CABEÇALHO -->
+
+  <header class="cabecalho" id="topo">
+    <div class="container cabecalho-interno">
+
+      <a href="./index.html"
+         class="marca"
+         aria-label="CidadãoConecta, página inicial">
+
+        <span class="marca-simbolo" aria-hidden="true">
+          <svg width="28" height="28"
+               viewBox="0 0 48 48"
+               fill="none">
+            <path d="M8 24L24 10L40 24V39H8V24Z"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"/>
+
+            <path d="M18 39V26H30V39"
+                  stroke="currentColor"
+                  stroke-width="3"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"/>
+
+            <circle cx="36" cy="12" r="5"
+                    fill="#A2DDF9"/>
+          </svg>
+        </span>
+
+        <span class="marca-texto">
+          <strong>cidadão<span>conecta.</span></strong>
+          <small>Sua cidade, sua voz</small>
+        </span>
+      </a>
+
+      <nav class="navegacao" aria-label="Menu principal">
+        <a href="./index.html">Início</a>
+        <a href="./servicos.html">Serviços</a>
+      </nav>
+
+      <a href="./registrar.html"
+         class="botao botao-primario botao-cabecalho">
+        Registrar problema
+        <span aria-hidden="true">↗</span>
+      </a>
+
+      <button class="botao-menu"
+              type="button"
+              id="botaoMenu"
+              aria-label="Abrir menu"
+              aria-controls="menuMobile"
+              aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <nav class="menu-mobile"
+         id="menuMobile"
+         aria-label="Menu para celular"
+         hidden>
+
+      <a href="./index.html">Início</a>
+      <a href="./servicos.html">Serviços</a>
+      <a href="./consultar.html" aria-current="page">
+        Consultar protocolo
+      </a>
+
+      <a href="./registrar.html"
+         class="menu-mobile-destaque">
+        Registrar problema
+      </a>
+    </nav>
+  </header>
+
+  <main id="conteudo">
+
+    <!-- APRESENTAÇÃO -->
+
+    <section class="consulta-hero">
+      <div class="container consulta-hero-grid">
+
+        <div class="consulta-hero-texto">
+
+          <span class="sobretitulo">
+            ACOMPANHAMENTO DE OCORRÊNCIAS
+          </span>
+
+          <h1>
+            Seu registro, sempre
+            <span>ao seu alcance.</span>
+          </h1>
+
+          <p>
+            Quer saber o andamento de um problema?
+            Utilize o código recebido ao finalizar
+            seu registro. Simples, rápido e sem precisar
+            criar uma conta.
+          </p>
+
+          <div class="consulta-beneficios">
+            <span>✓ Sem cadastro</span>
+            <span>✓ Consulta simples</span>
+            <span>✓ Informações organizadas</span>
+          </div>
+
+        </div>
+
+        <div class="consulta-ilustracao" aria-hidden="true">
+          <div class="consulta-orbita consulta-orbita-um"></div>
+          <div class="consulta-orbita consulta-orbita-dois"></div>
+
+          <div class="consulta-icone-grande">
+            <svg width="94" height="94"
+                 viewBox="0 0 100 100"
+                 fill="none">
+
+              <rect x="14" y="12"
+                    width="55" height="70"
+                    rx="13"
+                    fill="#EAF5FF"
+                    stroke="#86BBE4"
+                    stroke-width="3"/>
+
+              <path d="M28 33H55"
+                    stroke="#89B8DC"
+                    stroke-width="5"
+                    stroke-linecap="round"/>
+
+              <path d="M28 46H50"
+                    stroke="#89B8DC"
+                    stroke-width="5"
+                    stroke-linecap="round"/>
+
+              <circle cx="65" cy="64"
+                      r="21"
+                      fill="#FFFFFF"
+                      stroke="#448FC8"
+                      stroke-width="5"/>
+
+              <path d="M80 79L92 91"
+                    stroke="#448FC8"
+                    stroke-width="6"
+                    stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <div class="consulta-selo">
+            <small>URBAN OS</small>
+            <strong>ACOMPANHE</strong>
+            <span>SUA CIDADE</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ÁREA DE CONSULTA -->
+
+    <section class="consulta-conteudo"
+             aria-labelledby="tituloConsulta">
+
+      <div class="container consulta-layout">
+
+        <div class="consulta-coluna-principal">
+
+          <div class="consulta-painel">
+
+            <div class="consulta-painel-cabecalho">
+              <span class="consulta-painel-icone"
+                    aria-hidden="true">⌕</span>
+
+              <div>
+                <span class="consulta-etiqueta">
+                  CONSULTA DE REGISTRO
+                </span>
+
+                <h2 id="tituloConsulta">
+                  Acompanhe sua ocorrência
+                </h2>
+
+                <p>
+                  Digite o código recebido ao concluir
+                  seu registro.
+                </p>
+              </div>
+            </div>
+
+            <form id="formConsulta" novalidate>
+
+              <label for="protocolo">
+                Número do protocolo
+              </label>
+
+              <div class="consulta-campo">
+                <span aria-hidden="true">#</span>
+
+                <input type="text"
+                       id="protocolo"
+                       name="protocolo"
+                       placeholder="Ex.: LOCAL-XXXXXXXX-XXXX"
+                       autocomplete="off"
+                       spellcheck="false"
+                       maxlength="80"
+                       required>
+              </div>
+
+              <p class="consulta-campo-ajuda">
+                Você encontra o código na tela
+                de confirmação do registro.
+              </p>
+
+              <div id="mensagemConsulta"
+                   class="consulta-mensagem"
+                   role="status"
+                   aria-live="polite"
+                   hidden></div>
+
+              <button type="submit"
+                      class="botao botao-primario consulta-botao">
+                Consultar andamento
+                <span aria-hidden="true">→</span>
+              </button>
+
+            </form>
+          </div>
+
+          <!-- RESULTADO INICIALMENTE OCULTO -->
+
+          <section id="resultadoConsulta"
+                   class="consulta-resultado"
+                   aria-labelledby="resultadoTitulo"
+                   hidden>
+
+            <div class="resultado-cabecalho">
+              <div>
+                <span class="consulta-etiqueta">
+                  REGISTRO ENCONTRADO
+                </span>
+                <h2 id="resultadoTitulo">
+                  Detalhes da ocorrência
+                </h2>
+              </div>
+
+              <span class="resultado-status">
+                Registro demonstrativo
+              </span>
+            </div>
+
+            <div class="resultado-protocolo">
+              <span>IDENTIFICADOR LOCAL</span>
+              <strong id="resultadoCodigo"></strong>
+            </div>
+
+            <div class="resultado-informacoes">
+
+              <div class="resultado-item">
+                <small>Título</small>
+                <strong id="resultadoNome"></strong>
+              </div>
+
+              <div class="resultado-item">
+                <small>Categoria</small>
+                <strong id="resultadoCategoria"></strong>
+              </div>
+
+              <div class="resultado-item">
+                <small>Bairro</small>
+                <strong id="resultadoBairro"></strong>
+              </div>
+
+              <div class="resultado-item">
+                <small>Cidade / UF</small>
+                <strong id="resultadoCidade"></strong>
+              </div>
+
+              <div class="resultado-item">
+                <small>Data do registro</small>
+                <strong id="resultadoData"></strong>
+              </div>
+
+              <div class="resultado-item">
+                <small>Situação</small>
+                <strong id="resultadoSituacao">
+                  Registrada localmente
+                </strong>
+              </div>
+
+            </div>
+
+            <div class="resultado-descricao">
+              <h3>Descrição do problema</h3>
+              <p id="resultadoDescricao"></p>
+            </div>
+
+            <!-- HISTÓRICO -->
+
+            <div class="resultado-historico">
+
+              <span class="consulta-etiqueta">
+                HISTÓRICO DA OCORRÊNCIA
+              </span>
+
+              <h3>Andamento do registro</h3>
+
+              <ol class="consulta-linha-tempo">
+
+                <li class="concluido">
+                  <span class="historico-marcador"
+                        aria-hidden="true">✓</span>
+
+                  <div>
+                    <strong>Registro demonstrativo criado</strong>
+                    <p id="historicoData"></p>
+                  </div>
+                </li>
+
+                <li class="pendente">
+                  <span class="historico-marcador"
+                        aria-hidden="true"></span>
+
+                  <div>
+                    <strong>Aguardando integração</strong>
+                    <p>
+                      Ainda não existe análise de um
+                      órgão público para este registro.
+                    </p>
+                  </div>
+                </li>
+
+              </ol>
+            </div>
+
+            <div class="resultado-aviso">
+              <span aria-hidden="true">ⓘ</span>
+              <p>
+                Este registro foi salvo apenas neste
+                navegador, como demonstração acadêmica.
+                Não representa um protocolo oficial
+                nem uma solicitação enviada à prefeitura.
+              </p>
+            </div>
+
+            <div class="resultado-acoes">
+              <button type="button"
+                      id="novaConsulta"
+                      class="botao botao-secundario">
+                Consultar outro protocolo
+              </button>
+
+              <a href="./registrar.html"
+                 class="botao botao-primario">
+                Registrar outro problema
+                <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+
+          </section>
+
+        </div>
+
+        <!-- INFORMAÇÕES LATERAIS -->
+
+        <aside class="consulta-ajuda"
+               aria-label="Orientações sobre a consulta">
+
+          <div class="consulta-ajuda-card">
+
+            <span class="ajuda-icone-consulta"
+                  aria-hidden="true">✦</span>
+
+            <h2>Seu código é importante.</h2>
+
+            <p>
+              Guarde o identificador recebido
+              ao finalizar o registro.
+              Ele permite localizar as informações
+              demonstrativas da ocorrência.
+            </p>
+
+            <div class="consulta-exemplo">
+              <small>EXEMPLO DE CÓDIGO</small>
+              <strong>LOCAL-XXXXXXXX-XXXX</strong>
+            </div>
+
+            <ul class="consulta-dicas">
+              <li>Copie o código ao finalizar.</li>
+              <li>Guarde-o em um local seguro.</li>
+              <li>Consulte no mesmo navegador.</li>
+            </ul>
+          </div>
+
+          <div class="consulta-nota">
+
+            <strong>Sobre o acompanhamento</strong>
+
+            <p>
+              Esta versão ainda não consulta
+              o banco de dados Oracle.
+              O acompanhamento real será
+              disponibilizado com a integração
+              do backend Java.
+            </p>
+          </div>
+
+        </aside>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- RODAPÉ -->
+
+  <footer class="rodape">
+    <div class="container">
+
+      <div class="rodape-principal">
+
+        <div class="rodape-marca">
+          <strong>cidadão<span>conecta.</span></strong>
+
+          <p>
+            Tecnologia e participação para dar
+            visibilidade às necessidades da cidade.
+          </p>
+        </div>
+
+        <div class="rodape-links">
+          <strong>Navegação</strong>
+
+          <a href="./index.html">Início</a>
+          <a href="./servicos.html">Serviços</a>
+          <a href="./registrar.html">Registrar problema</a>
+          <a href="./consultar.html">Consultar protocolo</a>
+        </div>
+
+        <div class="rodape-links">
+          <strong>Informações</strong>
+
+          <a href="./index.html#como-funciona">
+            Como funciona
+          </a>
+
+          <a href="./index.html#duvidas">
+            Perguntas frequentes
+          </a>
+        </div>
+      </div>
+
+      <div class="rodape-inferior">
+        <span>
+          © 2026 CidadãoConecta · Projeto acadêmico FIAP.
+        </span>
+
+        <span>
+          Projeto independente, não oficial
+          da administração pública.
+        </span>
+      </div>
+
+    </div>
+  </footer>
+
+</body>
+</html>

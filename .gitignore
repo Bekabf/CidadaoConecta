@@ -1,0 +1,53 @@
+
+# ==========================================
+# CIDADAOCONECTA - GLOBAL SOLUTION FIAP 2026/2
+# ==========================================
+
+# Arquivos compilados Java
+*.class
+
+# Pastas de compilacao
+build/
+target/
+out/
+bin/
+
+# Arquivos temporarios Java
+*.log
+*.tmp
+*.bak
+
+# Variaveis de ambiente e credenciais
+.env
+.env.*
+!.env.example
+
+# Arquivos com senhas e credenciais
+*.jks
+*.keystore
+*.p12
+*.pfx
+
+# Configuracoes locais de IDE
+.idea/
+*.iml
+.vscode/*
+!.vscode/extensions.json
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Arquivos temporarios de editores
+*~
+*.swp
+*.swo
+
+# Arquivos temporarios Oracle
+*.lck
+
+# Arquivos ZIP gerados para entrega
+*.zip
+backend/lib/ojdbc11.jar
+**/TesteAcentuacao.java
