@@ -230,26 +230,27 @@ SELECT
 FROM DUAL;
 
 
+
 -- =====================================================
 -- 14 - LISTAGEM PUBLICA DA COMUNIDADE
 --
--- Apenas campos preparados para publicacao.
--- Nao retorna endereco completo nem usuario.
--- A API tambem deve restringir os campos.
+-- Exibe todas as ocorrencias cadastradas.
+-- Retorna apenas informacoes resumidas.
+-- Nao retorna protocolo, ID interno, descricao
+-- completa, rua, numero ou dados do usuario.
 -- =====================================================
 
 SELECT
-    O.ID_PUBLICO,
-    O.TITULO_PUBLICO,
-    O.RESUMO_PUBLICO,
+    O.TITULO,
     O.BAIRRO,
     O.CIDADE,
     O.UF,
     O.STATUS,
     O.DATA_CADASTRO
 FROM CC2_OCORRENCIA O
-WHERE O.VISIBILIDADE_PUBLICA = 1
-ORDER BY O.DATA_CADASTRO DESC;
+ORDER BY O.DATA_CADASTRO DESC,
+         O.ID_OCORRENCIA DESC;
+
 
 
 -- =====================================================

@@ -21,21 +21,34 @@
     Pular para o conteúdo
   </a>
 
-  <!-- CABEÇALHO -->
+  <!-- ==========================================
+       CABEÇALHO GLOBAL
+       ========================================== -->
 
   <header class="cabecalho" id="topo">
     <div class="container cabecalho-interno">
 
-      <a href="./index.html" class="marca"
-         aria-label="CidadãoConecta, página inicial">
+      <a
+        href="./index.html"
+        class="marca"
+        aria-label="CidadãoConecta, página inicial"
+      >
         <span class="marca-simbolo" aria-hidden="true">
           <svg width="28" height="28" viewBox="0 0 48 48" fill="none">
-            <path d="M8 24L24 10L40 24V39H8V24Z"
-                  stroke="currentColor" stroke-width="3"
-                  stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M18 39V26H30V39"
-                  stroke="currentColor" stroke-width="3"
-                  stroke-linecap="round" stroke-linejoin="round"/>
+            <path
+              d="M8 24L24 10L40 24V39H8V24Z"
+              stroke="currentColor"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M18 39V26H30V39"
+              stroke="currentColor"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
             <circle cx="36" cy="12" r="5" fill="#A2DDF9"/>
           </svg>
         </span>
@@ -46,33 +59,67 @@
         </span>
       </a>
 
+      <!-- MENU DESKTOP -->
+
       <nav class="navegacao" aria-label="Menu principal">
         <a href="./index.html">Início</a>
         <a href="./servicos.html">Serviços</a>
+        <a href="./ocorrencias.html">Comunidade</a>
+        <a href="./consultar.html">Consultar</a>
       </nav>
 
-      <a href="./registrar.html"
-         class="botao botao-primario botao-cabecalho"
-         aria-current="page">
+      <!-- BOTÃO REGISTRAR -->
+
+      <a
+        href="./registrar.html"
+        class="botao botao-primario botao-cabecalho"
+        aria-current="page"
+      >
         Registrar problema
         <span aria-hidden="true">↗</span>
       </a>
 
-      <button class="botao-menu" type="button"
-              id="botaoMenu" aria-label="Abrir menu"
-              aria-controls="menuMobile" aria-expanded="false">
-        <span></span><span></span><span></span>
+      <!-- MENU MOBILE -->
+
+      <button
+        class="botao-menu"
+        type="button"
+        id="botaoMenu"
+        aria-label="Abrir menu"
+        aria-controls="menuMobile"
+        aria-expanded="false"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
+
     </div>
 
-    <nav class="menu-mobile" id="menuMobile"
-         aria-label="Menu para celular" hidden>
+    <nav
+      class="menu-mobile"
+      id="menuMobile"
+      aria-label="Menu para celular"
+      hidden
+    >
       <a href="./index.html">Início</a>
       <a href="./servicos.html">Serviços</a>
-      <a href="./registrar.html" class="menu-mobile-destaque"
-         aria-current="page">Registrar problema</a>
+      <a href="./ocorrencias.html">Comunidade</a>
+      <a href="./consultar.html">Consultar</a>
+
+      <a
+        href="./registrar.html"
+        class="menu-mobile-destaque"
+        aria-current="page"
+      >
+        Registrar problema
+      </a>
     </nav>
   </header>
+
+  <!-- ==========================================
+       CONTEÚDO PRINCIPAL
+       ========================================== -->
 
   <main id="conteudo">
 
@@ -80,6 +127,7 @@
 
     <section class="registro-hero">
       <div class="container registro-hero-grid">
+
         <div>
           <span class="sobretitulo">SUA VOZ NA CIDADE</span>
 
@@ -100,10 +148,13 @@
           <strong>01</strong>
           <small>REGISTRO URBANO</small>
         </div>
+
       </div>
     </section>
 
-    <!-- FORMULÁRIO -->
+    <!-- ==========================================
+         FORMULÁRIO DE REGISTRO
+         ========================================== -->
 
     <section class="registro-area">
       <div class="container registro-layout">
@@ -113,16 +164,21 @@
           <!-- PROGRESSO -->
 
           <div class="registro-progresso" id="painelProgresso">
+
             <div class="progresso-cabecalho">
               <strong id="textoEtapa">Etapa 1 de 3</strong>
               <span id="textoPorcentagem">33%</span>
             </div>
 
-            <div class="progresso-trilha" id="barraProgresso"
-                 role="progressbar"
-                 aria-label="Progresso do registro"
-                 aria-valuemin="0" aria-valuemax="100"
-                 aria-valuenow="33">
+            <div
+              class="progresso-trilha"
+              id="barraProgresso"
+              role="progressbar"
+              aria-label="Progresso do registro"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="33"
+            >
               <span id="progressoAtual"></span>
             </div>
 
@@ -137,20 +193,28 @@
                 <span>3</span> Revisão
               </li>
             </ol>
+
           </div>
 
           <form id="formOcorrencia" novalidate>
 
-            <!-- ETAPA 1 -->
+            <!-- ==================================
+                 ETAPA 1 — PROBLEMA
+                 ================================== -->
 
-            <section class="form-painel" data-etapa="1"
-                     aria-labelledby="tituloProblema">
+            <section
+              class="form-painel"
+              data-etapa="1"
+              aria-labelledby="tituloProblema"
+            >
 
               <span class="form-etiqueta">
                 ETAPA 01 · IDENTIFICAÇÃO
               </span>
 
-              <h2 id="tituloProblema">O que aconteceu?</h2>
+              <h2 id="tituloProblema">
+                O que aconteceu?
+              </h2>
 
               <p class="form-descricao">
                 Escolha o tipo de problema e conte
@@ -158,10 +222,17 @@
                 utilizar palavras técnicas.
               </p>
 
-              <div class="form-erro" id="erroEtapa1"
-                   role="alert" hidden></div>
+              <div
+                class="form-erro"
+                id="erroEtapa1"
+                role="alert"
+                hidden
+              ></div>
+
+              <!-- CATEGORIAS -->
 
               <fieldset class="categorias-campo">
+
                 <legend>
                   Selecione uma categoria
                   <span class="obrigatorio">*</span>
@@ -169,118 +240,217 @@
 
                 <div class="categorias-opcoes">
 
+                  <!-- PAVIMENTAÇÃO -->
+
                   <label class="categoria-opcao">
-                    <input type="radio" name="categoria"
-                           value="pavimentacao" required>
-                    <span class="categoria-desenho"
-                          aria-hidden="true">▤</span>
+                    <input
+                      type="radio"
+                      name="categoria"
+                      value="pavimentacao"
+                      required
+                    >
+
+                    <span
+                      class="categoria-desenho"
+                      aria-hidden="true"
+                    >▤</span>
+
                     <span class="categoria-nome">
                       <strong>Ruas e calçadas</strong>
                       <small>Buracos e vias danificadas</small>
                     </span>
-                    <span class="categoria-selecao"
-                          aria-hidden="true"></span>
+
+                    <span
+                      class="categoria-selecao"
+                      aria-hidden="true"
+                    ></span>
                   </label>
 
+                  <!-- ILUMINAÇÃO -->
+
                   <label class="categoria-opcao">
-                    <input type="radio" name="categoria"
-                           value="iluminacao">
-                    <span class="categoria-desenho"
-                          aria-hidden="true">☼</span>
+                    <input
+                      type="radio"
+                      name="categoria"
+                      value="iluminacao"
+                    >
+
+                    <span
+                      class="categoria-desenho"
+                      aria-hidden="true"
+                    >☼</span>
+
                     <span class="categoria-nome">
                       <strong>Iluminação pública</strong>
                       <small>Postes e lâmpadas</small>
                     </span>
-                    <span class="categoria-selecao"
-                          aria-hidden="true"></span>
+
+                    <span
+                      class="categoria-selecao"
+                      aria-hidden="true"
+                    ></span>
                   </label>
 
+                  <!-- SANEAMENTO -->
+
                   <label class="categoria-opcao">
-                    <input type="radio" name="categoria"
-                           value="saneamento">
-                    <span class="categoria-desenho"
-                          aria-hidden="true">◉</span>
+                    <input
+                      type="radio"
+                      name="categoria"
+                      value="saneamento"
+                    >
+
+                    <span
+                      class="categoria-desenho"
+                      aria-hidden="true"
+                    >◉</span>
+
                     <span class="categoria-nome">
                       <strong>Água e saneamento</strong>
                       <small>Vazamentos e esgoto</small>
                     </span>
-                    <span class="categoria-selecao"
-                          aria-hidden="true"></span>
+
+                    <span
+                      class="categoria-selecao"
+                      aria-hidden="true"
+                    ></span>
                   </label>
 
+                  <!-- ACESSIBILIDADE -->
+
                   <label class="categoria-opcao">
-                    <input type="radio" name="categoria"
-                           value="acessibilidade">
-                    <span class="categoria-desenho"
-                          aria-hidden="true">♿</span>
+                    <input
+                      type="radio"
+                      name="categoria"
+                      value="acessibilidade"
+                    >
+
+                    <span
+                      class="categoria-desenho"
+                      aria-hidden="true"
+                    >♿</span>
+
                     <span class="categoria-nome">
                       <strong>Acessibilidade</strong>
                       <small>Barreiras e obstáculos</small>
                     </span>
-                    <span class="categoria-selecao"
-                          aria-hidden="true"></span>
+
+                    <span
+                      class="categoria-selecao"
+                      aria-hidden="true"
+                    ></span>
                   </label>
 
+                  <!-- LIMPEZA URBANA -->
+
                   <label class="categoria-opcao">
-                    <input type="radio" name="categoria"
-                           value="limpeza">
-                    <span class="categoria-desenho"
-                          aria-hidden="true">✳</span>
+                    <input
+                      type="radio"
+                      name="categoria"
+                      value="limpeza"
+                    >
+
+                    <span
+                      class="categoria-desenho"
+                      aria-hidden="true"
+                    >✳</span>
+
                     <span class="categoria-nome">
                       <strong>Limpeza urbana</strong>
                       <small>Lixo e espaços públicos</small>
                     </span>
-                    <span class="categoria-selecao"
-                          aria-hidden="true"></span>
+
+                    <span
+                      class="categoria-selecao"
+                      aria-hidden="true"
+                    ></span>
                   </label>
 
+                  <!-- OUTROS -->
+
                   <label class="categoria-opcao">
-                    <input type="radio" name="categoria"
-                           value="outro">
-                    <span class="categoria-desenho"
-                          aria-hidden="true">···</span>
+                    <input
+                      type="radio"
+                      name="categoria"
+                      value="outro"
+                    >
+
+                    <span
+                      class="categoria-desenho"
+                      aria-hidden="true"
+                    >···</span>
+
                     <span class="categoria-nome">
                       <strong>Outro problema</strong>
                       <small>Outras situações urbanas</small>
                     </span>
-                    <span class="categoria-selecao"
-                          aria-hidden="true"></span>
+
+                    <span
+                      class="categoria-selecao"
+                      aria-hidden="true"
+                    ></span>
                   </label>
 
                 </div>
               </fieldset>
 
+              <!-- TÍTULO -->
+
               <div class="campo">
+
                 <label for="titulo">
                   Dê um título ao problema
                   <span class="obrigatorio">*</span>
                 </label>
-                <input id="titulo" name="titulo" type="text"
-                       minlength="5" maxlength="100" required
-                       placeholder="Ex.: Buraco próximo à escola">
-                <small>Escreva um título curto e objetivo.</small>
+
+                <input
+                  id="titulo"
+                  name="titulo"
+                  type="text"
+                  minlength="5"
+                  maxlength="100"
+                  required
+                  placeholder="Ex.: Buraco próximo à escola"
+                >
+
+                <small>
+                  Escreva um título curto e objetivo.
+                </small>
+
               </div>
 
+              <!-- DESCRIÇÃO -->
+
               <div class="campo">
+
                 <label for="descricao">
                   Descreva a situação
                   <span class="obrigatorio">*</span>
                 </label>
-                <textarea id="descricao" name="descricao"
-                          minlength="15" maxlength="1000"
-                          rows="5" required
-                          placeholder="Ex.: Há um buraco grande próximo à faixa de pedestres, dificultando a passagem de carros e pessoas."></textarea>
+
+                <textarea
+                  id="descricao"
+                  name="descricao"
+                  minlength="15"
+                  maxlength="1000"
+                  rows="5"
+                  required
+                  placeholder="Ex.: Há um buraco grande próximo à faixa de pedestres, dificultando a passagem de carros e pessoas."
+                ></textarea>
 
                 <div class="campo-informacoes">
                   <small>Mínimo de 15 caracteres.</small>
                   <small id="contadorDescricao">0/1000</small>
                 </div>
+
               </div>
 
               <!-- FOTOS -->
 
               <div class="campo-fotos">
+
                 <div class="fotos-cabecalho">
+
                   <div>
                     <h3>Fotos do problema</h3>
                     <p>
@@ -288,59 +458,103 @@
                       mostrar a situação.
                     </p>
                   </div>
-                  <span class="fotos-opcional">Opcional</span>
+
+                  <span class="fotos-opcional">
+                    Opcional
+                  </span>
+
                 </div>
 
-                <label for="fotos" class="area-upload"
-                       id="areaUpload">
-                  <span class="upload-icone"
-                        aria-hidden="true">＋</span>
+                <label
+                  for="fotos"
+                  class="area-upload"
+                  id="areaUpload"
+                >
+
+                  <span
+                    class="upload-icone"
+                    aria-hidden="true"
+                  >＋</span>
+
                   <strong>Adicionar fotos</strong>
+
                   <span>
                     Escolha imagens do celular
                     ou do computador.
                   </span>
+
                   <small>
                     Até 3 imagens · JPG, PNG ou WebP · 5 MB cada
                   </small>
+
                 </label>
 
-                <input type="file" id="fotos" name="fotos"
-                       accept="image/jpeg,image/png,image/webp"
-                       multiple class="input-fotos">
+                <input
+                  type="file"
+                  id="fotos"
+                  name="fotos"
+                  accept="image/jpeg,image/png,image/webp"
+                  multiple
+                  class="input-fotos"
+                >
 
-                <div id="listaFotos" class="lista-fotos"
-                     aria-live="polite"></div>
+                <div
+                  id="listaFotos"
+                  class="lista-fotos"
+                  aria-live="polite"
+                ></div>
 
                 <p class="fotos-privacidade">
                   Evite enviar fotos com rostos,
                   placas ou informações pessoais de terceiros.
+                  As fotos serão usadas apenas para pré-visualização
+                  nesta versão.
                 </p>
+
               </div>
 
+              <!-- BOTÕES ETAPA 1 -->
+
               <div class="form-acoes">
-                <a href="./servicos.html" class="link-voltar">
+
+                <a
+                  href="./servicos.html"
+                  class="link-voltar"
+                >
                   Cancelar
                 </a>
 
-                <button type="button" id="avancar1"
-                        class="botao botao-primario">
+                <button
+                  type="button"
+                  id="avancar1"
+                  class="botao botao-primario"
+                >
                   Continuar
                   <span aria-hidden="true">→</span>
                 </button>
+
               </div>
+
             </section>
 
-            <!-- ETAPA 2 -->
+            <!-- ==================================
+                 ETAPA 2 — LOCALIZAÇÃO
+                 ================================== -->
 
-            <section class="form-painel" data-etapa="2"
-                     aria-labelledby="tituloLocal" hidden>
+            <section
+              class="form-painel"
+              data-etapa="2"
+              aria-labelledby="tituloLocal"
+              hidden
+            >
 
               <span class="form-etiqueta">
                 ETAPA 02 · LOCALIZAÇÃO
               </span>
 
-              <h2 id="tituloLocal">Onde fica o problema?</h2>
+              <h2 id="tituloLocal">
+                Onde fica o problema?
+              </h2>
 
               <p class="form-descricao">
                 Informe o endereço onde o problema
@@ -348,122 +562,228 @@
                 o endereço da sua residência.
               </p>
 
-              <div class="form-erro" id="erroEtapa2"
-                   role="alert" hidden></div>
+              <div
+                class="form-erro"
+                id="erroEtapa2"
+                role="alert"
+                hidden
+              ></div>
+
+              <!-- CIDADE E ESTADO -->
 
               <div class="form-grid">
+
                 <div class="campo">
+
                   <label for="cidade">
-                    Cidade <span class="obrigatorio">*</span>
+                    Cidade
+                    <span class="obrigatorio">*</span>
                   </label>
-                  <input id="cidade" name="cidade" type="text"
-                         maxlength="80" required
-                         placeholder="Ex.: Anápolis">
+
+                  <input
+                    id="cidade"
+                    name="cidade"
+                    type="text"
+                    maxlength="80"
+                    required
+                    placeholder="Ex.: Anápolis"
+                  >
+
                 </div>
 
                 <div class="campo">
+
                   <label for="uf">
-                    Estado (UF) <span class="obrigatorio">*</span>
+                    Estado (UF)
+                    <span class="obrigatorio">*</span>
                   </label>
-                  <input id="uf" name="uf" type="text"
-                         maxlength="2" pattern="[A-Za-z]{2}"
-                         required placeholder="GO"
-                         autocomplete="off">
+
+                  <input
+                    id="uf"
+                    name="uf"
+                    type="text"
+                    maxlength="2"
+                    pattern="[A-Za-z]{2}"
+                    required
+                    placeholder="GO"
+                    autocomplete="off"
+                  >
+
                 </div>
+
               </div>
+
+              <!-- BAIRRO -->
 
               <div class="campo">
+
                 <label for="bairro">
-                  Bairro <span class="obrigatorio">*</span>
+                  Bairro
+                  <span class="obrigatorio">*</span>
                 </label>
-                <input id="bairro" name="bairro" type="text"
-                       maxlength="100" required
-                       placeholder="Ex.: Centro">
+
+                <input
+                  id="bairro"
+                  name="bairro"
+                  type="text"
+                  maxlength="100"
+                  required
+                  placeholder="Ex.: Centro"
+                >
+
               </div>
 
+              <!-- RUA E NÚMERO -->
+
               <div class="form-grid form-grid-endereco">
+
                 <div class="campo">
+
                   <label for="rua">
                     Rua ou avenida
                     <span class="obrigatorio">*</span>
                   </label>
-                  <input id="rua" name="rua" type="text"
-                         maxlength="150" required
-                         placeholder="Ex.: Rua das Flores">
+
+                  <input
+                    id="rua"
+                    name="rua"
+                    type="text"
+                    maxlength="150"
+                    required
+                    placeholder="Ex.: Rua das Flores"
+                  >
+
                 </div>
 
                 <div class="campo">
-                  <label for="numero">Número</label>
-                  <input id="numero" name="numero" type="text"
-                         maxlength="30" placeholder="Ex.: 120">
+
+                  <label for="numero">
+                    Número
+                  </label>
+
+                  <input
+                    id="numero"
+                    name="numero"
+                    type="text"
+                    maxlength="30"
+                    placeholder="Ex.: 120"
+                  >
+
                 </div>
+
               </div>
 
+              <!-- REFERÊNCIA -->
+
               <div class="campo">
+
                 <label for="referencia">
                   Ponto de referência
                   <span class="texto-opcional">Opcional</span>
                 </label>
 
-                <textarea id="referencia" name="referencia"
-                          maxlength="300" rows="3"
-                          placeholder="Ex.: Em frente à farmácia da esquina."></textarea>
+                <textarea
+                  id="referencia"
+                  name="referencia"
+                  maxlength="300"
+                  rows="3"
+                  placeholder="Ex.: Em frente à farmácia da esquina."
+                ></textarea>
 
                 <small>
                   Uma referência ajuda a identificar o local.
                 </small>
+
               </div>
 
+              <!-- AVISO -->
+
               <div class="aviso-formulario">
+
                 <span aria-hidden="true">ⓘ</span>
+
                 <p>
                   Informe a localização do problema,
                   sem adicionar dados pessoais de terceiros.
                 </p>
+
               </div>
 
+              <!-- BOTÕES ETAPA 2 -->
+
               <div class="form-acoes">
-                <button type="button" id="voltar1"
-                        class="link-voltar">
+
+                <button
+                  type="button"
+                  id="voltar1"
+                  class="link-voltar"
+                >
                   ← Voltar
                 </button>
 
-                <button type="button" id="avancar2"
-                        class="botao botao-primario">
+                <button
+                  type="button"
+                  id="avancar2"
+                  class="botao botao-primario"
+                >
                   Revisar informações
                   <span aria-hidden="true">→</span>
                 </button>
+
               </div>
+
             </section>
 
-            <!-- ETAPA 3 -->
+            <!-- ==================================
+                 ETAPA 3 — REVISÃO
+                 ================================== -->
 
-            <section class="form-painel" data-etapa="3"
-                     aria-labelledby="tituloRevisao" hidden>
+            <section
+              class="form-painel"
+              data-etapa="3"
+              aria-labelledby="tituloRevisao"
+              hidden
+            >
 
               <span class="form-etiqueta">
                 ETAPA 03 · CONFERÊNCIA
               </span>
 
-              <h2 id="tituloRevisao">Vamos conferir?</h2>
+              <h2 id="tituloRevisao">
+                Vamos conferir?
+              </h2>
 
               <p class="form-descricao">
                 Verifique as informações. Se precisar
                 mudar alguma coisa, clique em Editar.
               </p>
 
-              <div class="form-erro" id="erroEtapa3"
-                   role="alert" hidden></div>
+              <div
+                class="form-erro"
+                id="erroEtapa3"
+                role="alert"
+                hidden
+              ></div>
+
+              <!-- REVISÃO DO PROBLEMA -->
 
               <div class="revisao-bloco">
+
                 <div class="revisao-cabecalho">
+
                   <h3>Sobre o problema</h3>
-                  <button type="button" id="editarProblema">
+
+                  <button
+                    type="button"
+                    id="editarProblema"
+                  >
                     Editar
                   </button>
+
                 </div>
 
                 <dl>
+
                   <div>
                     <dt>Categoria</dt>
                     <dd id="revCategoria"></dd>
@@ -483,18 +803,30 @@
                     <dt>Fotos selecionadas</dt>
                     <dd id="revFotos"></dd>
                   </div>
+
                 </dl>
+
               </div>
 
+              <!-- REVISÃO DA LOCALIZAÇÃO -->
+
               <div class="revisao-bloco">
+
                 <div class="revisao-cabecalho">
+
                   <h3>Localização</h3>
-                  <button type="button" id="editarLocal">
+
+                  <button
+                    type="button"
+                    id="editarLocal"
+                  >
                     Editar
                   </button>
+
                 </div>
 
                 <dl>
+
                   <div>
                     <dt>Cidade / UF</dt>
                     <dd id="revCidade"></dd>
@@ -514,84 +846,142 @@
                     <dt>Referência</dt>
                     <dd id="revReferencia"></dd>
                   </div>
+
                 </dl>
+
               </div>
+
+              <!-- AVISO DE INTEGRAÇÃO -->
 
               <div class="aviso-formulario">
+
                 <span aria-hidden="true">ⓘ</span>
+
                 <p>
-                  Esta é uma demonstração acadêmica.
-                  Os dados textuais serão guardados
-                  somente neste navegador, se o armazenamento
-                  local estiver disponível. As fotos não serão
-                  salvas e nenhuma solicitação será enviada
+                  Este registro faz parte de um projeto acadêmico.
+                  Os dados textuais serão enviados ao servidor Java
+                  e armazenados no banco Oracle configurado.
+
+                  As fotos são utilizadas apenas para
+                  pré-visualização e não serão enviadas ao banco.
+
+                  Nenhuma solicitação será encaminhada
                   a uma prefeitura.
                 </p>
+
               </div>
+
+              <!-- BOTÕES ETAPA 3 -->
 
               <div class="form-acoes">
-                <button type="button" id="voltar2"
-                        class="link-voltar">← Voltar</button>
 
-                <button type="submit"
-                        class="botao botao-primario">
-                  Salvar demonstração
+                <button
+                  type="button"
+                  id="voltar2"
+                  class="link-voltar"
+                >
+                  ← Voltar
+                </button>
+
+                <button
+                  type="submit"
+                  class="botao botao-primario"
+                >
+                  Cadastrar ocorrência
                   <span aria-hidden="true">✓</span>
                 </button>
+
               </div>
+
             </section>
 
           </form>
 
-          <!-- CONFIRMAÇÃO -->
+          <!-- ==================================
+               CONFIRMAÇÃO DO CADASTRO
+               ================================== -->
 
-          <section id="confirmacao"
-                   class="confirmacao-painel"
-                   aria-labelledby="tituloConfirmacao"
-                   hidden>
+          <section
+            id="confirmacao"
+            class="confirmacao-painel"
+            aria-labelledby="tituloConfirmacao"
+            hidden
+          >
 
-            <div class="confirmacao-icone" aria-hidden="true">✓</div>
-            <span class="form-etiqueta">REGISTRO DEMONSTRATIVO</span>
+            <div
+              class="confirmacao-icone"
+              aria-hidden="true"
+            >✓</div>
+
+            <span class="form-etiqueta">
+              REGISTRO ACADÊMICO
+            </span>
 
             <h2 id="tituloConfirmacao">
-              Informações salvas neste navegador!
+              Ocorrência cadastrada no sistema!
             </h2>
 
             <p>
-              Você concluiu a demonstração do registro.
-              Ainda não houve envio para um sistema público.
+              Sua ocorrência foi registrada no banco de dados
+              do projeto CidadãoConecta.
+
+              Nenhuma solicitação foi enviada a uma prefeitura.
             </p>
 
             <div class="confirmacao-codigo">
-              <small>IDENTIFICADOR LOCAL</small>
+
+              <small>
+                PROTOCOLO DO SISTEMA
+              </small>
+
               <strong id="codigoGerado"></strong>
-              <span>Este código não é um protocolo oficial.</span>
+
+              <span>
+                Guarde este código para referência.
+                Ele não é um protocolo oficial de prefeitura.
+              </span>
+
             </div>
 
             <div class="confirmacao-botoes">
-              <button type="button" id="novoRegistro"
-                      class="botao botao-primario">
+
+              <button
+                type="button"
+                id="novoRegistro"
+                class="botao botao-primario"
+              >
                 Registrar outro problema
               </button>
 
-              <a href="./servicos.html"
-                 class="botao botao-secundario">
+              <a
+                href="./servicos.html"
+                class="botao botao-secundario"
+              >
                 Voltar aos serviços
               </a>
+
             </div>
+
           </section>
 
         </div>
 
-        <!-- AJUDA LATERAL -->
+        <!-- ==================================
+             AJUDA LATERAL
+             ================================== -->
 
-        <aside class="registro-ajuda"
-               aria-label="Orientações para registrar uma ocorrência">
+        <aside
+          class="registro-ajuda"
+          aria-label="Orientações para registrar uma ocorrência"
+        >
 
           <div class="ajuda-cartao">
-            <span class="ajuda-icone" aria-hidden="true">✦</span>
 
-            <h2>Seu relato faz a diferença.</h2>
+            <span class="ajuda-icone">✦</span>
+
+            <h2>
+              Seu relato faz a diferença.
+            </h2>
 
             <p>
               Não sabe como descrever o problema?
@@ -599,12 +989,15 @@
             </p>
 
             <div class="ajuda-exemplo">
+
               <small>EXEMPLO</small>
+
               <p>
                 “A lâmpada do poste está apagada
                 há alguns dias e a rua fica
                 muito escura à noite.”
               </p>
+
             </div>
 
             <div class="ajuda-item">
@@ -618,16 +1011,9 @@
             <div class="ajuda-item">
               <span>✓</span> Fotos são opcionais.
             </div>
+
           </div>
 
-          <div class="ajuda-nota">
-            <strong>Sobre a demonstração</strong>
-            <p>
-              CidadãoConecta é um projeto acadêmico independente.
-              Contas e acompanhamento reais serão integrados
-              posteriormente ao backend.
-            </p>
-          </div>
         </aside>
 
       </div>
@@ -635,37 +1021,71 @@
 
   </main>
 
+  <!-- ==========================================
+       RODAPÉ GLOBAL
+       ========================================== -->
+
   <footer class="rodape">
+
     <div class="container">
 
       <div class="rodape-principal">
+
         <div class="rodape-marca">
-          <strong>cidadão<span>conecta.</span></strong>
+
+          <strong>
+            cidadão<span>conecta.</span>
+          </strong>
+
           <p>
             Tecnologia e participação para dar
             visibilidade às necessidades da cidade.
           </p>
+
         </div>
 
         <div class="rodape-links">
+
           <strong>Navegação</strong>
+
           <a href="./index.html">Início</a>
           <a href="./servicos.html">Serviços</a>
+          <a href="./ocorrencias.html">Comunidade</a>
+          <a href="./consultar.html">Consultar</a>
           <a href="./registrar.html">Registrar problema</a>
+
         </div>
 
         <div class="rodape-links">
+
           <strong>Informações</strong>
-          <a href="./index.html#como-funciona">Como funciona</a>
-          <a href="./index.html#duvidas">Perguntas frequentes</a>
+
+          <a href="./index.html#como-funciona">
+            Como funciona
+          </a>
+
+          <a href="./index.html#duvidas">
+            Perguntas frequentes
+          </a>
+
+          <a href="#topo">
+            Voltar ao início
+          </a>
+
         </div>
+
       </div>
 
       <div class="rodape-inferior">
-        <span>© 2026 CidadãoConecta · Projeto acadêmico FIAP.</span>
-        <span>Projeto independente, não oficial da administração pública.</span>
+
+        <span>
+          © 2026 CidadãoConecta · Projeto acadêmico FIAP.
+        </span>
+
       </div>
+
     </div>
+
   </footer>
 
 </body>

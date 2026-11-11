@@ -1,22 +1,16 @@
 
 /* =====================================================
-   CIDADÃOCONECTA — URBAN OS
-   OBSERVATÓRIO URBANO — OCORRENCIAS.JS
+   CIDADÃOCONECTA — OBSERVATÓRIO URBANO
+   Projeto acadêmico FIAP
+
+   Integração com API Java e Oracle
 
    Funcionalidades:
-   01. Carregar registros demonstrativos
-   02. Atualizar indicadores
-   03. Gráfico por categoria
-   04. Ranking de bairros
-   05. Filtros e pesquisa
-   06. Ordenação
-   07. Cartões de ocorrências
-   08. Abrir página de detalhes
-   09. Estados vazios e tratamento de erros
-   10. Atualização entre abas
-
-   Os registros são armazenados no navegador.
-   Não existe integração com a prefeitura.
+   - Listagem de ocorrências
+   - Indicadores e gráficos
+   - Ranking de bairros
+   - Filtros e ordenação
+   - Ícones padronizados com a página Registrar
    ===================================================== */
 
 "use strict";
@@ -28,51 +22,67 @@ document.addEventListener(
 
 function iniciarOcorrencias() {
 
-  /* ===================================================
-     01 — CONFIGURAÇÕES
-     =================================================== */
-
   const $ = (id) => document.getElementById(id);
 
   const lista = $("listaOcorrencias");
 
-  if (!lista) return;
+  if (!lista) {
+    return;
+  }
 
-  const CHAVE_REGISTROS =
-    "cidadaoconecta_registros_demo";
+  const ENDPOINT = "/api/ocorrencias/publicas";
+
+  /* ==========================================
+     01 — CATEGORIAS
+     ========================================== */
 
   const categorias = {
     pavimentacao: {
       nome: "Ruas e calçadas",
-      icone: "▤"
+      icone: "ruas"
     },
+
     iluminacao: {
       nome: "Iluminação pública",
-      icone: "☼"
+      icone: "sol"
     },
+
     saneamento: {
       nome: "Água e saneamento",
-      icone: "◉"
+      icone: "agua"
     },
+
     acessibilidade: {
       nome: "Acessibilidade",
-      icone: "♿"
+      icone: "acessibilidade"
     },
+
     limpeza: {
       nome: "Limpeza urbana",
-      icone: "✳"
+      icone: "limpeza"
     },
+
     outro: {
       nome: "Outro problema",
-      icone: "◫"
+      icone: "localizacao"
     }
   };
 
-  let registros = [];
+  const situacoes = {
+    ABERTA: "Aberta",
+    EM_ANALISE: "Em análise",
+    EM_ANDAMENTO: "Em andamento",
+    RESOLVIDA: "Resolvida",
+    ENCERRADA: "Encerrada"
+  };
 
-  /* ===================================================
+  let registros = [];
+  let carregando = false;
+  let houveErro = false;
+
+  /* ==========================================
      02 — FUNÇÕES AUXILIARES
-     =================================================== */
+     ========================================== */
 
   function normalizar(valor) {
     return String(valor ?? "")
@@ -82,7 +92,11 @@ function iniciarOcorrencias() {
       .trim();
   }
 
-  function criarElemento(tag, classe = "", texto) {
+  function criarElemento(
+    tag,
+    classe = "",
+    texto
+  ) {
     const elemento = document.createElement(tag);
 
     if (classe) {
@@ -96,8 +110,192 @@ function iniciarOcorrencias() {
     return elemento;
   }
 
+  function criarAvisoVazio(texto) {
+    return criarElemento(
+      "div",
+      "analise-sem-dados",
+      texto
+    );
+  }
+
+  function mostrarMensagem(texto) {
+    const aviso = $("mensagemOcorrencias");
+
+    if (!aviso) {
+      return;
+    }
+
+    aviso.textContent = texto;
+    aviso.hidden = !texto;
+  }
+
+  function nomeCategoria(codigo) {
+    return categorias[codigo]?.nome ||
+      "Outro problema";
+  }
+
+  function nomeSituacao(status) {
+    return situacoes[status] ||
+      String(status || "Não informada")
+        .replaceAll("_", " ");
+  }
+
+  function codigoCategoria(valor) {
+    const texto = normalizar(valor);
+
+    if (categorias[texto]) {
+      return texto;
+    }
+
+    const equivalencias = {
+      "ruas e calcadas": "pavimentacao",
+      "iluminacao publica": "iluminacao",
+      "agua e saneamento": "saneamento",
+      "acessibilidade": "acessibilidade",
+      "limpeza urbana": "limpeza",
+      "outro problema": "outro"
+    };
+
+    return equivalencias[texto] || "outro";
+  }
+
+  /* ==========================================
+     03 — ÍCONES SVG
+     ========================================== */
+
+  function criarIconeCategoria(tipo) {
+
+    const desenhos = {
+
+      /* RUAS E CALÇADAS */
+      ruas: `
+        <rect
+          x="5" y="4"
+          width="14" height="16"
+          rx="1"
+        />
+        <path d="M8 8h8"/>
+        <path d="M8 12h8"/>
+        <path d="M8 16h8"/>
+      `,
+
+      /* ILUMINAÇÃO PÚBLICA */
+      sol: `
+        <circle cx="12" cy="12" r="5"/>
+        <path d="M12 2v3"/>
+        <path d="M12 19v3"/>
+        <path d="M4.93 4.93l2.12 2.12"/>
+        <path d="M16.95 16.95l2.12 2.12"/>
+        <path d="M2 12h3"/>
+        <path d="M19 12h3"/>
+        <path d="M4.93 19.07l2.12-2.12"/>
+        <path d="M2 12h3"/>
+        <path d="M16.95 7.05l2.12-2.12"/>
+      `,
+
+      /* ÁGUA E SANEAMENTO */
+      agua: `
+        <path
+          d="M12 22a8 8 0 0 0 8-8
+             c0-4-8-12-8-12
+             S4 10 4 14a8 8 0 0 0 8 8Z"
+        />
+        <path d="M8 14a4 4 0 0 0 4 4"/>
+      `,
+
+      /* ACESSIBILIDADE */
+      acessibilidade: `
+        <circle cx="12" cy="4" r="2"/>
+        <path d="m4 10 8-2 8 2"/>
+        <path d="M12 8v7"/>
+        <path d="m8 21 4-6 4 6"/>
+      `,
+
+      /* LIMPEZA URBANA */
+      limpeza: `
+        <path d="M3 6h18"/>
+        <path d="M8 6V4h8v2"/>
+        <path d="M5 6l1 15h12l1-15"/>
+        <path d="M10 10v7"/>
+        <path d="M14 10v7"/>
+      `,
+
+      /* OUTROS PROBLEMAS */
+      localizacao: `
+        <path
+          d="M20 10c0 5-8 12-8 12
+             S4 15 4 10a8 8 0 1 1 16 0Z"
+        />
+        <circle cx="12" cy="10" r="3"/>
+      `
+    };
+
+    const icone = criarElemento(
+      "span",
+      "ocorrencia-card-icone"
+    );
+
+    const svg = document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "svg"
+    );
+
+    svg.setAttribute("width", "25");
+    svg.setAttribute("height", "25");
+    svg.setAttribute("viewBox", "0 0 24 24");
+    svg.setAttribute("fill", "none");
+    svg.setAttribute("stroke", "currentColor");
+    svg.setAttribute("stroke-width", "1.8");
+    svg.setAttribute("stroke-linecap", "round");
+    svg.setAttribute("stroke-linejoin", "round");
+    svg.setAttribute("focusable", "false");
+
+    // Os desenhos são constantes locais.
+    // Nenhum dado da API entra neste HTML.
+    svg.innerHTML =
+      desenhos[tipo] || desenhos.localizacao;
+
+    icone.appendChild(svg);
+
+    icone.setAttribute(
+      "aria-hidden",
+      "true"
+    );
+
+    return icone;
+  }
+
+  /* ==========================================
+     04 — DATAS
+     ========================================== */
+
+  function dataNumerica(valor) {
+    if (!valor) {
+      return 0;
+    }
+
+    const numero = new Date(valor).getTime();
+
+    return Number.isFinite(numero)
+      ? numero
+      : 0;
+  }
+
   function formatarData(valor) {
-    if (!valor) return "Data não informada";
+    if (!valor) {
+      return "Data não informada";
+    }
+
+    // Preserva a data civil recebida do Oracle.
+    const resultado = String(valor).match(
+      /^(\d{4})-(\d{2})-(\d{2})/
+    );
+
+    if (resultado) {
+      return (
+        `${resultado[3]}/${resultado[2]}/${resultado[1]}`
+      );
+    }
 
     const data = new Date(valor);
 
@@ -112,126 +310,195 @@ function iniciarOcorrencias() {
     }).format(data);
   }
 
-  function dataNumerica(valor) {
-    const numero = new Date(valor).getTime();
+  /* ==========================================
+     05 — LOCALIDADES
+     ========================================== */
 
-    return Number.isFinite(numero) ? numero : 0;
+  function chaveLocalidade(registro) {
+    return [
+      normalizar(registro.bairro),
+      normalizar(registro.cidade),
+      normalizar(registro.uf)
+    ].join("|");
   }
 
-  function nomeCategoria(codigo) {
-    return categorias[codigo]?.nome ||
-      "Outra categoria";
+  function nomeLocalidade(registro) {
+    const bairro =
+      registro.bairro || "Bairro não informado";
+
+    const cidadeUF = [
+      registro.cidade,
+      registro.uf
+    ]
+      .filter(Boolean)
+      .join(" / ");
+
+    return cidadeUF
+      ? `${bairro} — ${cidadeUF}`
+      : bairro;
   }
 
-  function criarAvisoVazio(mensagem) {
-    return criarElemento(
-      "div",
-      "analise-sem-dados",
-      mensagem
-    );
-  }
+  /* ==========================================
+     06 — NORMALIZAR DADOS DA API
+     ========================================== */
 
-  /* ===================================================
-     03 — CARREGAR REGISTROS
-     =================================================== */
-
-  function carregarRegistros() {
-    const aviso = $("mensagemOcorrencias");
-
-    if (aviso) {
-      aviso.hidden = true;
-      aviso.textContent = "";
+  function normalizarRegistro(item) {
+    if (
+      !item ||
+      typeof item !== "object" ||
+      typeof item.titulo !== "string"
+    ) {
+      return null;
     }
 
+    return {
+      titulo: item.titulo.trim(),
+
+      categoria: codigoCategoria(
+        item.categoria
+      ),
+
+      bairro: String(
+        item.bairro || ""
+      ).trim(),
+
+      cidade: String(
+        item.cidade || ""
+      ).trim(),
+
+      uf: String(
+        item.uf || ""
+      ).trim().toUpperCase(),
+
+      status: String(
+        item.status || "ABERTA"
+      ).toUpperCase(),
+
+      criadoEm: item.dataCadastro || null
+    };
+  }
+
+  /* ==========================================
+     07 — CARREGAR OCORRÊNCIAS DO ORACLE
+     ========================================== */
+
+  async function carregarRegistros() {
+    if (carregando) {
+      return;
+    }
+
+    carregando = true;
+
+    mostrarMensagem(
+      "Carregando ocorrências..."
+    );
+
     try {
-      const conteudo = localStorage.getItem(
-        CHAVE_REGISTROS
+      const resposta = await fetch(
+        ENDPOINT,
+        {
+          method: "GET",
+          headers: {
+            Accept: "application/json"
+          },
+          cache: "no-store"
+        }
       );
 
-      if (!conteudo) return [];
-
-      const dados = JSON.parse(conteudo);
-
-      if (!Array.isArray(dados)) {
+      if (!resposta.ok) {
         throw new Error(
-          "Formato de registros inválido"
+          "Não foi possível consultar a API."
         );
       }
 
-      return dados.filter((registro) => {
-        return (
-          registro !== null &&
-          typeof registro === "object" &&
-          typeof registro.idLocal === "string" &&
-          typeof registro.titulo === "string" &&
-          typeof registro.categoria === "string"
+      const dados = await resposta.json();
+
+      const itens = Array.isArray(dados)
+        ? dados
+        : dados.ocorrencias;
+
+      if (!Array.isArray(itens)) {
+        throw new Error(
+          "O servidor retornou dados inválidos."
         );
-      });
+      }
+
+      registros = itens
+        .map(normalizarRegistro)
+        .filter(Boolean);
+
+      houveErro = false;
+
+      atualizarObservatorio();
+
+      mostrarMensagem("");
 
     } catch (erro) {
       console.error(
-        "Erro ao carregar registros:",
+        "Erro ao carregar ocorrências:",
         erro
       );
 
-      if (aviso) {
-        aviso.textContent =
-          "Não foi possível carregar os registros " +
-          "deste navegador. Verifique o armazenamento local.";
+      registros = [];
+      houveErro = true;
 
-        aviso.hidden = false;
-      }
+      atualizarObservatorio();
 
-      return [];
+      mostrarMensagem(
+        "Não foi possível carregar as ocorrências. " +
+        "Verifique a API Java e o Oracle."
+      );
+
+    } finally {
+      carregando = false;
     }
   }
 
-  /* ===================================================
-     04 — INDICADORES PRINCIPAIS
-     =================================================== */
+  /* ==========================================
+     08 — INDICADORES
+     ========================================== */
 
   function atualizarIndicadores() {
-    const bairros = new Set();
+    const localidades = new Set();
     const tipos = new Set();
 
     registros.forEach((registro) => {
-      const bairro = normalizar(registro.bairro);
-
-      if (bairro) {
-        bairros.add(bairro);
+      if (registro.bairro) {
+        localidades.add(
+          chaveLocalidade(registro)
+        );
       }
 
-      if (registro.categoria) {
-        tipos.add(registro.categoria);
-      }
+      tipos.add(registro.categoria);
     });
 
     $("totalOcorrencias").textContent =
       registros.length;
 
     $("totalBairros").textContent =
-      bairros.size;
+      localidades.size;
 
     $("totalCategorias").textContent =
       tipos.size;
   }
 
-  /* ===================================================
-     05 — GRÁFICO POR CATEGORIA
-     =================================================== */
+  /* ==========================================
+     09 — GRÁFICO DE CATEGORIAS
+     ========================================== */
 
   function atualizarGraficoCategorias() {
     const grafico = $("graficoCategorias");
 
-    if (!grafico) return;
+    if (!grafico) {
+      return;
+    }
 
     grafico.replaceChildren();
 
     if (!registros.length) {
       grafico.appendChild(
         criarAvisoVazio(
-          "Ainda não existem registros demonstrativos " +
-          "para gerar o gráfico."
+          "Ainda não há ocorrências para gerar o gráfico."
         )
       );
 
@@ -252,10 +519,10 @@ function iniciarOcorrencias() {
     });
 
     const ordenadas = [...contagem.entries()]
-      .sort((a, b) => {
-        return b[1] - a[1] ||
-          a[0].localeCompare(b[0], "pt-BR");
-      });
+      .sort((a, b) =>
+        b[1] - a[1] ||
+        a[0].localeCompare(b[0], "pt-BR")
+      );
 
     const fragmento =
       document.createDocumentFragment();
@@ -280,13 +547,13 @@ function iniciarOcorrencias() {
         nome
       );
 
-      const valor = criarElemento(
+      const numero = criarElemento(
         "strong",
         "",
         `${quantidade} (${Math.round(porcentagem)}%)`
       );
 
-      topo.append(rotulo, valor);
+      topo.append(rotulo, numero);
 
       const trilho = criarElemento(
         "div",
@@ -308,8 +575,7 @@ function iniciarOcorrencias() {
 
       preenchimento.setAttribute(
         "aria-label",
-        `${nome}: ${quantidade} registro(s), ` +
-        `${Math.round(porcentagem)}% do total`
+        `${nome}: ${quantidade} ocorrências`
       );
 
       trilho.appendChild(preenchimento);
@@ -322,62 +588,59 @@ function iniciarOcorrencias() {
     grafico.appendChild(fragmento);
   }
 
-  /* ===================================================
-     06 — RANKING DE BAIRROS
-     =================================================== */
+  /* ==========================================
+     10 — RANKING DE BAIRROS
+     ========================================== */
 
   function atualizarRankingBairros() {
     const ranking = $("rankingBairros");
 
-    if (!ranking) return;
+    if (!ranking) {
+      return;
+    }
 
     ranking.replaceChildren();
 
-    const bairros = new Map();
+    const localidades = new Map();
 
     registros.forEach((registro) => {
-      const nome = String(
-        registro.bairro || ""
-      ).trim();
+      if (!registro.bairro) {
+        return;
+      }
 
-      const chave = normalizar(nome);
+      const chave = chaveLocalidade(registro);
 
-      if (!chave) return;
-
-      if (!bairros.has(chave)) {
-        bairros.set(chave, {
-          nome,
+      if (!localidades.has(chave)) {
+        localidades.set(chave, {
+          nome: nomeLocalidade(registro),
           quantidade: 0
         });
       }
 
-      bairros.get(chave).quantidade++;
+      localidades.get(chave).quantidade++;
     });
 
-    if (bairros.size === 0) {
+    if (!localidades.size) {
       ranking.appendChild(
         criarAvisoVazio(
-          "Os bairros aparecerão aqui quando " +
-          "existirem registros com localização."
+          "Ainda não há bairros disponíveis para análise."
         )
       );
 
       return;
     }
 
-    const ordenados = [...bairros.values()]
-      .sort((a, b) => {
-        return (
-          b.quantidade - a.quantidade ||
-          a.nome.localeCompare(b.nome, "pt-BR")
-        );
-      })
+    const ordenados = [...localidades.values()]
+      .sort((a, b) =>
+        b.quantidade - a.quantidade ||
+        a.nome.localeCompare(b.nome, "pt-BR")
+      )
       .slice(0, 5);
 
     const fragmento =
       document.createDocumentFragment();
 
-    ordenados.forEach((bairro, indice) => {
+    ordenados.forEach((localidade, indice) => {
       const item = criarElemento(
         "div",
         "bairro-ranking-item"
@@ -397,24 +660,24 @@ function iniciarOcorrencias() {
       const titulo = criarElemento(
         "strong",
         "",
-        bairro.nome
+        localidade.nome
       );
 
       const legenda = criarElemento(
         "small",
         "",
-        bairro.quantidade === 1
-          ? "1 registro local"
-          : `${bairro.quantidade} registros locais`
+        localidade.quantidade === 1
+          ? "1 ocorrência"
+          : `${localidade.quantidade} ocorrências`
       );
+
+      dados.append(titulo, legenda);
 
       const quantidade = criarElemento(
         "span",
         "bairro-ranking-quantidade",
-        bairro.quantidade
+        localidade.quantidade
       );
-
-      dados.append(titulo, legenda);
 
       item.append(
         posicao,
@@ -428,61 +691,102 @@ function iniciarOcorrencias() {
     ranking.appendChild(fragmento);
   }
 
-  /* ===================================================
-     07 — FILTRO DE BAIRROS
-     =================================================== */
+  /* ==========================================
+     11 — FILTRO DE BAIRROS
+     ========================================== */
 
   function preencherFiltroBairros() {
     const select = $("filtroBairro");
-
     const valorAnterior = select.value;
 
     select.replaceChildren(
       new Option("Todos os bairros", "")
     );
 
-    const bairros = new Map();
+    const localidades = new Map();
 
     registros.forEach((registro) => {
-      const nome = String(
-        registro.bairro || ""
-      ).trim();
+      if (!registro.bairro) {
+        return;
+      }
 
-      const chave = normalizar(nome);
+      const chave = chaveLocalidade(registro);
 
-      if (chave && !bairros.has(chave)) {
-        bairros.set(chave, nome);
+      if (!localidades.has(chave)) {
+        localidades.set(
+          chave,
+          nomeLocalidade(registro)
+        );
       }
     });
 
-    const ordenados = [...bairros.entries()]
-      .sort((a, b) => {
-        return a[1].localeCompare(
-          b[1],
-          "pt-BR"
+    [...localidades.entries()]
+      .sort((a, b) =>
+        a[1].localeCompare(b[1], "pt-BR")
+      )
+      .forEach(([chave, nome]) => {
+        select.add(
+          new Option(nome, chave)
         );
       });
 
-    ordenados.forEach(([chave, nome]) => {
-      select.add(
-        new Option(nome, chave)
+    const existe = [...select.options]
+      .some((opcao) =>
+        opcao.value === valorAnterior
       );
-    });
 
-    const existeValor = [
-      ...select.options
-    ].some((opcao) => {
-      return opcao.value === valorAnterior;
-    });
-
-    if (existeValor) {
+    if (existe) {
       select.value = valorAnterior;
     }
   }
 
-  /* ===================================================
-     08 — FILTROS E ORDENAÇÃO
-     =================================================== */
+  /* ==========================================
+     12 — FILTRO DE SITUAÇÕES
+     ========================================== */
+
+  function preencherFiltroSituacoes() {
+    const select = $("filtroSituacao");
+    const valorAnterior = select.value;
+
+    select.replaceChildren(
+      new Option("Todas as situações", "")
+    );
+
+    const encontrados = new Set(
+      registros.map(
+        (registro) => registro.status
+      )
+    );
+
+    [...encontrados]
+      .sort((a, b) =>
+        nomeSituacao(a).localeCompare(
+          nomeSituacao(b),
+          "pt-BR"
+        )
+      )
+      .forEach((status) => {
+        select.add(
+          new Option(
+            nomeSituacao(status),
+            status
+          )
+        );
+      });
+
+    const existe = [...select.options]
+      .some((opcao) =>
+        opcao.value === valorAnterior
+      );
+
+    if (existe) {
+      select.value = valorAnterior;
+    }
+  }
+
+  /* ==========================================
+     13 — PESQUISA, FILTROS E ORDENAÇÃO
+     ========================================== */
 
   function obterRegistrosFiltrados() {
     const pesquisa = normalizar(
@@ -490,18 +794,18 @@ function iniciarOcorrencias() {
     );
 
     const bairro = $("filtroBairro").value;
-
     const categoria = $("filtroCategoria").value;
-
     const situacao = $("filtroSituacao").value;
-
     const ordem = $("ordenarOcorrencias").value;
 
     const resultado = registros.filter(
       (registro) => {
+
         const textoPesquisa = [
           registro.titulo,
           registro.bairro,
+          registro.cidade,
+          registro.uf,
           nomeCategoria(registro.categoria)
         ]
           .map(normalizar)
@@ -513,17 +817,15 @@ function iniciarOcorrencias() {
 
         const correspondeBairro =
           !bairro ||
-          normalizar(registro.bairro) === bairro;
+          chaveLocalidade(registro) === bairro;
 
         const correspondeCategoria =
           !categoria ||
           registro.categoria === categoria;
 
-        // Todos os registros desta versão
-        // possuem situação "local".
         const correspondeSituacao =
           !situacao ||
-          situacao === "local";
+          registro.status === situacao;
 
         return (
           correspondePesquisa &&
@@ -543,10 +845,8 @@ function iniciarOcorrencias() {
       }
 
       if (ordem === "bairro") {
-        return String(
-          a.bairro || ""
-        ).localeCompare(
-          String(b.bairro || ""),
+        return nomeLocalidade(a).localeCompare(
+          nomeLocalidade(b),
           "pt-BR"
         );
       }
@@ -560,26 +860,21 @@ function iniciarOcorrencias() {
     return resultado;
   }
 
-  /* ===================================================
-     09 — CARTÕES DE OCORRÊNCIAS
-
-     AJUSTADO:
-     Comunidade → Detalhes da ocorrência
-     =================================================== */
+  /* ==========================================
+     14 — CRIAR CARTÃO
+     ========================================== */
 
   function criarCard(registro) {
     const categoria =
-      categorias[registro.categoria] || {
-        nome: "Outra categoria",
-        icone: "◫"
-      };
+      categorias[registro.categoria] ||
+      categorias.outro;
 
     const cartao = criarElemento(
       "article",
       "ocorrencia-comunidade"
     );
 
-    // CABEÇALHO
+    /* CABEÇALHO */
 
     const topo = criarElemento(
       "div",
@@ -589,31 +884,24 @@ function iniciarOcorrencias() {
     const etiqueta = criarElemento(
       "span",
       "ocorrencia-card-codigo",
-      "CIDADÃOCONECTA / DEMONSTRAÇÃO"
+      "CIDADÃOCONECTA / OBSERVATÓRIO"
     );
 
     const situacao = criarElemento(
       "span",
       "ocorrencia-card-status",
-      "Registro local"
+      nomeSituacao(registro.status)
     );
 
     topo.append(etiqueta, situacao);
 
-    // CATEGORIA
+    /* ÍCONE DA CATEGORIA */
 
-    const icone = criarElemento(
-      "span",
-      "ocorrencia-card-icone",
+    const icone = criarIconeCategoria(
       categoria.icone
     );
 
-    icone.setAttribute(
-      "aria-hidden",
-      "true"
-    );
-
-    // TÍTULO
+    /* TÍTULO */
 
     const titulo = criarElemento(
       "h3",
@@ -621,21 +909,16 @@ function iniciarOcorrencias() {
       registro.titulo || "Ocorrência sem título"
     );
 
-    // RESUMO DEMONSTRATIVO
-
-    // A descrição original não é exibida aqui
-    // porque pode conter informações pessoais.
+    /* RESUMO */
 
     const resumo = criarElemento(
       "p",
       "",
-      `Registro demonstrativo relacionado a ` +
-      `${categoria.nome.toLowerCase()}. ` +
-      `As informações estão salvas apenas ` +
-      `neste navegador.`
+      `Ocorrência relacionada a ${categoria.nome.toLowerCase()}, ` +
+      "registrada no CidadãoConecta."
     );
 
-    // METADADOS
+    /* METADADOS */
 
     const metadados = criarElemento(
       "div",
@@ -657,11 +940,10 @@ function iniciarOcorrencias() {
     const localidade = criarElemento(
       "span",
       "",
-      [
-        registro.cidade,
-        registro.uf
-      ].filter(Boolean).join(" / ") ||
-      "Localidade não informada"
+      [registro.cidade, registro.uf]
+        .filter(Boolean)
+        .join(" / ") ||
+        "Localidade não informada"
     );
 
     metadados.append(
@@ -670,7 +952,7 @@ function iniciarOcorrencias() {
       localidade
     );
 
-    // RODAPÉ
+    /* RODAPÉ */
 
     const rodape = criarElemento(
       "div",
@@ -683,35 +965,13 @@ function iniciarOcorrencias() {
       formatarData(registro.criadoEm)
     );
 
-    /* ==========================================
-       LINK PARA A NOVA PÁGINA DE DETALHES
-       ========================================== */
-
-    const consultar = criarElemento(
-      "a",
+    const aviso = criarElemento(
+      "span",
       "ocorrencia-card-link",
-      "Ver detalhes da ocorrência →"
+      "Registro acadêmico"
     );
 
-    consultar.href =
-      "./detalhes.html?id=" +
-      encodeURIComponent(registro.idLocal);
-
-    consultar.setAttribute(
-      "aria-label",
-      `Ver detalhes da ocorrência: ${registro.titulo}`
-    );
-
-    // O protocolo é utilizado somente nesta
-    // demonstração local. Na versão integrada,
-    // a página pública deverá usar outro
-    // identificador, sem conceder acesso
-    // aos dados privados da ocorrência.
-
-    rodape.append(
-      data,
-      consultar
-    );
+    rodape.append(data, aviso);
 
     cartao.append(
       topo,
@@ -725,9 +985,9 @@ function iniciarOcorrencias() {
     return cartao;
   }
 
-  /* ===================================================
-     10 — RENDERIZAR CARTÕES
-     =================================================== */
+  /* ==========================================
+     15 — RENDERIZAR LISTAGEM
+     ========================================== */
 
   function renderizarOcorrencias() {
     const filtrados = obterRegistrosFiltrados();
@@ -743,13 +1003,11 @@ function iniciarOcorrencias() {
       estadoVazio.hidden = false;
 
       $("textoEstadoVazio").textContent =
-        registros.length === 0
-          ? "Ainda não existem registros demonstrativos " +
-            "neste navegador. Registre um problema " +
-            "para começar."
-          : "Nenhuma ocorrência corresponde aos " +
-            "filtros selecionados. Experimente " +
-            "outra pesquisa, bairro ou categoria.";
+        houveErro
+          ? "Não foi possível carregar os dados do Oracle."
+          : registros.length === 0
+            ? "Nenhuma ocorrência disponível no momento."
+            : "Nenhuma ocorrência corresponde aos filtros selecionados.";
 
       $("botaoLimparVazio").hidden =
         registros.length === 0;
@@ -771,27 +1029,22 @@ function iniciarOcorrencias() {
     lista.appendChild(fragmento);
   }
 
-  /* ===================================================
-     11 — ATUALIZAR TODO O OBSERVATÓRIO
-     =================================================== */
+  /* ==========================================
+     16 — ATUALIZAR OBSERVATÓRIO
+     ========================================== */
 
   function atualizarObservatorio() {
-    registros = carregarRegistros();
-
     atualizarIndicadores();
-
     atualizarGraficoCategorias();
-
     atualizarRankingBairros();
-
     preencherFiltroBairros();
-
+    preencherFiltroSituacoes();
     renderizarOcorrencias();
   }
 
-  /* ===================================================
-     12 — LIMPAR FILTROS
-     =================================================== */
+  /* ==========================================
+     17 — LIMPAR FILTROS
+     ========================================== */
 
   function limparFiltros() {
     $("formFiltros").reset();
@@ -802,14 +1055,15 @@ function iniciarOcorrencias() {
     renderizarOcorrencias();
   }
 
-  /* ===================================================
-     13 — EVENTOS
-     =================================================== */
+  /* ==========================================
+     18 — EVENTOS
+     ========================================== */
 
   $("formFiltros").addEventListener(
     "submit",
     (evento) => {
       evento.preventDefault();
+      renderizarOcorrencias();
     }
   );
 
@@ -848,31 +1102,18 @@ function iniciarOcorrencias() {
     limparFiltros
   );
 
-  /* ===================================================
-     14 — SINCRONIZAÇÃO ENTRE ABAS
-     =================================================== */
-
-  window.addEventListener(
-    "storage",
-    (evento) => {
-      if (evento.key === CHAVE_REGISTROS) {
-        atualizarObservatorio();
-      }
-    }
-  );
-
   document.addEventListener(
     "visibilitychange",
     () => {
       if (!document.hidden) {
-        atualizarObservatorio();
+        carregarRegistros();
       }
     }
   );
 
-  /* ===================================================
-     15 — INICIALIZAÇÃO
-     =================================================== */
+  /* ==========================================
+     19 — INICIALIZAÇÃO
+     ========================================== */
 
-  atualizarObservatorio();
+  carregarRegistros();
 }

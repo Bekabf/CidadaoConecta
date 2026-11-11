@@ -1,18 +1,27 @@
 
-/* ==========================================
+/* =====================================================
    CIDADÃOCONECTA — URBAN OS
-   CONSULTAR OCORRÊNCIAS
-   ========================================== */
+   CONSULTAR.CSS
+   ===================================================== */
 
 .pagina-consultar {
-  background: #f6faff;
+  --consulta-azul: #438cc8;
+  --consulta-azul-claro: #599bd0;
+  --consulta-titulo: #29465f;
+  --consulta-texto: #708ba4;
+  --consulta-borda: #dce9f5;
+  --consulta-fundo: #f6faff;
+
+  background: var(--consulta-fundo);
 }
 
 .pagina-consultar [hidden] {
   display: none !important;
 }
 
-/* HERO */
+/* =====================================================
+   01 — BANNER
+   ===================================================== */
 
 .consulta-hero {
   position: relative;
@@ -56,14 +65,14 @@
 
 .consulta-hero h1 span {
   display: block;
-  color: #599bd0;
+  color: var(--consulta-azul-claro);
 }
 
 .consulta-hero-texto > p {
   max-width: 550px;
   margin: 0;
 
-  color: #708ba4;
+  color: var(--consulta-texto);
   font-size: 15px;
   line-height: 1.85;
 }
@@ -79,7 +88,7 @@
   padding: 9px 12px;
 
   color: #437fae;
-  background: rgba(255,255,255,.73);
+  background: rgba(255, 255, 255, .73);
   border: 1px solid #d9eaf8;
   border-radius: 10px;
 
@@ -87,19 +96,20 @@
   font-weight: 800;
 }
 
-/* ILUSTRAÇÃO */
+/* =====================================================
+   02 — ILUSTRAÇÃO
+   ===================================================== */
 
 .consulta-ilustracao {
   position: relative;
   display: grid;
   place-items: center;
-
   min-height: 300px;
 }
 
 .consulta-orbita {
   position: absolute;
-  border: 1px solid rgba(116,172,220,.28);
+  border: 1px solid rgba(116, 172, 220, .28);
   border-radius: 50%;
 }
 
@@ -117,17 +127,19 @@
 .consulta-icone-grande {
   position: relative;
   z-index: 1;
+
   display: grid;
   place-items: center;
 
   width: 180px;
   height: 180px;
 
-  background: rgba(255,255,255,.85);
-  border: 1px solid #ffffff;
+  background: rgba(255, 255, 255, .85);
+  border: 1px solid #fff;
   border-radius: 42px;
 
-  box-shadow: 0 20px 50px rgba(71,127,181,.13);
+  box-shadow: 0 20px 50px rgba(71, 127, 181, .13);
+
   transform: rotate(-8deg);
 }
 
@@ -148,9 +160,10 @@
 
   padding: 16px;
 
-  background: rgba(255,255,255,.95);
+  background: rgba(255, 255, 255, .95);
   border-radius: 15px;
-  box-shadow: 0 14px 35px rgba(70,120,180,.12);
+
+  box-shadow: 0 14px 35px rgba(70, 120, 180, .12);
 }
 
 .consulta-selo small,
@@ -165,7 +178,9 @@
   font-size: 13px;
 }
 
-/* CONTEÚDO */
+/* =====================================================
+   03 — CONTEÚDO
+   ===================================================== */
 
 .consulta-conteudo {
   padding: 70px 0 110px;
@@ -173,7 +188,7 @@
 
 .consulta-layout {
   display: grid;
-  grid-template-columns: minmax(0,1fr) 310px;
+  grid-template-columns: minmax(0, 1fr) 310px;
   align-items: start;
   gap: 28px;
 }
@@ -184,18 +199,20 @@
   gap: 20px;
 }
 
-/* PAINEL DE BUSCA */
+/* =====================================================
+   04 — PAINEL DE CONSULTA
+   ===================================================== */
 
 .consulta-painel,
 .consulta-resultado {
   min-width: 0;
   padding: 38px;
 
-  background: #ffffff;
+  background: #fff;
   border: 1px solid #e3ecf5;
   border-radius: 25px;
 
-  box-shadow: 0 18px 48px rgba(62,103,151,.05);
+  box-shadow: 0 18px 48px rgba(62, 103, 151, .05);
 }
 
 .consulta-painel-cabecalho {
@@ -235,7 +252,7 @@
   margin: 0 0 10px;
 
   color: #2b4963;
-  font-size: clamp(25px,2.7vw,34px);
+  font-size: clamp(25px, 2.7vw, 34px);
   letter-spacing: -.045em;
 }
 
@@ -244,7 +261,12 @@
 
   color: #8198ac;
   font-size: 13px;
+  line-height: 1.75;
 }
+
+/* =====================================================
+   05 — FORMULÁRIO
+   ===================================================== */
 
 #formConsulta label {
   display: block;
@@ -267,12 +289,18 @@
   border: 1.5px solid #dce8f2;
   border-radius: 13px;
 
-  transition: border-color .2s, box-shadow .2s;
+  transition:
+    border-color .2s,
+    box-shadow .2s;
 }
 
 .consulta-campo:focus-within {
   border-color: #4b93cb;
-  box-shadow: 0 0 0 4px rgba(75,147,203,.11);
+  box-shadow: 0 0 0 4px rgba(75, 147, 203, .11);
+}
+
+.consulta-campo:has(input[aria-invalid="true"]) {
+  border-color: #df8b9b;
 }
 
 .consulta-campo > span {
@@ -307,12 +335,27 @@
 
   color: #849aaf;
   font-size: 11px;
+  line-height: 1.7;
 }
 
 .consulta-botao {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
   width: 100%;
   min-height: 54px;
 }
+
+.consulta-botao:disabled {
+  opacity: .65;
+  cursor: wait;
+}
+
+/* =====================================================
+   06 — MENSAGENS
+   ===================================================== */
 
 .consulta-mensagem {
   padding: 14px 16px;
@@ -324,218 +367,16 @@
   border-radius: 12px;
 
   font-size: 13px;
-  line-height: 1.6;
+  line-height: 1.7;
 }
 
-/* RESULTADO */
-
-.consulta-resultado {
-  scroll-margin-top: 25px;
+.consulta-mensagem[hidden] {
+  display: none !important;
 }
 
-.resultado-cabecalho {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 15px;
-
-  margin-bottom: 24px;
-}
-
-.resultado-cabecalho h2 {
-  margin-bottom: 0;
-}
-
-.resultado-status {
-  display: inline-flex;
-  padding: 8px 12px;
-
-  color: #4088bf;
-  background: #eaf5ff;
-  border-radius: 9px;
-
-  font-size: 11px;
-  font-weight: 800;
-}
-
-.resultado-protocolo {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-
-  padding: 22px;
-  margin-bottom: 26px;
-
-  background: #edf7ff;
-  border: 1px dashed #bddbf2;
-  border-radius: 15px;
-
-  text-align: center;
-}
-
-.resultado-protocolo span {
-  color: #7e9eb8;
-  font-size: 10px;
-  letter-spacing: .08em;
-}
-
-.resultado-protocolo strong {
-  color: #3685c0;
-  font-size: clamp(17px,2.3vw,24px);
-  overflow-wrap: anywhere;
-}
-
-.resultado-informacoes {
-  display: grid;
-  grid-template-columns: repeat(2,minmax(0,1fr));
-  gap: 14px;
-}
-
-.resultado-item {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-
-  min-width: 0;
-  padding: 18px;
-
-  background: #f8fbfe;
-  border: 1px solid #e7eef6;
-  border-radius: 13px;
-}
-
-.resultado-item small {
-  color: #829aaf;
-  font-size: 11px;
-}
-
-.resultado-item strong {
-  color: #385873;
-  font-size: 13px;
-  overflow-wrap: anywhere;
-}
-
-.resultado-descricao,
-.resultado-historico {
-  padding-top: 28px;
-  margin-top: 28px;
-  border-top: 1px solid #e7eef5;
-}
-
-.resultado-descricao h3,
-.resultado-historico h3 {
-  margin-bottom: 12px;
-  color: #304e69;
-  font-size: 18px;
-}
-
-.resultado-descricao p {
-  margin-bottom: 0;
-  color: #6f899f;
-  font-size: 13px;
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-}
-
-/* HISTÓRICO */
-
-.consulta-linha-tempo {
-  margin: 22px 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.consulta-linha-tempo li {
-  position: relative;
-  display: flex;
-  align-items: flex-start;
-  gap: 15px;
-  padding-bottom: 25px;
-}
-
-.consulta-linha-tempo li:not(:last-child)::before {
-  content: "";
-  position: absolute;
-  top: 25px;
-  left: 12px;
-  height: calc(100% - 22px);
-  border-left: 2px solid #e0ebf5;
-}
-
-.historico-marcador {
-  position: relative;
-  z-index: 1;
-  display: grid;
-  place-items: center;
-  flex-shrink: 0;
-
-  width: 26px;
-  height: 26px;
-
-  background: #e7eff6;
-  border: 5px solid #d9e6f0;
-  border-radius: 50%;
-}
-
-.consulta-linha-tempo .concluido .historico-marcador {
-  color: #ffffff;
-  background: #3aa788;
-  border: 0;
-  font-weight: 800;
-}
-
-.consulta-linha-tempo strong {
-  display: block;
-  margin-bottom: 5px;
-  color: #385873;
-  font-size: 13px;
-}
-
-.consulta-linha-tempo p {
-  margin: 0;
-  color: #839aae;
-  font-size: 12px;
-}
-
-/* AVISO E AÇÕES */
-
-.resultado-aviso {
-  display: flex;
-  gap: 12px;
-
-  padding: 17px;
-  margin-top: 20px;
-
-  background: #f0f8ff;
-  border: 1px solid #dcebf6;
-  border-radius: 13px;
-}
-
-.resultado-aviso > span {
-  flex-shrink: 0;
-  color: #438cbd;
-  font-size: 20px;
-}
-
-.resultado-aviso p {
-  margin: 0;
-  color: #718ba1;
-  font-size: 12px;
-}
-
-.resultado-acoes {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 25px;
-}
-
-.resultado-acoes .botao {
-  flex: 1 1 auto;
-}
-
-/* COLUNA LATERAL */
+/* =====================================================
+   07 — COLUNA LATERAL
+   ===================================================== */
 
 .consulta-ajuda {
   display: grid;
@@ -566,7 +407,7 @@
   margin-bottom: 23px;
 
   color: #4389bf;
-  background: rgba(255,255,255,.84);
+  background: rgba(255, 255, 255, .84);
   border-radius: 15px;
 
   font-size: 25px;
@@ -582,6 +423,7 @@
   margin: 0 0 20px;
   color: #718aa1;
   font-size: 12px;
+  line-height: 1.8;
 }
 
 .consulta-exemplo {
@@ -592,7 +434,7 @@
   padding: 18px;
   margin-bottom: 20px;
 
-  background: rgba(255,255,255,.85);
+  background: rgba(255, 255, 255, .85);
   border-radius: 14px;
 }
 
@@ -611,6 +453,7 @@
 .consulta-dicas {
   margin: 0;
   padding-left: 19px;
+
   color: #69869f;
   font-size: 12px;
   line-height: 2;
@@ -618,7 +461,7 @@
 
 .consulta-nota {
   padding: 21px;
-  background: #ffffff;
+  background: #fff;
   border: 1px solid #e3edf5;
   border-radius: 17px;
 }
@@ -632,17 +475,483 @@
   margin: 9px 0 0;
   color: #879caf;
   font-size: 11px;
+  line-height: 1.7;
 }
 
-/* RESPONSIVIDADE */
+/* =====================================================
+   08 — POP-UP DE DETALHES
+   ===================================================== */
+
+.consulta-modal {
+  position: fixed;
+  inset: 0;
+
+  box-sizing: border-box;
+
+  width: min(740px, calc(100% - 28px));
+  max-width: 740px;
+  max-height: min(88dvh, 950px);
+
+  margin: auto;
+  padding: 0;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  overscroll-behavior: contain;
+
+  color: var(--consulta-titulo);
+  background: #fff;
+
+  border: 1px solid #dbeafa;
+  border-radius: 22px;
+
+  box-shadow: 0 28px 90px rgba(20, 56, 93, .23);
+}
+
+.consulta-modal:not([open]) {
+  display: none !important;
+}
+
+.consulta-modal[open] {
+  display: block;
+}
+
+.consulta-modal::backdrop {
+  background: rgba(18, 46, 78, .6);
+  backdrop-filter: blur(5px);
+}
+
+/* =====================================================
+   09 — CABEÇALHO DO POP-UP
+   ===================================================== */
+
+.consulta-modal-topo {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+
+  padding: 19px 25px;
+
+  background: #f5faff;
+  border-bottom: 1px solid #e1edf8;
+}
+
+.consulta-modal-topo > span {
+  color: var(--consulta-azul);
+
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .09em;
+}
+
+.consulta-modal-fechar {
+  display: grid;
+  place-items: center;
+
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+
+  padding: 0;
+
+  color: #577c9d;
+  background: #fff;
+
+  border: 1px solid #d7e6f4;
+  border-radius: 11px;
+
+  cursor: pointer;
+
+  font-size: 24px;
+  line-height: 1;
+
+  transition:
+    background .2s,
+    color .2s;
+}
+
+.consulta-modal-fechar:hover {
+  color: #226fa8;
+  background: #eaf5ff;
+}
+
+.consulta-modal-fechar:focus-visible {
+  outline: 3px solid var(--consulta-azul);
+  outline-offset: 2px;
+}
+
+/* =====================================================
+   10 — RESULTADO NO POP-UP
+   ===================================================== */
+
+.pagina-consultar .consulta-modal .consulta-resultado {
+  display: block;
+
+  width: 100%;
+  max-width: none;
+
+  margin: 0;
+  padding: 27px;
+
+  background: #fff;
+
+  border: 0;
+  border-radius: 0;
+
+  box-shadow: none;
+}
+
+.resultado-cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 15px;
+
+  margin-bottom: 24px;
+}
+
+.resultado-cabecalho h2 {
+  margin-bottom: 0;
+}
+
+/* STATUS */
+
+.resultado-status {
+  display: inline-flex;
+  align-items: center;
+
+  padding: 9px 13px;
+
+  color: #3f82b6;
+  background: #eaf5ff;
+
+  border: 1px solid #d5e9fa;
+  border-radius: 100px;
+
+  font-size: 11px;
+  font-weight: 800;
+  white-space: nowrap;
+}
+
+.resultado-status[data-status="RESOLVIDA"],
+.resultado-status[data-status="CONCLUIDA"] {
+  color: #26765b;
+  background: #e7f7ef;
+  border-color: #c7e9d7;
+}
+
+.resultado-status[data-status="CANCELADA"] {
+  color: #9b5252;
+  background: #fff0f0;
+  border-color: #f2d3d3;
+}
+
+.resultado-status[data-status="EM_ANALISE"] {
+  color: #8b701f;
+  background: #fff8e5;
+  border-color: #f4e5b9;
+}
+
+.resultado-status[data-status="EM_ANDAMENTO"] {
+  color: #306fa2;
+  background: #e9f3ff;
+  border-color: #cce2f5;
+}
+
+/* =====================================================
+   11 — PROTOCOLO
+   ===================================================== */
+
+.resultado-protocolo {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  padding: 22px;
+  margin-bottom: 26px;
+
+  background: #edf7ff;
+  border: 1px dashed #bddbf2;
+  border-radius: 15px;
+
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.resultado-protocolo span {
+  color: #7e9eb8;
+  font-size: 10px;
+  letter-spacing: .08em;
+}
+
+.resultado-protocolo strong {
+  color: #3685c0;
+
+  font-size: clamp(16px, 2.3vw, 24px);
+
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* =====================================================
+   12 — DADOS DA OCORRÊNCIA
+   ===================================================== */
+
+.resultado-informacoes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.resultado-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  min-width: 0;
+  padding: 18px;
+
+  background: #f8fbfe;
+  border: 1px solid #e7eef6;
+  border-radius: 13px;
+}
+
+.resultado-item small {
+  color: #829aaf;
+  font-size: 11px;
+}
+
+.resultado-item strong {
+  color: #385873;
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+
+/* =====================================================
+   13 — DESCRIÇÃO E HISTÓRICO
+   ===================================================== */
+
+.resultado-descricao,
+.resultado-historico {
+  padding-top: 28px;
+  margin-top: 28px;
+
+  border-top: 1px solid #e7eef5;
+}
+
+.resultado-descricao h3,
+.resultado-historico h3 {
+  margin: 0 0 12px;
+
+  color: #304e69;
+  font-size: 18px;
+}
+
+.resultado-descricao p {
+  margin: 0;
+
+  color: #6f899f;
+  font-size: 13px;
+  line-height: 1.8;
+
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+/* =====================================================
+   14 — LINHA DO TEMPO
+   ===================================================== */
+
+.consulta-linha-tempo {
+  margin: 22px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.consulta-linha-tempo li {
+  position: relative;
+
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+
+  padding-bottom: 25px;
+}
+
+.consulta-linha-tempo li:last-child {
+  padding-bottom: 0;
+}
+
+.consulta-linha-tempo li:not(:last-child)::before {
+  content: "";
+
+  position: absolute;
+  top: 25px;
+  left: 12px;
+
+  height: calc(100% - 22px);
+
+  border-left: 2px solid #e0ebf5;
+}
+
+.historico-marcador {
+  position: relative;
+  z-index: 1;
+
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+
+  width: 26px;
+  height: 26px;
+
+  background: #e7eff6;
+  border: 5px solid #d9e6f0;
+  border-radius: 50%;
+}
+
+.consulta-linha-tempo .concluido .historico-marcador {
+  color: #fff;
+  background: #3aa788;
+
+  border: 0;
+  font-weight: 800;
+}
+
+.consulta-linha-tempo strong {
+  display: block;
+  margin-bottom: 5px;
+
+  color: #385873;
+  font-size: 13px;
+}
+
+.consulta-linha-tempo p {
+  margin: 0;
+
+  color: #839aae;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+/* =====================================================
+   15 — AVISO DE TRANSPARÊNCIA
+   ===================================================== */
+
+.consulta-aviso-dados {
+  display: block;
+
+  margin: 24px 0 0;
+  padding: 15px 17px;
+
+  color: #69869d;
+  background: #f5faff;
+
+  border: 1px solid #e2edf8;
+  border-radius: 12px;
+
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.resultado-aviso {
+  display: flex;
+  gap: 12px;
+
+  padding: 17px;
+  margin-top: 20px;
+
+  background: #f0f8ff;
+  border: 1px solid #dcebf6;
+  border-radius: 13px;
+}
+
+.resultado-aviso > span {
+  flex-shrink: 0;
+  color: #438cbd;
+  font-size: 20px;
+}
+
+.resultado-aviso p {
+  margin: 0;
+  color: #718ba1;
+  font-size: 12px;
+}
+
+/* =====================================================
+   16 — DOIS BOTÕES DO POP-UP
+   ===================================================== */
+
+.resultado-acoes {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 25px;
+}
+
+.resultado-acoes .botao {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  width: 100%;
+  min-width: 0;
+  min-height: 48px;
+
+  padding: 12px 15px;
+
+  text-align: center;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+/* =====================================================
+   17 — ROLAGEM DO POP-UP
+   ===================================================== */
+
+.consulta-modal {
+  scrollbar-width: thin;
+  scrollbar-color: #c3dced #f5faff;
+}
+
+.consulta-modal::-webkit-scrollbar {
+  width: 8px;
+}
+
+.consulta-modal::-webkit-scrollbar-track {
+  background: #f5faff;
+}
+
+.consulta-modal::-webkit-scrollbar-thumb {
+  background: #c3dced;
+  border-radius: 100px;
+}
+
+.consulta-modal::-webkit-scrollbar-thumb:hover {
+  background: #92bfe0;
+}
+
+/* =====================================================
+   18 — RESPONSIVIDADE
+   ===================================================== */
 
 @media (max-width: 960px) {
+
   .consulta-layout {
-    grid-template-columns: minmax(0,1fr);
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .consulta-ajuda {
-    grid-template-columns: repeat(2,minmax(0,1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .consulta-hero-grid {
@@ -652,23 +961,28 @@
   .consulta-ilustracao {
     display: none;
   }
+
 }
 
+/* =====================================================
+   19 — CELULARES
+   ===================================================== */
+
 @media (max-width: 650px) {
+
   .consulta-hero {
     padding: 55px 0;
   }
 
   .consulta-hero h1 {
-    font-size: clamp(36px,9vw,50px);
+    font-size: clamp(36px, 9vw, 50px);
   }
 
   .consulta-conteudo {
     padding: 35px 0 75px;
   }
 
-  .consulta-painel,
-  .consulta-resultado {
+  .consulta-painel {
     padding: 24px 18px;
     border-radius: 20px;
   }
@@ -677,26 +991,100 @@
     flex-direction: column;
   }
 
-  .resultado-informacoes,
   .consulta-ajuda {
     grid-template-columns: 1fr;
-  }
-
-  .resultado-acoes {
-    flex-direction: column;
-  }
-
-  .resultado-acoes .botao {
-    width: 100%;
   }
 
   .consulta-beneficios {
     gap: 8px;
   }
+
+  .consulta-beneficios span {
+    font-size: 10px;
+  }
+
+  .consulta-campo input {
+    font-size: 13px;
+  }
+
+  .consulta-ajuda-card {
+    padding: 24px;
+  }
+
+  /* POP-UP NO CELULAR */
+
+  .consulta-modal {
+    width: calc(100% - 18px);
+    max-width: none;
+    max-height: 94dvh;
+    border-radius: 16px;
+  }
+
+  .consulta-modal-topo {
+    padding: 15px 17px;
+  }
+
+  .consulta-modal-topo > span {
+    font-size: 10px;
+  }
+
+  .pagina-consultar .consulta-modal .consulta-resultado {
+    padding: 21px 16px;
+  }
+
+  .consulta-modal .resultado-cabecalho {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .consulta-modal .resultado-cabecalho h2 {
+    font-size: 25px;
+  }
+
+  .consulta-modal .resultado-informacoes {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .consulta-modal .resultado-item {
+    padding: 15px;
+  }
+
+  .consulta-modal .resultado-protocolo {
+    padding: 17px 12px;
+  }
+
+  .consulta-modal .resultado-protocolo strong {
+    font-size: 16px;
+  }
+
+  /* BOTÕES EMPILHADOS */
+
+  .consulta-modal .resultado-acoes {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .consulta-modal .resultado-acoes .botao {
+    width: 100%;
+    min-height: 48px;
+  }
+
 }
 
+/* =====================================================
+   20 — ACESSIBILIDADE
+   ===================================================== */
+
 @media (prefers-reduced-motion: reduce) {
-  .consulta-campo {
+
+  .consulta-campo,
+  .consulta-modal-fechar {
     transition: none;
   }
+
+  .consulta-modal {
+    scroll-behavior: auto;
+  }
+
 }

@@ -5,53 +5,70 @@
 <head>
   <meta charset="UTF-8">
 
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-  <meta name="theme-color"
-        content="#f5f9ff">
+  <meta name="theme-color" content="#f5f9ff">
 
-  <meta name="description"
-        content="Central de serviços do CidadãoConecta. Registre problemas urbanos, explore ocorrências da comunidade e acompanhe seus registros por protocolo.">
+  <meta
+    name="description"
+    content="Central de serviços do CidadãoConecta. Registre problemas urbanos, explore ocorrências da comunidade e consulte seus registros pelo protocolo."
+  >
 
   <title>Serviços | CidadãoConecta</title>
 
-  <!-- ESTILOS -->
+  <!-- ==========================================
+       ESTILOS
+       ========================================== -->
+
   <link rel="stylesheet" href="./CSS/style.css">
   <link rel="stylesheet" href="./CSS/servicos.css">
 
   <!-- JAVASCRIPT GLOBAL -->
+
   <script src="./JS/main.js" defer></script>
+
 </head>
 
 <body class="pagina-servicos">
 
   <!-- ACESSIBILIDADE -->
+
   <a href="#conteudo" class="pular-conteudo">
     Pular para o conteúdo
   </a>
 
-  <!-- ========================================
-       CABEÇALHO
-       ======================================== -->
+  <!-- ==========================================
+       01 — CABEÇALHO GLOBAL
+       ========================================== -->
 
   <header class="cabecalho" id="topo">
 
     <div class="container cabecalho-interno">
 
-      <!-- LOGOTIPO -->
+      <!-- ======================================
+           LOGOTIPO
+           ====================================== -->
 
-      <a href="./index.html"
-         class="marca"
-         aria-label="CidadãoConecta, página inicial">
+      <a
+        href="./index.html"
+        class="marca"
+        aria-label="CidadãoConecta, página inicial"
+      >
 
-        <span class="marca-simbolo"
-              aria-hidden="true">
+        <span
+          class="marca-simbolo"
+          aria-hidden="true"
+        >
 
-          <svg width="28"
-               height="28"
-               viewBox="0 0 48 48"
-               fill="none">
+          <svg
+            width="28"
+            height="28"
+            viewBox="0 0 48 48"
+            fill="none"
+          >
 
             <path
               d="M8 24L24 10L40 24V39H8V24Z"
@@ -77,9 +94,11 @@
             />
 
           </svg>
+
         </span>
 
         <span class="marca-texto">
+
           <strong>
             cidadão<span>conecta.</span>
           </strong>
@@ -87,39 +106,59 @@
           <small>
             Sua cidade, sua voz
           </small>
+
         </span>
 
       </a>
 
-      <!-- MENU DESKTOP -->
+      <!-- ======================================
+           MENU PRINCIPAL — DESKTOP
+           SEM DROPDOWN
+           ====================================== -->
 
-      <nav class="navegacao"
-           aria-label="Menu principal">
+      <nav
+        class="navegacao"
+        aria-label="Menu principal"
+      >
+
+        <!-- INÍCIO -->
 
         <a href="./index.html">
           Início
         </a>
 
-        <a href="./servicos.html"
-           class="ativo"
-           aria-current="page">
+        <!-- SERVIÇOS — PÁGINA ATIVA -->
+
+        <a
+          href="./servicos.html"
+          class="ativo"
+          aria-current="page"
+        >
           Serviços
         </a>
 
-        <a href="./consultar.html">
-          Consultar
-        </a>
+        <!-- COMUNIDADE -->
 
         <a href="./ocorrencias.html">
           Comunidade
         </a>
 
+        <!-- CONSULTAR -->
+
+        <a href="./consultar.html">
+          Consultar
+        </a>
+
       </nav>
 
-      <!-- BOTÃO PRINCIPAL -->
+      <!-- ======================================
+           BOTÃO REGISTRAR PROBLEMA
+           ====================================== -->
 
-      <a href="./registrar.html"
-         class="botao botao-primario botao-cabecalho">
+      <a
+        href="./registrar.html"
+        class="botao botao-primario botao-cabecalho"
+      >
 
         Registrar problema
 
@@ -129,7 +168,9 @@
 
       </a>
 
-      <!-- MENU MOBILE -->
+      <!-- ======================================
+           BOTÃO MENU MOBILE
+           ====================================== -->
 
       <button
         type="button"
@@ -137,7 +178,8 @@
         id="botaoMenu"
         aria-label="Abrir menu"
         aria-controls="menuMobile"
-        aria-expanded="false">
+        aria-expanded="false"
+      >
 
         <span></span>
         <span></span>
@@ -147,31 +189,40 @@
 
     </div>
 
+    <!-- ======================================
+         MENU MOBILE — SEM SUBMENU
+         ====================================== -->
+
     <nav
       class="menu-mobile"
       id="menuMobile"
       aria-label="Menu para celular"
-      hidden>
+      hidden
+    >
 
       <a href="./index.html">
         Início
       </a>
 
-      <a href="./servicos.html"
-         aria-current="page">
+      <a
+        href="./servicos.html"
+        aria-current="page"
+      >
         Serviços
-      </a>
-
-      <a href="./consultar.html">
-        Consultar
       </a>
 
       <a href="./ocorrencias.html">
         Comunidade
       </a>
 
-      <a href="./registrar.html"
-         class="menu-mobile-destaque">
+      <a href="./consultar.html">
+        Consultar
+      </a>
+
+      <a
+        href="./registrar.html"
+        class="menu-mobile-destaque"
+      >
         Registrar problema
       </a>
 
@@ -179,14 +230,14 @@
 
   </header>
 
-  <!-- ========================================
-       CONTEÚDO PRINCIPAL
-       ======================================== -->
+  <!-- ==========================================
+       02 — CONTEÚDO PRINCIPAL
+       ========================================== -->
 
   <main id="conteudo">
 
     <!-- ========================================
-         01 — BANNER PRINCIPAL
+         BANNER PRINCIPAL
          ======================================== -->
 
     <section class="central-hero">
@@ -195,6 +246,8 @@
 
         <div class="central-apresentacao">
 
+          <!-- TEXTO PRINCIPAL -->
+
           <div>
 
             <span class="sobretitulo">
@@ -202,25 +255,39 @@
             </span>
 
             <h1>
+
               O que você precisa
-              <span>fazer na sua cidade?</span>
+
+              <span>
+                fazer na sua cidade?
+              </span>
+
             </h1>
 
             <p>
+
               Escolha uma ação para começar.
-              Sem menus complicados e sem
-              perder tempo.
+              Sem menus complicados e sem perder tempo.
+
             </p>
 
           </div>
 
-          <!-- ELEMENTO VISUAL URBAN OS -->
+          <!-- ==================================
+               ILUSTRAÇÃO URBAN OS
+               ================================== -->
 
-          <div class="central-destaque"
-               aria-hidden="true">
+          <div
+            class="central-destaque"
+            aria-hidden="true"
+          >
 
             <span class="central-destaque-circulo">
-              <span>CC</span>
+
+              <span>
+                CC
+              </span>
+
             </span>
 
             <span class="central-destaque-texto">
@@ -244,14 +311,17 @@
     </section>
 
     <!-- ========================================
-         02 — ACESSO RÁPIDO AOS SERVIÇOS
+         03 — ACESSO RÁPIDO AOS SERVIÇOS
          ======================================== -->
 
     <section
       class="central-acoes"
-      aria-labelledby="tituloAcoes">
+      aria-labelledby="tituloAcoes"
+    >
 
       <div class="container">
+
+        <!-- TÍTULO DA SEÇÃO -->
 
         <div class="central-secao-topo">
 
@@ -265,19 +335,31 @@
 
         </div>
 
+        <!-- ==================================
+             LISTA DE SERVIÇOS
+             ================================== -->
+
         <div class="central-lista">
 
           <!-- ==================================
-               CARTÃO 1 — REGISTRAR PROBLEMA
+               CARTÃO 01 — REGISTRAR PROBLEMA
                ================================== -->
 
-          <a href="./registrar.html"
-             class="central-acao central-acao-principal">
+          <a
+            href="./registrar.html"
+            class="central-acao central-acao-principal"
+          >
 
-            <span class="central-acao-icone"
-                  aria-hidden="true">
+            <!-- ÍCONE -->
+
+            <span
+              class="central-acao-icone"
+              aria-hidden="true"
+            >
               ＋
             </span>
+
+            <!-- INFORMAÇÕES -->
 
             <span class="central-acao-texto">
 
@@ -290,12 +372,15 @@
               </strong>
 
               <span>
-                Informe a categoria, descreva
-                a situação e indique o local
-                em um formulário guiado.
+
+                Informe a categoria, descreva a situação
+                e indique o local em um formulário guiado.
+
               </span>
 
             </span>
+
+            <!-- AÇÃO -->
 
             <span class="central-acao-final">
 
@@ -310,16 +395,24 @@
           </a>
 
           <!-- ==================================
-               CARTÃO 2 — COMUNIDADE
+               CARTÃO 02 — COMUNIDADE
                ================================== -->
 
-          <a href="./ocorrencias.html"
-             class="central-acao">
+          <a
+            href="./ocorrencias.html"
+            class="central-acao"
+          >
 
-            <span class="central-acao-icone"
-                  aria-hidden="true">
+            <!-- ÍCONE -->
+
+            <span
+              class="central-acao-icone"
+              aria-hidden="true"
+            >
               ⌕
             </span>
+
+            <!-- INFORMAÇÕES -->
 
             <span class="central-acao-texto">
 
@@ -332,13 +425,17 @@
               </strong>
 
               <span>
-                Explore as ocorrências da
-                comunidade, pesquise por bairro
+
+                Explore as ocorrências cadastradas no
+                CidadãoConecta, pesquise por bairro
                 e categoria e conheça os problemas
-                registrados nesta demonstração.
+                identificados pela comunidade.
+
               </span>
 
             </span>
+
+            <!-- AÇÃO -->
 
             <span class="central-acao-final">
 
@@ -353,21 +450,29 @@
           </a>
 
           <!-- ==================================
-               CARTÃO 3 — CONSULTAR PROTOCOLO
+               CARTÃO 03 — CONSULTAR PROTOCOLO
                ================================== -->
 
-          <a href="./consultar.html"
-             class="central-acao">
+          <a
+            href="./consultar.html"
+            class="central-acao"
+          >
 
-            <span class="central-acao-icone"
-                  aria-hidden="true">
+            <!-- ÍCONE -->
+
+            <span
+              class="central-acao-icone"
+              aria-hidden="true"
+            >
               ✓
             </span>
+
+            <!-- INFORMAÇÕES -->
 
             <span class="central-acao-texto">
 
               <span class="central-acao-etiqueta">
-                ACOMPANHAMENTO
+                CONSULTA E ACOMPANHAMENTO
               </span>
 
               <strong>
@@ -375,13 +480,17 @@
               </strong>
 
               <span>
-                Consulte uma ocorrência pelo
-                protocolo e visualize os detalhes
-                do registro, sua situação atual
-                e o histórico disponível.
+
+                Consulte uma ocorrência pelo protocolo
+                recebido após o cadastro e visualize
+                suas informações, a situação atual
+                e o histórico disponível no sistema.
+
               </span>
 
             </span>
+
+            <!-- AÇÃO -->
 
             <span class="central-acao-final">
 
@@ -396,31 +505,18 @@
           </a>
 
         </div>
-
-        <!-- INFORMAÇÕES DA DEMONSTRAÇÃO -->
-
-        <p class="central-observacao">
-
-          O CidadãoConecta é um protótipo acadêmico.
-          O registro de ocorrências, a consulta por
-          protocolo e os indicadores da comunidade
-          utilizam informações demonstrativas
-          salvas neste navegador. O armazenamento
-          compartilhado e o acompanhamento com
-          atualizações reais dependerão da
-          integração com o backend.
-
-        </p>
+        <!-- FIM DA CENTRAL-LISTA -->
 
       </div>
+      <!-- FIM DO CONTAINER -->
 
     </section>
 
   </main>
 
-  <!-- ========================================
-       RODAPÉ
-       ======================================== -->
+  <!-- ==========================================
+       04 — RODAPÉ
+       ========================================== -->
 
   <footer class="rodape">
 
@@ -428,7 +524,9 @@
 
       <div class="rodape-principal">
 
-        <!-- MARCA -->
+        <!-- ==================================
+             MARCA
+             ================================== -->
 
         <div class="rodape-marca">
 
@@ -437,14 +535,17 @@
           </strong>
 
           <p>
-            Tecnologia e participação para
-            dar visibilidade às necessidades
-            da cidade.
+
+            Tecnologia e participação para dar
+            visibilidade às necessidades da cidade.
+
           </p>
 
         </div>
 
-        <!-- NAVEGAÇÃO -->
+        <!-- ==================================
+             LINKS DE NAVEGAÇÃO
+             ================================== -->
 
         <div class="rodape-links">
 
@@ -460,12 +561,12 @@
             Serviços
           </a>
 
-          <a href="./consultar.html">
-            Consultar protocolo
-          </a>
-
           <a href="./ocorrencias.html">
             Comunidade
+          </a>
+
+          <a href="./consultar.html">
+            Consultar
           </a>
 
           <a href="./registrar.html">
@@ -474,7 +575,9 @@
 
         </div>
 
-        <!-- INFORMAÇÕES -->
+        <!-- ==================================
+             INFORMAÇÕES
+             ================================== -->
 
         <div class="rodape-links">
 
@@ -490,6 +593,10 @@
             Perguntas frequentes
           </a>
 
+          <a href="#topo">
+            Voltar ao início
+          </a>
+
         </div>
 
       </div>
@@ -497,13 +604,10 @@
       <div class="rodape-inferior">
 
         <span>
+
           © 2026 CidadãoConecta ·
           Projeto acadêmico FIAP.
-        </span>
 
-        <span>
-          Projeto independente, não oficial
-          da administração pública.
         </span>
 
       </div>

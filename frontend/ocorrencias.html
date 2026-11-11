@@ -4,29 +4,26 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#f5f9ff">
 
-  <meta name="description"
-        content="Explore as necessidades da sua comunidade no Observatório Urbano do CidadãoConecta.">
+  <meta
+    name="description"
+    content="Explore ocorrências urbanas, indicadores e necessidades da comunidade no CidadãoConecta."
+  >
 
-  <title>Observatório Urbano | CidadãoConecta</title>
+  <title>Comunidade | CidadãoConecta</title>
 
-  <!-- ESTILOS EXISTENTES -->
+  <!-- ESTILOS -->
   <link rel="stylesheet" href="./CSS/style.css">
   <link rel="stylesheet" href="./CSS/ocorrencias.css">
 
-  <!-- SCRIPTS EXISTENTES -->
+  <!-- JAVASCRIPT -->
   <script src="./JS/main.js" defer></script>
   <script src="./JS/ocorrencias.js" defer></script>
 
-  <!-- ESTILOS ADICIONAIS DO NOVO OBSERVATÓRIO -->
+  <!-- ESTILOS COMPLEMENTARES DO OBSERVATÓRIO -->
   <style>
-    /* ========================================
-       OBSERVATÓRIO URBANO — NOVOS COMPONENTES
-       Os estilos existentes são preservados.
-       ======================================== */
 
     .pagina-ocorrencias {
       --obs-azul: #438cc8;
@@ -34,6 +31,8 @@
       --obs-suave: #eef7ff;
       --obs-borda: #dcebf7;
     }
+
+    /* IDENTIDADE */
 
     .observatorio-identidade {
       display: inline-flex;
@@ -85,7 +84,7 @@
       font-weight: 900;
     }
 
-    /* APRESENTAÇÃO DA SEÇÃO DE ANÁLISES */
+    /* ANÁLISES */
 
     .analises-area {
       padding: 85px 0 95px;
@@ -233,7 +232,7 @@
       text-align: center;
     }
 
-    /* VISÃO POR BAIRRO */
+    /* RANKING DE BAIRROS */
 
     .bairros-ranking {
       display: grid;
@@ -289,7 +288,7 @@
       font-weight: 800;
     }
 
-    /* TRÊS PILARES DO PROJETO */
+    /* IMPACTO SOCIAL */
 
     .impacto-area {
       padding: 85px 0;
@@ -362,7 +361,7 @@
       font-weight: 700;
     }
 
-    /* SEÇÃO DE TRANSPARÊNCIA */
+    /* TRANSPARÊNCIA */
 
     .observatorio-transparencia {
       display: grid;
@@ -399,7 +398,7 @@
       line-height: 1.8;
     }
 
-    /* AJUSTES MOBILE */
+    /* RESPONSIVIDADE */
 
     @media (max-width: 850px) {
       .analises-grade {
@@ -435,7 +434,9 @@
         padding: 20px;
       }
     }
+
   </style>
+
 </head>
 
 <body class="pagina-ocorrencias">
@@ -444,69 +445,119 @@
     Pular para o conteúdo
   </a>
 
-  <!-- =====================================
-       CABEÇALHO
-       ===================================== -->
+  <!-- ==========================================
+       01 — CABEÇALHO GLOBAL
+       ========================================== -->
 
   <header class="cabecalho" id="topo">
+
     <div class="container cabecalho-interno">
 
-      <a href="./index.html"
-         class="marca"
-         aria-label="CidadãoConecta, página inicial">
+      <!-- LOGOTIPO -->
+
+      <a
+        href="./index.html"
+        class="marca"
+        aria-label="CidadãoConecta, página inicial"
+      >
 
         <span class="marca-simbolo" aria-hidden="true">
-          <svg width="28" height="28"
-               viewBox="0 0 48 48"
-               fill="none">
 
-            <path d="M8 24L24 10L40 24V39H8V24Z"
-                  stroke="currentColor"
-                  stroke-width="3"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"/>
+          <svg
+            width="28"
+            height="28"
+            viewBox="0 0 48 48"
+            fill="none"
+          >
 
-            <path d="M18 39V26H30V39"
-                  stroke="currentColor"
-                  stroke-width="3"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"/>
+            <path
+              d="M8 24L24 10L40 24V39H8V24Z"
+              stroke="currentColor"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
 
-            <circle cx="36" cy="12" r="5"
-                    fill="#A2DDF9"/>
+            <path
+              d="M18 39V26H30V39"
+              stroke="currentColor"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+
+            <circle
+              cx="36"
+              cy="12"
+              r="5"
+              fill="#A2DDF9"
+            />
+
           </svg>
+
         </span>
 
         <span class="marca-texto">
-          <strong>cidadão<span>conecta.</span></strong>
+          <strong>
+            cidadão<span>conecta.</span>
+          </strong>
+
           <small>Sua cidade, sua voz</small>
         </span>
 
       </a>
 
-      <nav class="navegacao" aria-label="Menu principal">
-        <a href="./index.html">Início</a>
-        <a href="./servicos.html">Serviços</a>
-        <a href="./consultar.html">Consultar</a>
-        <a href="./ocorrencias.html"
-           class="ativo"
-           aria-current="page">
+      <!-- ======================================
+           MENU PRINCIPAL — SEM DROPDOWN
+           ====================================== -->
+
+      <nav
+        class="navegacao"
+        aria-label="Menu principal"
+      >
+
+        <a href="./index.html">
+          Início
+        </a>
+
+        <a href="./servicos.html">
+          Serviços
+        </a>
+
+        <a
+          href="./ocorrencias.html"
+          class="ativo"
+          aria-current="page"
+        >
           Comunidade
         </a>
+
+        <a href="./consultar.html">
+          Consultar
+        </a>
+
       </nav>
 
-      <a href="./registrar.html"
-         class="botao botao-primario botao-cabecalho">
+      <!-- BOTÃO REGISTRAR -->
+
+      <a
+        href="./registrar.html"
+        class="botao botao-primario botao-cabecalho"
+      >
         Registrar problema
         <span aria-hidden="true">↗</span>
       </a>
 
-      <button class="botao-menu"
-              id="botaoMenu"
-              type="button"
-              aria-label="Abrir menu"
-              aria-controls="menuMobile"
-              aria-expanded="false">
+      <!-- BOTÃO MENU MOBILE -->
+
+      <button
+        type="button"
+        class="botao-menu"
+        id="botaoMenu"
+        aria-label="Abrir menu"
+        aria-controls="menuMobile"
+        aria-expanded="false"
+      >
         <span></span>
         <span></span>
         <span></span>
@@ -514,29 +565,52 @@
 
     </div>
 
-    <nav class="menu-mobile"
-         id="menuMobile"
-         aria-label="Menu para celular"
-         hidden>
+    <!-- ======================================
+         MENU MOBILE — SEM SUBMENU
+         ====================================== -->
+
+    <nav
+      class="menu-mobile"
+      id="menuMobile"
+      aria-label="Menu para celular"
+      hidden
+    >
 
       <a href="./index.html">Início</a>
+
       <a href="./servicos.html">Serviços</a>
-      <a href="./consultar.html">Consultar</a>
-      <a href="./ocorrencias.html"
-         aria-current="page">Comunidade</a>
-      <a href="./registrar.html"
-         class="menu-mobile-destaque">
+
+      <a
+        href="./ocorrencias.html"
+        aria-current="page"
+      >
+        Comunidade
+      </a>
+
+      <a href="./consultar.html">
+        Consultar
+      </a>
+
+      <a
+        href="./registrar.html"
+        class="menu-mobile-destaque"
+      >
         Registrar problema
       </a>
+
     </nav>
 
   </header>
 
+  <!-- ==========================================
+       02 — CONTEÚDO PRINCIPAL
+       ========================================== -->
+
   <main id="conteudo">
 
-    <!-- =====================================
-         01 — HERO / APRESENTAÇÃO
-         ===================================== -->
+    <!-- ========================================
+         01 — APRESENTAÇÃO
+         ======================================== -->
 
     <section class="ocorrencias-hero">
 
@@ -562,14 +636,18 @@
 
           <div class="ocorrencias-hero-acoes">
 
-            <a href="#explorar"
-               class="botao botao-primario">
+            <a
+              href="#explorar"
+              class="botao botao-primario"
+            >
               Explorar ocorrências
               <span aria-hidden="true">↓</span>
             </a>
 
-            <a href="./registrar.html"
-               class="botao botao-secundario">
+            <a
+              href="./registrar.html"
+              class="botao botao-secundario"
+            >
               Registrar problema
               <span aria-hidden="true">↗</span>
             </a>
@@ -584,9 +662,12 @@
 
         </div>
 
-        <!-- VISUAL URBAN OS EXISTENTE -->
+        <!-- ILUSTRAÇÃO -->
 
-        <div class="observatorio-visual" aria-hidden="true">
+        <div
+          class="observatorio-visual"
+          aria-hidden="true"
+        >
 
           <div class="observatorio-orbita"></div>
 
@@ -603,11 +684,21 @@
               <span class="observatorio-anel anel-dois"></span>
               <span class="observatorio-anel anel-tres"></span>
 
-              <span class="observatorio-marcador marcador-um">⌖</span>
-              <span class="observatorio-marcador marcador-dois">⌖</span>
-              <span class="observatorio-marcador marcador-tres">⌖</span>
+              <span class="observatorio-marcador marcador-um">
+                ⌖
+              </span>
 
-              <div class="observatorio-simbolo">CC</div>
+              <span class="observatorio-marcador marcador-dois">
+                ⌖
+              </span>
+
+              <span class="observatorio-marcador marcador-tres">
+                ⌖
+              </span>
+
+              <div class="observatorio-simbolo">
+                CC
+              </div>
 
             </div>
 
@@ -625,49 +716,72 @@
 
     </section>
 
-    <!-- =====================================
-         02 — INDICADORES
-         ===================================== -->
+    <!-- ========================================
+         03 — INDICADORES DO OBSERVATÓRIO
+         ======================================== -->
 
-    <section class="indicadores-area"
-             aria-label="Indicadores de registros locais">
+    <section
+      class="indicadores-area"
+      aria-label="Indicadores de ocorrências"
+    >
 
       <div class="container">
 
         <div class="indicadores-cabecalho">
 
           <div>
-            <span class="sobretitulo">VISÃO GERAL</span>
-            <h2>Os números contam uma história.</h2>
+            <span class="sobretitulo">
+              VISÃO GERAL
+            </span>
+
+            <h2>
+              Os números contam uma história.
+            </h2>
           </div>
 
           <p>
-            Indicadores calculados com base nos
-            registros demonstrativos deste navegador.
+            Indicadores calculados com base nas
+            ocorrências disponibilizadas pelo
+            sistema CidadãoConecta.
           </p>
 
         </div>
 
         <div class="indicadores-grade">
 
+          <!-- TOTAL DE OCORRÊNCIAS -->
+
           <article class="indicador-card">
-            <span class="indicador-icone"
-                  aria-hidden="true">▤</span>
+
+            <span
+              class="indicador-icone"
+              aria-hidden="true"
+            >
+              ▤
+            </span>
 
             <span class="indicador-nome">
-              Registros locais
+              Ocorrências registradas
             </span>
 
             <strong id="totalOcorrencias">0</strong>
 
             <small>
-              Ocorrências demonstrativas cadastradas
+              Registros disponíveis no Observatório
             </small>
+
           </article>
 
+          <!-- BAIRROS -->
+
           <article class="indicador-card">
-            <span class="indicador-icone"
-                  aria-hidden="true">⌖</span>
+
+            <span
+              class="indicador-icone"
+              aria-hidden="true"
+            >
+              ⌖
+            </span>
 
             <span class="indicador-nome">
               Bairros identificados
@@ -678,11 +792,19 @@
             <small>
               Localidades presentes nos registros
             </small>
+
           </article>
 
+          <!-- CATEGORIAS -->
+
           <article class="indicador-card">
-            <span class="indicador-icone"
-                  aria-hidden="true">◫</span>
+
+            <span
+              class="indicador-icone"
+              aria-hidden="true"
+            >
+              ◫
+            </span>
 
             <span class="indicador-nome">
               Tipos de problemas
@@ -691,8 +813,9 @@
             <strong id="totalCategorias">0</strong>
 
             <small>
-              Categorias registradas
+              Categorias identificadas nas ocorrências
             </small>
+
           </article>
 
         </div>
@@ -701,14 +824,15 @@
 
     </section>
 
-    <!-- =====================================
-         03 — ANÁLISES DO OBSERVATÓRIO
-         NOVA SEÇÃO
-         ===================================== -->
+    <!-- ========================================
+         04 — ANÁLISES DO OBSERVATÓRIO
+         ======================================== -->
 
-    <section class="analises-area"
-             id="analises"
-             aria-labelledby="tituloAnalises">
+    <section
+      class="analises-area"
+      id="analises"
+      aria-labelledby="tituloAnalises"
+    >
 
       <div class="container">
 
@@ -726,15 +850,15 @@
 
             <p>
               Descubra quais categorias aparecem
-              com maior frequência e como os
-              registros demonstrativos se distribuem
-              entre os bairros.
+              com maior frequência e como as
+              ocorrências se distribuem entre
+              os bairros.
             </p>
 
           </div>
 
           <span class="analises-selo">
-            DADOS LOCAIS · DEMONSTRAÇÃO
+            DADOS DO CIDADÃOCONECTA
           </span>
 
         </div>
@@ -748,26 +872,34 @@
             <div class="analise-cartao-topo">
 
               <div>
-                <h3>Problemas por categoria</h3>
+                <h3>
+                  Problemas por categoria
+                </h3>
+
                 <p>
                   Distribuição dos tipos de ocorrência
                   encontrados nos registros.
                 </p>
               </div>
 
-              <span class="analise-cartao-icone"
-                    aria-hidden="true">▥</span>
+              <span
+                class="analise-cartao-icone"
+                aria-hidden="true"
+              >
+                ▥
+              </span>
 
             </div>
 
-            <div class="categorias-grafico"
-                 id="graficoCategorias"
-                 aria-label="Distribuição dos registros por categoria">
-            </div>
+            <div
+              class="categorias-grafico"
+              id="graficoCategorias"
+              aria-label="Distribuição das ocorrências por categoria"
+            ></div>
 
           </article>
 
-          <!-- ANÁLISE DE BAIRROS -->
+          <!-- RANKING DOS BAIRROS -->
 
           <article class="analise-cartao">
 
@@ -775,21 +907,27 @@
 
               <div>
                 <h3>Bairros em perspectiva</h3>
+
                 <p>
-                  Localidades com mais registros
-                  nesta demonstração.
+                  Localidades com maior quantidade
+                  de registros disponíveis.
                 </p>
               </div>
 
-              <span class="analise-cartao-icone"
-                    aria-hidden="true">⌖</span>
+              <span
+                class="analise-cartao-icone"
+                aria-hidden="true"
+              >
+                ⌖
+              </span>
 
             </div>
 
-            <div class="bairros-ranking"
-                 id="rankingBairros"
-                 aria-label="Bairros com registros demonstrativos">
-            </div>
+            <div
+              class="bairros-ranking"
+              id="rankingBairros"
+              aria-label="Bairros com ocorrências registradas"
+            ></div>
 
           </article>
 
@@ -799,13 +937,15 @@
 
     </section>
 
-    <!-- =====================================
-         04 — CENTRAL DE OCORRÊNCIAS
-         ===================================== -->
+    <!-- ========================================
+         05 — CENTRAL DE OCORRÊNCIAS
+         ======================================== -->
 
-    <section class="explorar-area"
-             id="explorar"
-             aria-labelledby="tituloExplorar">
+    <section
+      class="explorar-area"
+      id="explorar"
+      aria-labelledby="tituloExplorar"
+    >
 
       <div class="container">
 
@@ -822,19 +962,25 @@
             </h2>
 
             <p>
-              Encontre registros demonstrativos
-              por título, bairro ou categoria.
+              Encontre ocorrências por título,
+              bairro, categoria ou situação.
             </p>
 
           </div>
 
         </div>
 
-        <!-- FILTROS: IDs PRESERVADOS -->
+        <!-- ====================================
+             FILTROS
+             ==================================== -->
 
-        <form class="filtros-painel"
-              id="formFiltros"
-              role="search">
+        <form
+          class="filtros-painel"
+          id="formFiltros"
+          role="search"
+        >
+
+          <!-- PESQUISA -->
 
           <div class="filtro-campo filtro-pesquisa">
 
@@ -842,11 +988,15 @@
               Buscar ocorrência
             </label>
 
-            <input type="search"
-                   id="filtroPesquisa"
-                   placeholder="Ex.: buraco, iluminação, bairro...">
+            <input
+              type="search"
+              id="filtroPesquisa"
+              placeholder="Ex.: buraco, iluminação, bairro..."
+            >
 
           </div>
+
+          <!-- BAIRRO -->
 
           <div class="filtro-campo">
 
@@ -855,12 +1005,16 @@
             </label>
 
             <select id="filtroBairro">
+
               <option value="">
                 Todos os bairros
               </option>
+
             </select>
 
           </div>
+
+          <!-- CATEGORIA -->
 
           <div class="filtro-campo">
 
@@ -902,6 +1056,8 @@
 
           </div>
 
+          <!-- SITUAÇÃO -->
+
           <div class="filtro-campo">
 
             <label for="filtroSituacao">
@@ -909,26 +1065,30 @@
             </label>
 
             <select id="filtroSituacao">
+
               <option value="">
                 Todas as situações
               </option>
 
-              <option value="local">
-                Registrada localmente
-              </option>
             </select>
 
           </div>
 
-          <button type="button"
-                  id="limparFiltros"
-                  class="botao botao-secundario filtro-limpar">
+          <!-- LIMPAR FILTROS -->
+
+          <button
+            type="button"
+            id="limparFiltros"
+            class="botao botao-secundario filtro-limpar"
+          >
             Limpar filtros
           </button>
 
         </form>
 
-        <!-- TÍTULO DA LISTAGEM -->
+        <!-- ====================================
+             RESULTADOS
+             ==================================== -->
 
         <div class="listagem-topo">
 
@@ -945,6 +1105,8 @@
 
           </div>
 
+          <!-- ORDENAÇÃO -->
+
           <div class="ordenacao">
 
             <label for="ordenarOcorrencias">
@@ -952,6 +1114,7 @@
             </label>
 
             <select id="ordenarOcorrencias">
+
               <option value="recentes">
                 Mais recentes
               </option>
@@ -963,55 +1126,71 @@
               <option value="bairro">
                 Bairro (A–Z)
               </option>
+
             </select>
 
           </div>
 
         </div>
 
-        <!-- AVISO DE ERRO -->
+        <!-- MENSAGENS DA API -->
 
-        <div id="mensagemOcorrencias"
-             class="ocorrencias-mensagem"
-             role="status"
-             aria-live="polite"
-             hidden>
-        </div>
+        <div
+          id="mensagemOcorrencias"
+          class="ocorrencias-mensagem"
+          role="status"
+          aria-live="polite"
+          hidden
+        ></div>
 
-        <!-- LISTA: ID PRESERVADO -->
+        <!-- LISTA GERADA PELO JAVASCRIPT -->
 
-        <div class="ocorrencias-grade"
-             id="listaOcorrencias"
-             aria-live="polite">
-        </div>
+        <div
+          class="ocorrencias-grade"
+          id="listaOcorrencias"
+          aria-live="polite"
+        ></div>
 
-        <!-- ESTADO VAZIO: IDs PRESERVADOS -->
+        <!-- ====================================
+             ESTADO VAZIO
+             ==================================== -->
 
-        <div id="estadoVazio"
-             class="ocorrencias-vazio"
-             hidden>
+        <div
+          id="estadoVazio"
+          class="ocorrencias-vazio"
+          hidden
+        >
 
-          <span class="vazio-icone"
-                aria-hidden="true">⌕</span>
+          <span
+            class="vazio-icone"
+            aria-hidden="true"
+          >
+            ⌕
+          </span>
 
           <h3>
             Nenhuma ocorrência encontrada
           </h3>
 
           <p id="textoEstadoVazio">
-            Ainda não existem registros para mostrar.
+            Ainda não existem ocorrências disponíveis
+            para mostrar.
           </p>
 
           <div class="vazio-acoes">
 
-            <button type="button"
-                    id="botaoLimparVazio"
-                    class="botao botao-secundario">
+            <button
+              type="button"
+              id="botaoLimparVazio"
+              class="botao botao-secundario"
+            >
               Limpar pesquisa
             </button>
 
-            <a href="./registrar.html"
-               class="botao botao-primario">
+            <a
+              href="./registrar.html"
+              class="botao botao-primario"
+            >
               Registrar um problema
               <span aria-hidden="true">↗</span>
             </a>
@@ -1020,29 +1199,33 @@
 
         </div>
 
-        <!-- TRANSPARÊNCIA -->
+        <!-- ====================================
+             TRANSPARÊNCIA SOBRE OS DADOS
+             ==================================== -->
 
         <div class="observatorio-transparencia">
 
-          <span class="observatorio-transparencia-icone"
-                aria-hidden="true">ⓘ</span>
+          <span
+            class="observatorio-transparencia-icone"
+            aria-hidden="true"
+          >
+            ⓘ
+          </span>
 
           <div>
 
             <strong>
-              Transparência sobre esta demonstração
+              Transparência sobre os dados
             </strong>
 
             <p>
-              Os indicadores e os cartões desta página
-              utilizam registros salvos neste navegador.
-              Eles não representam dados públicos,
-              estatísticas oficiais ou solicitações
-              encaminhadas à prefeitura.
-              A versão integrada utilizará Java,
-              Oracle e regras de privacidade para
-              definir quais ocorrências poderão
-              aparecer publicamente.
+              Os indicadores e os cartões são calculados
+              a partir das ocorrências disponibilizadas
+              pela API Java e armazenadas no Oracle
+              do projeto CidadãoConecta.
+
+              Este é um ambiente acadêmico independente,
+              sem encaminhamento automático às prefeituras.
             </p>
 
           </div>
@@ -1053,13 +1236,14 @@
 
     </section>
 
-    <!-- =====================================
-         05 — IMPACTO SOCIAL
-         NOVA SEÇÃO
-         ===================================== -->
+    <!-- ========================================
+         06 — IMPACTO SOCIAL
+         ======================================== -->
 
-    <section class="impacto-area"
-             aria-labelledby="tituloImpacto">
+    <section
+      class="impacto-area"
+      aria-labelledby="tituloImpacto"
+    >
 
       <div class="container">
 
@@ -1084,9 +1268,13 @@
 
         <div class="impacto-grade">
 
+          <!-- VISIBILIDADE -->
+
           <article class="impacto-cartao">
 
-            <span class="impacto-numero">01 / VISIBILIDADE</span>
+            <span class="impacto-numero">
+              01 / VISIBILIDADE
+            </span>
 
             <h3>
               Dar voz aos problemas
@@ -1104,9 +1292,13 @@
 
           </article>
 
+          <!-- INFORMAÇÃO -->
+
           <article class="impacto-cartao">
 
-            <span class="impacto-numero">02 / INFORMAÇÃO</span>
+            <span class="impacto-numero">
+              02 / INFORMAÇÃO
+            </span>
 
             <h3>
               Entender a realidade
@@ -1124,9 +1316,13 @@
 
           </article>
 
+          <!-- PARTICIPAÇÃO -->
+
           <article class="impacto-cartao">
 
-            <span class="impacto-numero">03 / PARTICIPAÇÃO</span>
+            <span class="impacto-numero">
+              03 / PARTICIPAÇÃO
+            </span>
 
             <h3>
               Acompanhar mudanças
@@ -1136,7 +1332,7 @@
               Preparar um caminho para que,
               futuramente, o cidadão acompanhe
               atualizações e confirme a resolução
-              de problemas registrados.
+              dos problemas registrados.
             </p>
 
             <div class="impacto-rodape">
@@ -1151,9 +1347,9 @@
 
     </section>
 
-    <!-- =====================================
-         06 — CHAMADA FINAL
-         ===================================== -->
+    <!-- ========================================
+         07 — CHAMADA FINAL
+         ======================================== -->
 
     <section class="participacao-final">
 
@@ -1172,15 +1368,20 @@
             </h2>
 
             <p>
-              Faça um registro demonstrativo
-              e conheça o funcionamento
-              do CidadãoConecta.
+              Registre uma ocorrência e acompanhe
+              suas informações pelo CidadãoConecta.
+
+              O cadastro faz parte do ambiente
+              acadêmico e não é encaminhado
+              automaticamente a órgãos públicos.
             </p>
 
           </div>
 
-          <a href="./registrar.html"
-             class="botao botao-primario">
+          <a
+            href="./registrar.html"
+            class="botao botao-primario"
+          >
             Registrar ocorrência
             <span aria-hidden="true">↗</span>
           </a>
@@ -1193,15 +1394,17 @@
 
   </main>
 
-  <!-- =====================================
-       RODAPÉ
-       ===================================== -->
+  <!-- ==========================================
+       08 — RODAPÉ GLOBAL
+       ========================================== -->
 
   <footer class="rodape">
 
     <div class="container">
 
       <div class="rodape-principal">
+
+        <!-- MARCA -->
 
         <div class="rodape-marca">
 
@@ -1217,21 +1420,35 @@
 
         </div>
 
+        <!-- NAVEGAÇÃO -->
+
         <div class="rodape-links">
 
           <strong>Navegação</strong>
 
-          <a href="./index.html">Início</a>
-          <a href="./servicos.html">Serviços</a>
-          <a href="./consultar.html">
-            Consultar protocolo
+          <a href="./index.html">
+            Início
           </a>
-          <a href="./ocorrencias.html">Comunidade</a>
+
+          <a href="./servicos.html">
+            Serviços
+          </a>
+
+          <a href="./ocorrencias.html">
+            Comunidade
+          </a>
+
+          <a href="./consultar.html">
+            Consultar
+          </a>
+
           <a href="./registrar.html">
             Registrar problema
           </a>
 
         </div>
+
+        <!-- INFORMAÇÕES -->
 
         <div class="rodape-links">
 
@@ -1245,6 +1462,10 @@
             Perguntas frequentes
           </a>
 
+          <a href="#topo">
+            Voltar ao início
+          </a>
+
         </div>
 
       </div>
@@ -1256,297 +1477,11 @@
           Projeto acadêmico FIAP.
         </span>
 
-        <span>
-          Projeto independente,
-          não oficial da administração pública.
-        </span>
-
       </div>
 
     </div>
 
   </footer>
-
-  <!-- =====================================
-       07 — ANÁLISES DEMONSTRATIVAS
-
-       Complemento independente para
-       as duas novas áreas do Observatório.
-
-       Não modifica o ocorrencias.js.
-       ===================================== -->
-
-  <script>
-    document.addEventListener(
-      "DOMContentLoaded",
-      () => {
-
-        const grafico = document.getElementById(
-          "graficoCategorias"
-        );
-
-        const ranking = document.getElementById(
-          "rankingBairros"
-        );
-
-        if (!grafico || !ranking) {
-          return;
-        }
-
-        const CHAVE =
-          "cidadaoconecta_registros_demo";
-
-        const nomesCategorias = {
-          pavimentacao: "Ruas e calçadas",
-          iluminacao: "Iluminação pública",
-          saneamento: "Água e saneamento",
-          acessibilidade: "Acessibilidade",
-          limpeza: "Limpeza urbana",
-          outro: "Outro problema"
-        };
-
-        function normalizar(texto) {
-          return String(texto || "")
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "")
-            .toLowerCase()
-            .trim();
-        }
-
-        function carregarDados() {
-          try {
-            const conteudo =
-              localStorage.getItem(CHAVE);
-
-            const dados = JSON.parse(
-              conteudo || "[]"
-            );
-
-            return Array.isArray(dados)
-              ? dados.filter(
-                  (item) =>
-                    item &&
-                    typeof item === "object" &&
-                    typeof item.idLocal === "string"
-                )
-              : [];
-
-          } catch {
-            return [];
-          }
-        }
-
-        function mostrarMensagem(
-          elemento,
-          mensagem
-        ) {
-          const aviso =
-            document.createElement("div");
-
-          aviso.className = "analise-sem-dados";
-          aviso.textContent = mensagem;
-
-          elemento.replaceChildren(aviso);
-        }
-
-        function renderizarCategorias(registros) {
-          grafico.replaceChildren();
-
-          if (!registros.length) {
-            mostrarMensagem(
-              grafico,
-              "Cadastre uma ocorrência demonstrativa para visualizar os indicadores por categoria."
-            );
-            return;
-          }
-
-          const contagens = new Map();
-
-          registros.forEach((registro) => {
-            const categoria =
-              nomesCategorias[registro.categoria] ||
-              "Outra categoria";
-
-            contagens.set(
-              categoria,
-              (contagens.get(categoria) || 0) + 1
-            );
-          });
-
-          const ordenadas = [
-            ...contagens.entries()
-          ].sort((a, b) => b[1] - a[1]);
-
-          ordenadas.forEach(
-            ([nome, quantidade]) => {
-
-              const porcentagem =
-                (quantidade / registros.length) * 100;
-
-              const linha =
-                document.createElement("div");
-              linha.className = "categoria-linha";
-
-              const topo =
-                document.createElement("div");
-              topo.className =
-                "categoria-linha-topo";
-
-              const titulo =
-                document.createElement("span");
-              titulo.textContent = nome;
-
-              const numero =
-                document.createElement("strong");
-              numero.textContent =
-                `${quantidade} (${Math.round(porcentagem)}%)`;
-
-              topo.append(titulo, numero);
-
-              const trilho =
-                document.createElement("div");
-              trilho.className =
-                "categoria-trilho";
-
-              const preenchimento =
-                document.createElement("div");
-              preenchimento.className =
-                "categoria-preenchimento";
-
-              preenchimento.style.width =
-                `${porcentagem}%`;
-
-              trilho.appendChild(preenchimento);
-
-              linha.append(topo, trilho);
-
-              grafico.appendChild(linha);
-            }
-          );
-        }
-
-        function renderizarBairros(registros) {
-          ranking.replaceChildren();
-
-          const bairros = new Map();
-
-          registros.forEach((registro) => {
-            const nome = String(
-              registro.bairro || ""
-            ).trim();
-
-            const chave = normalizar(nome);
-
-            if (!chave) {
-              return;
-            }
-
-            if (!bairros.has(chave)) {
-              bairros.set(chave, {
-                nome,
-                quantidade: 0
-              });
-            }
-
-            bairros.get(chave).quantidade++;
-          });
-
-          if (!bairros.size) {
-            mostrarMensagem(
-              ranking,
-              "Os bairros aparecerão aqui quando houver registros demonstrativos com localização informada."
-            );
-            return;
-          }
-
-          const ordenados = [
-            ...bairros.values()
-          ]
-            .sort(
-              (a, b) =>
-                b.quantidade - a.quantidade ||
-                a.nome.localeCompare(
-                  b.nome,
-                  "pt-BR"
-                )
-            )
-            .slice(0, 5);
-
-          ordenados.forEach(
-            (bairro, indice) => {
-
-              const item =
-                document.createElement("div");
-              item.className =
-                "bairro-ranking-item";
-
-              const posicao =
-                document.createElement("span");
-              posicao.className =
-                "bairro-ranking-posicao";
-              posicao.textContent =
-                String(indice + 1).padStart(2, "0");
-
-              const dados =
-                document.createElement("div");
-              dados.className =
-                "bairro-ranking-dados";
-
-              const titulo =
-                document.createElement("strong");
-              titulo.textContent = bairro.nome;
-
-              const legenda =
-                document.createElement("small");
-
-              legenda.textContent =
-                bairro.quantidade === 1
-                  ? "1 registro local"
-                  : `${bairro.quantidade} registros locais`;
-
-              dados.append(titulo, legenda);
-
-              const quantidade =
-                document.createElement("span");
-              quantidade.className =
-                "bairro-ranking-quantidade";
-
-              quantidade.textContent =
-                bairro.quantidade;
-
-              item.append(
-                posicao,
-                dados,
-                quantidade
-              );
-
-              ranking.appendChild(item);
-            }
-          );
-        }
-
-        function atualizarAnalises() {
-          const registros = carregarDados();
-
-          renderizarCategorias(registros);
-          renderizarBairros(registros);
-        }
-
-        atualizarAnalises();
-
-        // Sincronização entre abas da mesma origem.
-        window.addEventListener(
-          "storage",
-          (evento) => {
-            if (evento.key === CHAVE) {
-              atualizarAnalises();
-            }
-          }
-        );
-
-      }
-    );
-  </script>
 
 </body>
 </html>

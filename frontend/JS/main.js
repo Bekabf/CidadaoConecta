@@ -3,89 +3,104 @@
    CIDADÃOCONECTA — URBAN OS
    JAVASCRIPT GLOBAL — MAIN.JS
 
-   Funcionalidades:
-   1. Navegação principal padronizada
-   2. Links: Início, Serviços, Consultar e Comunidade
-   3. Identificação automática da página ativa
-   4. Menu responsivo para celulares
-   5. Fechamento do menu ao navegar ou pressionar ESC
-   6. Preservação do botão Registrar problema
+   Projeto acadêmico FIAP
 
-   Estrutura:
-   frontend/
-     JS/main.js
-     index.html
-     servicos.html
-     registrar.html
-     consultar.html
-     ocorrencias.html
+   MENU PRINCIPAL:
+   - Início
+   - Serviços
+   - Comunidade
+   - Consultar
+   - Registrar problema
+
+   Funcionalidades:
+   01. Identificação automática da página ativa
+   02. Navegação padronizada
+   03. Menu responsivo para celulares
+   04. Fechamento ao clicar em um link
+   05. Fechamento ao clicar fora do menu
+   06. Fechamento com tecla ESC
+   07. Fechamento ao voltar para desktop
+   08. Destaque do botão Registrar problema
+
+   Não utiliza dropdown de Ocorrências.
    ===================================================== */
 
 "use strict";
 
-document.addEventListener("DOMContentLoaded", () => {
-  configurarNavegacao();
-  iniciarMenuMobile();
-});
-
 /* =====================================================
-   01 — CONFIGURAÇÕES DA NAVEGAÇÃO
+   01 — INICIALIZAÇÃO
    ===================================================== */
 
-const PAGINAS_CIDADAOCONECTA = [
-  {
-    arquivo: "index.html",
-    titulo: "Início"
-  },
-  {
-    arquivo: "servicos.html",
-    titulo: "Serviços"
-  },
-  {
-    arquivo: "consultar.html",
-    titulo: "Consultar"
-  },
-  {
-    arquivo: "ocorrencias.html",
-    titulo: "Comunidade"
-  }
-];
+document.addEventListener("DOMContentLoaded", () => {
+
+  configurarNavegacao();
+
+  configurarMenuMobile();
+
+});
 
 /* =====================================================
    02 — IDENTIFICAR PÁGINA ATUAL
    ===================================================== */
 
 function obterPaginaAtual() {
+
   const caminho = window.location.pathname;
 
-  const arquivo = caminho.split("/").pop();
+  const arquivo = caminho
+    .split("/")
+    .pop()
+    .toLowerCase();
 
   return arquivo || "index.html";
 }
 
 /* =====================================================
-   03 — IDENTIFICAR DESTINO DE UM LINK
+   03 — IDENTIFICAR DESTINO DOS LINKS
    ===================================================== */
 
 function obterArquivoDoLink(link) {
+
+  if (!link) {
+    return "";
+  }
+
+  const href = link.getAttribute("href");
+
+  if (!href) {
+    return "";
+  }
+
   try {
+
     const endereco = new URL(
-      link.getAttribute("href"),
+      href,
       window.location.href
     );
 
-    return endereco.pathname.split("/").pop();
+    return endereco.pathname
+      .split("/")
+      .pop()
+      .toLowerCase();
 
   } catch (erro) {
+
     return "";
+
   }
 }
 
 /* =====================================================
-   04 — ATUALIZAR NAVEGAÇÃO
+   04 — CONFIGURAR NAVEGAÇÃO
+
+   Não cria links.
+   Não reorganiza o HTML.
+   Não adiciona dropdowns.
+   Apenas identifica a página ativa.
    ===================================================== */
 
 function configurarNavegacao() {
+
   const paginaAtual = obterPaginaAtual();
 
   const navegacaoDesktop = document.querySelector(
@@ -96,106 +111,139 @@ function configurarNavegacao() {
     "menuMobile"
   );
 
-  atualizarLinks(
+  const menus = [
     navegacaoDesktop,
-    paginaAtual,
-    false
-  );
-
-  atualizarLinks(
-    navegacaoMobile,
-    paginaAtual,
-    true
-  );
-}
-
-/* =====================================================
-   05 — ORGANIZAR LINKS
-   ===================================================== */
-
-function atualizarLinks(menu, paginaAtual, mobile) {
-  if (!menu) {
-    return;
-  }
-
-  const linksExistentes = [
-    ...menu.querySelectorAll("a")
+    navegacaoMobile
   ];
 
-  // Identifica o link Registrar problema.
-  const linkRegistrar = linksExistentes.find(
-    (link) =>
-      obterArquivoDoLink(link) === "registrar.html"
-  );
+  /*
+    A página Detalhes será exibida
+    futuramente dentro de um modal
+    na página Consultar.
 
-  // Cria ou reaproveita os links principais.
-  PAGINAS_CIDADAOCONECTA.forEach((pagina) => {
-    let link = [
-      ...menu.querySelectorAll("a")
-    ].find(
-      (elemento) =>
-        obterArquivoDoLink(elemento) === pagina.arquivo
-    );
+    Se um link antigo abrir detalhes.html,
+    destacamos Consultar na navegação.
+  */
 
-    if (!link) {
-      link = document.createElement("a");
+  const paginaDestacada =
+    paginaAtual === "detalhes.html"
+      ? "consultar.html"
+      : paginaAtual;
 
-      link.href = "./" + pagina.arquivo;
+  menus.forEach((menu) => {
+
+    if (!menu) {
+      return;
     }
 
-    link.textContent = pagina.titulo;
+    const links = menu.querySelectorAll("a");
 
-    const ativo = pagina.arquivo === paginaAtual;
+    links.forEach((link) => {
 
-    // Remove destaques antigos.
-    link.classList.remove("ativo");
+      const destino = obterArquivoDoLink(link);
 
-    if (ativo) {
-      link.setAttribute(
-        "aria-current",
-        "page"
-      );
+      link.classList.remove("ativo");
 
-      if (!mobile) {
+      link.removeAttribute("aria-current");
+
+      const ativo =
+        destino === paginaDestacada &&
+        destino !== "registrar.html";
+
+      if (ativo) {
+
         link.classList.add("ativo");
+
+        link.setAttribute(
+          "aria-current",
+          "page"
+        );
       }
 
-    } else {
-      link.removeAttribute("aria-current");
-    }
+    });
 
-    // Organiza a ordem dos links.
-    if (mobile && linkRegistrar) {
-      menu.insertBefore(
-        link,
-        linkRegistrar
-      );
-    } else {
-      menu.appendChild(link);
-    }
   });
 
-  // Atualiza o estado do botão Registrar problema.
-  if (linkRegistrar) {
+  /* ==========================================
+     BOTÃO REGISTRAR PROBLEMA
+     ========================================== */
+
+  const botaoRegistrar = document.querySelector(
+    ".botao-cabecalho"
+  );
+
+  if (botaoRegistrar) {
+
+    botaoRegistrar.classList.remove("ativo");
+
+    botaoRegistrar.removeAttribute(
+      "aria-current"
+    );
+
     if (paginaAtual === "registrar.html") {
-      linkRegistrar.setAttribute(
+
+      botaoRegistrar.classList.add("ativo");
+
+      botaoRegistrar.setAttribute(
         "aria-current",
         "page"
       );
 
-    } else {
-      linkRegistrar.removeAttribute(
-        "aria-current"
-      );
     }
+
   }
+
+  /*
+    No menu mobile, o botão Registrar
+    também recebe o destaque correto.
+  */
+
+  if (navegacaoMobile) {
+
+    const linksMobile =
+      navegacaoMobile.querySelectorAll("a");
+
+    linksMobile.forEach((link) => {
+
+      if (
+        obterArquivoDoLink(link) ===
+        "registrar.html"
+      ) {
+
+        link.classList.toggle(
+          "ativo",
+          paginaAtual === "registrar.html"
+        );
+
+        if (paginaAtual === "registrar.html") {
+
+          link.setAttribute(
+            "aria-current",
+            "page"
+          );
+
+        } else {
+
+          link.removeAttribute(
+            "aria-current"
+          );
+
+        }
+
+      }
+
+    });
+
+  }
+
 }
 
 /* =====================================================
-   06 — MENU MOBILE
+   05 — MENU MOBILE
    ===================================================== */
 
-function iniciarMenuMobile() {
+function configurarMenuMobile() {
+
   const botaoMenu = document.getElementById(
     "botaoMenu"
   );
@@ -204,7 +252,6 @@ function iniciarMenuMobile() {
     "menuMobile"
   );
 
-  // Algumas páginas podem não possuir menu mobile.
   if (!botaoMenu || !menuMobile) {
     return;
   }
@@ -213,11 +260,12 @@ function iniciarMenuMobile() {
     "(min-width: 901px)"
   );
 
-  /* -------------------------------------------------
-     FECHAR MENU
-     ------------------------------------------------- */
+  /* ===================================================
+     06 — FECHAR MENU
+     =================================================== */
 
   function fecharMenu() {
+
     menuMobile.hidden = true;
 
     botaoMenu.setAttribute(
@@ -229,13 +277,15 @@ function iniciarMenuMobile() {
       "aria-label",
       "Abrir menu"
     );
+
   }
 
-  /* -------------------------------------------------
-     ABRIR MENU
-     ------------------------------------------------- */
+  /* ===================================================
+     07 — ABRIR MENU
+     =================================================== */
 
   function abrirMenu() {
+
     menuMobile.hidden = false;
 
     botaoMenu.setAttribute(
@@ -247,94 +297,135 @@ function iniciarMenuMobile() {
       "aria-label",
       "Fechar menu"
     );
+
   }
 
-  // Inicialmente fechado.
+  /* ===================================================
+     08 — ESTADO INICIAL
+     =================================================== */
+
   fecharMenu();
 
-  /* -------------------------------------------------
-     CLIQUE NO BOTÃO
-     ------------------------------------------------- */
+  /* ===================================================
+     09 — BOTÃO HAMBÚRGUER
+     =================================================== */
 
-  botaoMenu.addEventListener("click", () => {
-    if (menuMobile.hidden) {
-      abrirMenu();
-    } else {
-      fecharMenu();
+  botaoMenu.addEventListener(
+    "click",
+    () => {
+
+      if (menuMobile.hidden) {
+
+        abrirMenu();
+
+      } else {
+
+        fecharMenu();
+
+      }
+
     }
-  });
+  );
 
-  /* -------------------------------------------------
-     FECHAR APÓS CLICAR EM UM LINK
-     ------------------------------------------------- */
+  /* ===================================================
+     10 — FECHAR APÓS CLICAR EM UM LINK
+     =================================================== */
 
-  menuMobile.querySelectorAll("a").forEach((link) => {
-    link.addEventListener(
-      "click",
-      fecharMenu
-    );
-  });
+  menuMobile.querySelectorAll("a")
+    .forEach((link) => {
 
-  /* -------------------------------------------------
-     FECHAR COM ESC
-     ------------------------------------------------- */
+      link.addEventListener(
+        "click",
+        fecharMenu
+      );
 
-  document.addEventListener("keydown", (evento) => {
-    if (
-      evento.key === "Escape" &&
-      !menuMobile.hidden
-    ) {
-      fecharMenu();
+    });
 
-      botaoMenu.focus();
+  /* ===================================================
+     11 — FECHAR COM ESC
+     =================================================== */
+
+  document.addEventListener(
+    "keydown",
+    (evento) => {
+
+      if (
+        evento.key === "Escape" &&
+        !menuMobile.hidden
+      ) {
+
+        fecharMenu();
+
+        botaoMenu.focus();
+
+      }
+
     }
-  });
+  );
 
-  /* -------------------------------------------------
-     FECHAR AO CLICAR FORA DO MENU
-     ------------------------------------------------- */
+  /* ===================================================
+     12 — FECHAR AO CLICAR FORA
+     =================================================== */
 
-  document.addEventListener("click", (evento) => {
-    const clicouNoMenu = menuMobile.contains(
-      evento.target
-    );
+  document.addEventListener(
+    "pointerdown",
+    (evento) => {
 
-    const clicouNoBotao = botaoMenu.contains(
-      evento.target
-    );
+      if (menuMobile.hidden) {
+        return;
+      }
 
-    if (
-      !menuMobile.hidden &&
-      !clicouNoMenu &&
-      !clicouNoBotao
-    ) {
-      fecharMenu();
+      const clicouNoMenu =
+        menuMobile.contains(evento.target);
+
+      const clicouNoBotao =
+        botaoMenu.contains(evento.target);
+
+      if (
+        !clicouNoMenu &&
+        !clicouNoBotao
+      ) {
+
+        fecharMenu();
+
+      }
+
     }
-  });
+  );
 
-  /* -------------------------------------------------
-     FECHAR AO VOLTAR PARA DESKTOP
-     ------------------------------------------------- */
+  /* ===================================================
+     13 — FECHAR AO VOLTAR PARA DESKTOP
+     =================================================== */
 
   function verificarTamanhoTela() {
+
     if (telaDesktop.matches) {
+
       fecharMenu();
+
     }
+
   }
 
   if (
-    typeof telaDesktop.addEventListener === "function"
+    typeof telaDesktop.addEventListener ===
+    "function"
   ) {
+
     telaDesktop.addEventListener(
       "change",
       verificarTamanhoTela
     );
 
   } else if (
-    typeof telaDesktop.addListener === "function"
+    typeof telaDesktop.addListener ===
+    "function"
   ) {
+
     telaDesktop.addListener(
       verificarTamanhoTela
     );
+
   }
+
 }

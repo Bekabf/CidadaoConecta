@@ -4,25 +4,22 @@
    REGISTRO DE OCORRÊNCIAS
 
    - Formulário em 3 etapas
-   - Validação de dados
-   - Fotos com pré-visualização
+   - Validação dos campos
+   - Pré-visualização de fotos
    - Revisão das informações
-   - Salvamento demonstrativo
+   - Integração com API Java / Oracle
+   - Protocolo gerado pelo backend
    - Copiar protocolo
    - Registrar outro problema
    ========================================== */
 
 "use strict";
 
-document.addEventListener(
-  "DOMContentLoaded",
-  iniciarRegistro
-);
+document.addEventListener("DOMContentLoaded", iniciarRegistro);
 
 function iniciarRegistro() {
-  const form = document.getElementById(
-    "formOcorrencia"
-  );
+
+  const form = document.getElementById("formOcorrencia");
 
   if (!form) {
     return;
@@ -60,17 +57,16 @@ function iniciarRegistro() {
   const MAX_FOTOS = 3;
   const MAX_TAMANHO = 5 * 1024 * 1024;
 
-  const CHAVE_REGISTROS =
-    "cidadaoconecta_registros_demo";
-
   let fotosSelecionadas = [];
   let ultimoProtocolo = "";
+  let envioEmAndamento = false;
 
   /* ==========================================
      01 — MENSAGENS DE ERRO
      ========================================== */
 
   function limparErros() {
+
     form.querySelectorAll(".form-erro").forEach(
       (elemento) => {
         elemento.textContent = "";
@@ -85,11 +81,8 @@ function iniciarRegistro() {
     });
   }
 
-  function mostrarErro(
-    etapa,
-    mensagem,
-    campo = null
-  ) {
+  function mostrarErro(etapa, mensagem, campo = null) {
+
     const aviso = $(`erroEtapa${etapa}`);
 
     if (!aviso) {
@@ -100,11 +93,7 @@ function iniciarRegistro() {
     aviso.hidden = false;
 
     if (campo) {
-      campo.setAttribute(
-        "aria-invalid",
-        "true"
-      );
-
+      campo.setAttribute("aria-invalid", "true");
       campo.focus();
     } else {
       aviso.scrollIntoView({
@@ -120,10 +109,8 @@ function iniciarRegistro() {
      02 — CONTROLE DAS ETAPAS
      ========================================== */
 
-  function mostrarEtapa(
-    numero,
-    focar = true
-  ) {
+  function mostrarEtapa(numero, focar = true) {
+
     secoes.forEach((secao) => {
       secao.hidden =
         Number(secao.dataset.etapa) !== numero;
@@ -147,54 +134,50 @@ function iniciarRegistro() {
       String(porcentagem)
     );
 
-    document.querySelectorAll(
-      "[data-passo]"
-    ).forEach((passo) => {
-      passo.classList.toggle(
-        "atual",
-        Number(passo.dataset.passo) === numero
-      );
-    });
+    document.querySelectorAll("[data-passo]").forEach(
+      (passo) => {
+        passo.classList.toggle(
+          "atual",
+          Number(passo.dataset.passo) === numero
+        );
+      }
+    );
 
     limparErros();
 
-    if (focar) {
-      const secao = secoes.find(
-        (item) =>
-          Number(item.dataset.etapa) === numero
-      );
+    if (!focar) {
+      return;
+    }
 
-      if (secao) {
-        secao.scrollIntoView({
-          behavior: "auto",
-          block: "start"
+    const secao = secoes.find(
+      (item) => Number(item.dataset.etapa) === numero
+    );
+
+    if (secao) {
+
+      secao.scrollIntoView({
+        behavior: "auto",
+        block: "start"
+      });
+
+      const titulo = secao.querySelector("h2");
+
+      if (titulo) {
+        titulo.setAttribute("tabindex", "-1");
+
+        titulo.focus({
+          preventScroll: true
         });
-
-        const titulo = secao.querySelector("h2");
-
-        if (titulo) {
-          titulo.setAttribute(
-            "tabindex",
-            "-1"
-          );
-
-          titulo.focus({
-            preventScroll: true
-          });
-        }
       }
     }
   }
 
   /* ==========================================
-     03 — VALIDAÇÃO
+     03 — VALIDAÇÃO DOS CAMPOS
      ========================================== */
 
-  function validarTexto(
-    id,
-    minimo,
-    etapa
-  ) {
+  function validarTexto(id, minimo, etapa) {
+
     const campo = $(id);
     const valor = campo.value.trim();
 
@@ -207,9 +190,7 @@ function iniciarRegistro() {
     );
 
     const nome = label
-      ? label.textContent
-          .replace("*", "")
-          .trim()
+      ? label.textContent.replace("*", "").trim()
       : id;
 
     if (!valor) {
@@ -228,6 +209,7 @@ function iniciarRegistro() {
   }
 
   function validarEtapa1() {
+
     limparErros();
 
     const categoria = form.querySelector(
@@ -238,9 +220,7 @@ function iniciarRegistro() {
       return mostrarErro(
         1,
         "Selecione o tipo de problema para continuar.",
-        form.querySelector(
-          'input[name="categoria"]'
-        )
+        form.querySelector('input[name="categoria"]')
       );
     }
 
@@ -256,6 +236,7 @@ function iniciarRegistro() {
   }
 
   function validarEtapa2() {
+
     limparErros();
 
     $("uf").value = $("uf").value
@@ -266,11 +247,7 @@ function iniciarRegistro() {
       return false;
     }
 
-    if (
-      !estadosValidos.has(
-        $("uf").value
-      )
-    ) {
+    if (!estadosValidos.has($("uf").value)) {
       return mostrarErro(
         2,
         "Informe uma UF válida, como GO, SP ou MG.",
@@ -294,6 +271,7 @@ function iniciarRegistro() {
      ========================================== */
 
   function atualizarContador() {
+
     $("contadorDescricao").textContent =
       `${$("descricao").value.length}/1000`;
   }
@@ -306,42 +284,28 @@ function iniciarRegistro() {
   atualizarContador();
 
   /* ==========================================
-     05 — FOTOS
+     05 — FOTOS PARA PRÉ-VISUALIZAÇÃO
      ========================================== */
 
-  function criarMiniatura(
-    foto,
-    indice
-  ) {
-    const cartao = document.createElement(
-      "div"
-    );
+  function criarMiniatura(foto, indice) {
 
+    const cartao = document.createElement("div");
     cartao.className = "foto-item";
 
-    const imagem = document.createElement(
-      "img"
-    );
+    const imagem = document.createElement("img");
 
     imagem.src = foto.url;
-    imagem.alt =
-      `Prévia da foto ${indice + 1}`;
+    imagem.alt = `Prévia da foto ${indice + 1}`;
 
-    const informacoes =
-      document.createElement("div");
+    const informacoes = document.createElement("div");
+    informacoes.className = "foto-item-info";
 
-    informacoes.className =
-      "foto-item-info";
-
-    const nome =
-      document.createElement("span");
-
+    const nome = document.createElement("span");
     nome.className = "foto-item-nome";
     nome.textContent = foto.arquivo.name;
     nome.title = foto.arquivo.name;
 
-    const remover =
-      document.createElement("button");
+    const remover = document.createElement("button");
 
     remover.type = "button";
     remover.className = "foto-remover";
@@ -352,60 +316,42 @@ function iniciarRegistro() {
       `Remover foto ${foto.arquivo.name}`
     );
 
-    remover.addEventListener(
-      "click",
-      () => {
-        URL.revokeObjectURL(
-          foto.url
-        );
+    remover.addEventListener("click", () => {
 
-        fotosSelecionadas =
-          fotosSelecionadas.filter(
-            (item) => item !== foto
-          );
+      URL.revokeObjectURL(foto.url);
 
-        renderizarFotos();
-      }
-    );
+      fotosSelecionadas = fotosSelecionadas.filter(
+        (item) => item !== foto
+      );
 
-    informacoes.append(
-      nome,
-      remover
-    );
+      renderizarFotos();
+    });
 
-    cartao.append(
-      imagem,
-      informacoes
-    );
+    informacoes.append(nome, remover);
+
+    cartao.append(imagem, informacoes);
 
     return cartao;
   }
 
   function renderizarFotos() {
+
     const lista = $("listaFotos");
 
     lista.replaceChildren();
 
-    fotosSelecionadas.forEach(
-      (foto, indice) => {
-        lista.appendChild(
-          criarMiniatura(
-            foto,
-            indice
-          )
-        );
-      }
-    );
+    fotosSelecionadas.forEach((foto, indice) => {
+      lista.appendChild(
+        criarMiniatura(foto, indice)
+      );
+    });
   }
 
   function liberarFotos() {
-    fotosSelecionadas.forEach(
-      (foto) => {
-        URL.revokeObjectURL(
-          foto.url
-        );
-      }
-    );
+
+    fotosSelecionadas.forEach((foto) => {
+      URL.revokeObjectURL(foto.url);
+    });
 
     fotosSelecionadas = [];
 
@@ -414,146 +360,111 @@ function iniciarRegistro() {
     renderizarFotos();
   }
 
-  $("fotos").addEventListener(
-    "change",
-    (evento) => {
-      const arquivos = [
-        ...evento.target.files
-      ];
+  $("fotos").addEventListener("change", (evento) => {
 
-      limparErros();
+    const arquivos = [...evento.target.files];
 
-      for (const arquivo of arquivos) {
-        if (
-          fotosSelecionadas.length >=
-          MAX_FOTOS
-        ) {
-          mostrarErro(
-            1,
-            "Você pode adicionar no máximo 3 fotos."
-          );
+    limparErros();
 
-          break;
-        }
+    for (const arquivo of arquivos) {
 
-        if (
-          !tiposPermitidos.has(
-            arquivo.type
-          )
-        ) {
-          mostrarErro(
-            1,
-            `O arquivo "${arquivo.name}" não é JPG, PNG ou WebP.`
-          );
-
-          continue;
-        }
-
-        if (
-          arquivo.size === 0 ||
-          arquivo.size > MAX_TAMANHO
-        ) {
-          mostrarErro(
-            1,
-            `A foto "${arquivo.name}" deve ter até 5 MB e não pode estar vazia.`
-          );
-
-          continue;
-        }
-
-        const duplicada =
-          fotosSelecionadas.some(
-            (foto) =>
-              foto.arquivo.name ===
-                arquivo.name &&
-              foto.arquivo.size ===
-                arquivo.size &&
-              foto.arquivo.lastModified ===
-                arquivo.lastModified
-          );
-
-        if (duplicada) {
-          continue;
-        }
-
-        fotosSelecionadas.push({
-          arquivo,
-          url: URL.createObjectURL(
-            arquivo
-          )
-        });
+      if (fotosSelecionadas.length >= MAX_FOTOS) {
+        mostrarErro(
+          1,
+          "Você pode adicionar no máximo 3 fotos."
+        );
+        break;
       }
 
-      evento.target.value = "";
+      if (!tiposPermitidos.has(arquivo.type)) {
+        mostrarErro(
+          1,
+          `O arquivo "${arquivo.name}" não é JPG, PNG ou WebP.`
+        );
+        continue;
+      }
 
-      renderizarFotos();
-    }
-  );
+      if (
+        arquivo.size === 0 ||
+        arquivo.size > MAX_TAMANHO
+      ) {
+        mostrarErro(
+          1,
+          `A foto "${arquivo.name}" deve ter até 5 MB e não pode estar vazia.`
+        );
+        continue;
+      }
 
-  window.addEventListener(
-    "pagehide",
-    () => {
-      fotosSelecionadas.forEach(
-        (foto) => {
-          URL.revokeObjectURL(
-            foto.url
-          );
-        }
+      const duplicada = fotosSelecionadas.some(
+        (foto) =>
+          foto.arquivo.name === arquivo.name &&
+          foto.arquivo.size === arquivo.size &&
+          foto.arquivo.lastModified === arquivo.lastModified
       );
+
+      if (duplicada) {
+        continue;
+      }
+
+      fotosSelecionadas.push({
+        arquivo,
+        url: URL.createObjectURL(arquivo)
+      });
     }
-  );
+
+    evento.target.value = "";
+
+    renderizarFotos();
+  });
+
+  window.addEventListener("pagehide", () => {
+
+    fotosSelecionadas.forEach((foto) => {
+      URL.revokeObjectURL(foto.url);
+    });
+  });
 
   /* ==========================================
-     06 — COLETAR DADOS
+     06 — COLETAR DADOS DO FORMULÁRIO
      ========================================== */
 
   function coletarDados() {
-    const categoria =
-      form.querySelector(
-        'input[name="categoria"]:checked'
-      )?.value || "";
+
+    const categoria = form.querySelector(
+      'input[name="categoria"]:checked'
+    )?.value || "";
 
     return {
       categoria,
 
-      titulo:
-        $("titulo").value.trim(),
+      titulo: $("titulo").value.trim(),
 
-      descricao:
-        $("descricao").value.trim(),
+      descricao: $("descricao").value.trim(),
 
-      cidade:
-        $("cidade").value.trim(),
+      cidade: $("cidade").value.trim(),
 
-      uf:
-        $("uf").value
-          .trim()
-          .toUpperCase(),
+      uf: $("uf").value.trim().toUpperCase(),
 
-      bairro:
-        $("bairro").value.trim(),
+      bairro: $("bairro").value.trim(),
 
-      rua:
-        $("rua").value.trim(),
+      rua: $("rua").value.trim(),
 
-      numero:
-        $("numero").value.trim(),
+      numero: $("numero").value.trim(),
 
-      referencia:
-        $("referencia").value.trim()
+      referencia: $("referencia").value.trim()
     };
   }
 
   /* ==========================================
-     07 — REVISÃO
+     07 — REVISÃO DAS INFORMAÇÕES
      ========================================== */
 
   function preencherRevisao() {
+
     const dados = coletarDados();
 
     $("revCategoria").textContent =
-      nomesCategorias[dados.categoria] ||
-      "Não informado";
+      nomesCategorias[dados.categoria] || "Não informado";
 
     $("revTitulo").textContent =
       dados.titulo;
@@ -561,8 +472,7 @@ function iniciarRegistro() {
     $("revDescricao").textContent =
       dados.descricao;
 
-    const quantidadeFotos =
-      fotosSelecionadas.length;
+    const quantidadeFotos = fotosSelecionadas.length;
 
     $("revFotos").textContent =
       quantidadeFotos === 0
@@ -581,72 +491,53 @@ function iniciarRegistro() {
         : dados.rua;
 
     $("revReferencia").textContent =
-      dados.referencia ||
-      "Não informado";
+      dados.referencia || "Não informado";
   }
 
   /* ==========================================
-     08 — BOTÕES ENTRE ETAPAS
+     08 — NAVEGAÇÃO ENTRE ETAPAS
      ========================================== */
 
-  $("avancar1").addEventListener(
-    "click",
-    () => {
-      if (validarEtapa1()) {
-        mostrarEtapa(2);
-      }
-    }
-  );
+  $("avancar1").addEventListener("click", () => {
 
-  $("avancar2").addEventListener(
-    "click",
-    () => {
-      if (validarEtapa2()) {
-        preencherRevisao();
-        mostrarEtapa(3);
-      }
-    }
-  );
-
-  $("voltar1").addEventListener(
-    "click",
-    () => {
-      mostrarEtapa(1);
-    }
-  );
-
-  $("voltar2").addEventListener(
-    "click",
-    () => {
+    if (validarEtapa1()) {
       mostrarEtapa(2);
     }
-  );
+  });
 
-  $("editarProblema").addEventListener(
-    "click",
-    () => {
-      mostrarEtapa(1);
-    }
-  );
+  $("avancar2").addEventListener("click", () => {
 
-  $("editarLocal").addEventListener(
-    "click",
-    () => {
-      mostrarEtapa(2);
+    if (validarEtapa2()) {
+      preencherRevisao();
+      mostrarEtapa(3);
     }
-  );
+  });
+
+  $("voltar1").addEventListener("click", () => {
+    mostrarEtapa(1);
+  });
+
+  $("voltar2").addEventListener("click", () => {
+    mostrarEtapa(2);
+  });
+
+  $("editarProblema").addEventListener("click", () => {
+    mostrarEtapa(1);
+  });
+
+  $("editarLocal").addEventListener("click", () => {
+    mostrarEtapa(2);
+  });
 
   /* ==========================================
      09 — CATEGORIA PELA URL
      ========================================== */
 
-  const parametros =
-    new URLSearchParams(
-      window.location.search
-    );
+  const parametrosURL = new URLSearchParams(
+    window.location.search
+  );
 
-  const categoriaInicial =
-    parametros.get("categoria");
+  const categoriaInicial = parametrosURL.get("categoria");
 
   if (
     categoriaInicial &&
@@ -657,53 +548,27 @@ function iniciarRegistro() {
   ) {
     form.querySelectorAll(
       'input[name="categoria"]'
-    ).forEach(
-      (radio) => {
-        radio.checked =
-          radio.value ===
-          categoriaInicial;
-      }
-    );
+    ).forEach((radio) => {
+
+      radio.checked =
+        radio.value === categoriaInicial;
+    });
   }
 
   /* ==========================================
-     10 — IDENTIFICADOR LOCAL
+     10 — COPIAR PROTOCOLO
      ========================================== */
 
-  function gerarProtocoloLocal() {
-    const tempo = Date.now()
-      .toString(36)
-      .toUpperCase();
+  async function copiarProtocolo(botao) {
 
-    const aleatorio = Array.from(
-      crypto.getRandomValues(
-        new Uint8Array(6)
-      )
-    )
-      .map((numero) =>
-        numero.toString(16).padStart(2, "0")
-      )
-      .join("")
-      .toUpperCase();
-
-    return `LOCAL-${tempo}-${aleatorio}`;
-  }
-
-  /* ==========================================
-     11 — COPIAR PROTOCOLO
-     ========================================== */
-
-  async function copiarProtocolo(
-    botao
-  ) {
     if (!ultimoProtocolo) {
       return;
     }
 
-    const textoOriginal =
-      "Copiar protocolo";
+    const textoOriginal = "Copiar protocolo";
 
     try {
+
       if (
         !navigator.clipboard ||
         !navigator.clipboard.writeText
@@ -717,29 +582,19 @@ function iniciarRegistro() {
         ultimoProtocolo
       );
 
-      botao.textContent =
-        "✓ Protocolo copiado";
+      botao.textContent = "✓ Protocolo copiado";
 
     } catch {
-      // Permite selecionar o código manualmente.
+
       const codigo = $("codigoGerado");
 
-      codigo.setAttribute(
-        "tabindex",
-        "-1"
-      );
-
+      codigo.setAttribute("tabindex", "-1");
       codigo.focus();
 
-      const selecao =
-        window.getSelection();
+      const selecao = window.getSelection();
+      const intervalo = document.createRange();
 
-      const intervalo =
-        document.createRange();
-
-      intervalo.selectNodeContents(
-        codigo
-      );
+      intervalo.selectNodeContents(codigo);
 
       selecao.removeAllRanges();
       selecao.addRange(intervalo);
@@ -748,67 +603,41 @@ function iniciarRegistro() {
         "Código selecionado: Ctrl + C";
     }
 
-    window.setTimeout(
-      () => {
-        botao.textContent =
-          textoOriginal;
-      },
-      3000
-    );
+    window.setTimeout(() => {
+      botao.textContent = textoOriginal;
+    }, 3000);
   }
 
   /* ==========================================
-     12 — BOTÕES DA CONFIRMAÇÃO
-
-     APENAS:
-     - Copiar protocolo
-     - Registrar outro problema
+     11 — BOTÕES DA CONFIRMAÇÃO
      ========================================== */
 
   function configurarConfirmacao() {
-    const area =
-      document.querySelector(
-        "#confirmacao .confirmacao-botoes"
-      );
 
-    const botaoNovo =
-      $("novoRegistro");
+    const area = document.querySelector(
+      "#confirmacao .confirmacao-botoes"
+    );
+
+    const botaoNovo = $("novoRegistro");
 
     if (!area || !botaoNovo) {
       return;
     }
 
-    // Cria o botão Copiar.
-    const botaoCopiar =
-      document.createElement("button");
+    const botaoCopiar = document.createElement("button");
 
     botaoCopiar.type = "button";
     botaoCopiar.id = "copiarProtocolo";
+    botaoCopiar.className = "botao botao-primario";
+    botaoCopiar.textContent = "Copiar protocolo";
 
-    botaoCopiar.className =
-      "botao botao-primario";
+    botaoCopiar.addEventListener("click", () => {
+      copiarProtocolo(botaoCopiar);
+    });
 
-    botaoCopiar.textContent =
-      "Copiar protocolo";
+    botaoNovo.className = "botao botao-secundario";
+    botaoNovo.textContent = "Registrar outro problema";
 
-    botaoCopiar.addEventListener(
-      "click",
-      () => {
-        copiarProtocolo(
-          botaoCopiar
-        );
-      }
-    );
-
-    // O segundo botão será Registrar outro.
-    botaoNovo.className =
-      "botao botao-secundario";
-
-    botaoNovo.textContent =
-      "Registrar outro problema";
-
-    // Remove os outros botões somente
-    // da confirmação. Não altera o restante.
     area.replaceChildren(
       botaoCopiar,
       botaoNovo
@@ -818,129 +647,126 @@ function iniciarRegistro() {
   configurarConfirmacao();
 
   /* ==========================================
-     13 — SALVAMENTO DEMONSTRATIVO
+     12 — CADASTRO NA API JAVA / ORACLE
      ========================================== */
 
-  form.addEventListener(
-    "submit",
-    (evento) => {
-      evento.preventDefault();
+  form.addEventListener("submit", async (evento) => {
 
-      // Mostra a etapa antes de validar
-      // para que o erro permaneça visível.
-      if (!validarEtapa1()) {
-        mostrarEtapa(1);
-        validarEtapa1();
-        return;
-      }
+    evento.preventDefault();
 
-      if (!validarEtapa2()) {
-        mostrarEtapa(2);
-        validarEtapa2();
-        return;
-      }
+    // Impedir cadastros duplicados.
+    if (envioEmAndamento) {
+      return;
+    }
 
-      const dados = coletarDados();
+    // Validar etapa 1.
+    if (!validarEtapa1()) {
 
-      let idLocal;
+      mostrarEtapa(1);
+      validarEtapa1();
 
-      try {
-        idLocal =
-          gerarProtocoloLocal();
-      } catch {
-        mostrarEtapa(3);
+      return;
+    }
 
-        mostrarErro(
-          3,
-          "Não foi possível gerar o identificador neste navegador."
-        );
+    // Validar etapa 2.
+    if (!validarEtapa2()) {
 
-        return;
-      }
+      mostrarEtapa(2);
+      validarEtapa2();
 
-      const registro = {
-        ...dados,
+      return;
+    }
 
-        idLocal,
+    // Exibir etapa de revisão.
+    mostrarEtapa(3, false);
+    limparErros();
 
-        criadoEm:
-          new Date().toISOString(),
+    const dados = coletarDados();
 
-        demonstrativo: true,
+    const botaoSalvar = form.querySelector(
+      'button[type="submit"]'
+    );
 
-        fotosArmazenadas: false
-      };
+    const textoOriginal = botaoSalvar.innerHTML;
 
-      try {
-        let anteriores = [];
+    envioEmAndamento = true;
 
-        const conteudo =
-          localStorage.getItem(
-            CHAVE_REGISTROS
-          );
+    botaoSalvar.disabled = true;
+    botaoSalvar.textContent = "Enviando registro...";
 
-        if (conteudo) {
-          try {
-            const dadosSalvos =
-              JSON.parse(conteudo);
+    try {
 
-            if (
-              Array.isArray(
-                dadosSalvos
-              )
-            ) {
-              anteriores =
-                dadosSalvos;
-            }
-          } catch {
-            anteriores = [];
-          }
+      // Converter dados para o formato
+      // recebido pelo ServidorWeb.java.
+      const parametros = new URLSearchParams(dados);
+
+      // Enviar dados ao backend Java.
+      const resposta = await fetch(
+        "/api/ocorrencias",
+        {
+          method: "POST",
+
+          headers: {
+            "Content-Type":
+              "application/x-www-form-urlencoded;charset=UTF-8"
+          },
+
+          body: parametros.toString()
         }
+      );
 
-        // Mantém até 10 registros locais.
-        const registros = [
-          registro,
-          ...anteriores
-        ].slice(0, 10);
+      // Interpretar a resposta JSON.
+      let resultado;
 
-        localStorage.setItem(
-          CHAVE_REGISTROS,
-          JSON.stringify(registros)
-        );
-
+      try {
+        resultado = await resposta.json();
       } catch {
-        mostrarEtapa(3);
-
-        mostrarErro(
-          3,
-          "Não foi possível salvar o registro neste navegador. Verifique o armazenamento local."
+        throw new Error(
+          "O servidor enviou uma resposta inválida."
         );
-
-        return;
       }
 
-      ultimoProtocolo =
-        idLocal;
+      // Verificar o resultado da operação.
+      if (!resposta.ok) {
+        throw new Error(
+          typeof resultado.erro === "string"
+            ? resultado.erro
+            : "Não foi possível cadastrar a ocorrência."
+        );
+      }
 
+      // Verificar o protocolo retornado.
+      if (
+        typeof resultado.protocolo !== "string" ||
+        !resultado.protocolo.startsWith("CC-")
+      ) {
+        throw new Error(
+          "O servidor não retornou um protocolo válido."
+        );
+      }
+
+      ultimoProtocolo = resultado.protocolo;
+
+      // Mostrar protocolo no HTML.
       $("codigoGerado").textContent =
         ultimoProtocolo;
 
-      const botaoCopiar =
-        $("copiarProtocolo");
+      const botaoCopiar = $("copiarProtocolo");
 
       if (botaoCopiar) {
-        botaoCopiar.textContent =
-          "Copiar protocolo";
+        botaoCopiar.textContent = "Copiar protocolo";
       }
 
+      // Esconder o formulário.
       form.hidden = true;
 
-      $("painelProgresso").hidden =
-        true;
+      $("painelProgresso").hidden = true;
 
-      $("confirmacao").hidden =
-        false;
+      // Mostrar confirmação.
+      $("confirmacao").hidden = false;
 
+      // Liberar fotos da memória.
+      // Ainda não são enviadas ao Oracle.
       liberarFotos();
 
       $("confirmacao").scrollIntoView({
@@ -948,49 +774,64 @@ function iniciarRegistro() {
         block: "start"
       });
 
-      const titulo =
-        $("tituloConfirmacao");
+      const titulo = $("tituloConfirmacao");
 
-      titulo.setAttribute(
-        "tabindex",
-        "-1"
-      );
+      titulo.setAttribute("tabindex", "-1");
 
       titulo.focus({
         preventScroll: true
       });
+
+    } catch (erro) {
+
+      console.error(
+        "Erro ao cadastrar ocorrência:",
+        erro
+      );
+
+      const mensagem = erro instanceof TypeError
+        ? "Não foi possível conectar ao servidor Java. Verifique se o site está aberto em http://localhost:8080."
+        : (
+          erro.message ||
+          "Não foi possível salvar a ocorrência no Oracle."
+        );
+
+      mostrarErro(3, mensagem);
+
+    } finally {
+
+      envioEmAndamento = false;
+
+      botaoSalvar.disabled = false;
+      botaoSalvar.innerHTML = textoOriginal;
     }
-  );
+  });
 
   /* ==========================================
-     14 — REGISTRAR OUTRO PROBLEMA
+     13 — REGISTRAR OUTRO PROBLEMA
      ========================================== */
 
-  $("novoRegistro").addEventListener(
-    "click",
-    () => {
-      form.reset();
+  $("novoRegistro").addEventListener("click", () => {
 
-      liberarFotos();
+    form.reset();
 
-      ultimoProtocolo = "";
+    liberarFotos();
 
-      form.hidden = false;
+    ultimoProtocolo = "";
 
-      $("painelProgresso").hidden =
-        false;
+    form.hidden = false;
 
-      $("confirmacao").hidden =
-        true;
+    $("painelProgresso").hidden = false;
 
-      atualizarContador();
+    $("confirmacao").hidden = true;
 
-      mostrarEtapa(1);
-    }
-  );
+    atualizarContador();
+
+    mostrarEtapa(1);
+  });
 
   /* ==========================================
-     15 — INICIALIZAÇÃO
+     14 — INICIALIZAÇÃO
      ========================================== */
 
   mostrarEtapa(1, false);

@@ -12,7 +12,10 @@ target/
 out/
 bin/
 
-# Arquivos temporarios Java
+# Backups de compilacao
+backend/backup-classes/
+
+# Arquivos temporarios
 *.log
 *.tmp
 *.bak
@@ -22,11 +25,13 @@ bin/
 .env.*
 !.env.example
 
-# Arquivos com senhas e credenciais
+# Arquivos de certificados e chaves
 *.jks
 *.keystore
 *.p12
 *.pfx
+*.key
+*.pem
 
 # Configuracoes locais de IDE
 .idea/
@@ -47,7 +52,10 @@ desktop.ini
 # Arquivos temporarios Oracle
 *.lck
 
-# Arquivos ZIP gerados para entrega
+# Arquivos ZIP gerados
 *.zip
+
+# Driver JDBC Oracle
+# Deve ser obtido separadamente ou incluido
+# no pacote de entrega conforme sua licenca.
 backend/lib/ojdbc11.jar
-**/TesteAcentuacao.java
